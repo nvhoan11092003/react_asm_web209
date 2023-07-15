@@ -1,10 +1,14 @@
 import { Outlet } from "react-router-dom"
 import NavBar from "../../components/NavBar"
 import SideBar from "../../components/SideBar"
-import Footer from "../../components/Footer"
+import FooterAdmin from "../../components/FooterAdmin"
+import LinkAdmin from "../../components/LinkAdmin"
+
 
 const AdminLayout = () => {
   return (
+   <>
+     <LinkAdmin/>
     <div>
         <div className="container-scroller">
             <SideBar/>
@@ -15,8 +19,9 @@ const AdminLayout = () => {
             </div>
             
         </div>
-       <Footer/>
+       <FooterAdmin/>
     </div>
+   </>
   )
 }
 
