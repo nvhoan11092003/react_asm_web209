@@ -1,5 +1,3 @@
-import React from "react";
-
 const Menu = () => {
   const wid_80 = {
     width: "80px",
@@ -535,3 +533,4 @@ const Menu = () => {
 };
 
 export default Menu;
+
