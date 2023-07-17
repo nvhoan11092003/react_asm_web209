@@ -1,9 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const BookingPage = () => {
-  const hei_100 = {
-    height: "100px",
-  };
   return (
     <div>
       <div className="container-xxl py-5 bg-dark hero-header mb-5">
@@ -14,10 +12,10 @@ const BookingPage = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-content-center text-uppercase">
               <li className="breadcrumb-item">
-                <a href="#">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li className="breadcrumb-item">
-                <a href="#">Pages</a>
+                <Link to="/">Pages</Link>
               </li>
               <li
                 className="breadcrumb-item text-white active"
@@ -110,7 +108,7 @@ const BookingPage = () => {
                         className="form-control"
                         placeholder="Special Request"
                         id="message"
-                        style={hei_100}
+                        style={{ height: "100px" }}
                       ></textarea>
                       <label>Special Request</label>
                     </div>
