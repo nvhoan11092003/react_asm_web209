@@ -7,12 +7,16 @@ import cartRouter from "./router/cart"
 import orderRouter from "./router/orders"
 import uploadRouter from "./router/upload_image"
 import mongoose from "mongoose";
-
+import cors from "cors"
 
 
 dotenv.config()
 const app = express()
+
+app.use(cors())
+
 app.use(express.json());
+
 app.use("/api",productRouter)
 app.use("/api",categoryRouter)
 app.use("/api",userRouter)
