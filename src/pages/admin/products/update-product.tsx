@@ -65,7 +65,12 @@ const UpdateProduct = (props: IProps) => {
         <Form.Item
           label="Product Name"
           name="name"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[
+            { required: true, message: "Please input your username!" },
+            { whitespace: true },
+            { min: 6, max: 255 },
+          ]}
+          hasFeedback
         >
           <Input />
         </Form.Item>
@@ -74,6 +79,7 @@ const UpdateProduct = (props: IProps) => {
           label="Product Price"
           name="price"
           rules={[{ required: true, message: "Please input your password!" }]}
+          hasFeedback
         >
           <Input />
         </Form.Item>
@@ -84,6 +90,7 @@ const UpdateProduct = (props: IProps) => {
           rules={[
             { required: true, message: "Please input your description!" },
           ]}
+          hasFeedback
         >
           <TextArea />
         </Form.Item>

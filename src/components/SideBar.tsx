@@ -1,6 +1,6 @@
 
 import Logo from "./Logo"
-import Menu from "./Menu"
+import MenuAdmin from "./MenuAdmin"
 import ProfileDesc from "./ProfileDesc"
 
 const SideBar = () => {
@@ -9,7 +9,7 @@ const SideBar = () => {
      <Logo/>
       <ul className="nav">
       <ProfileDesc/>
-      <Menu/>  
+      <MenuAdmin/>  
       </ul>
     </nav>
   )

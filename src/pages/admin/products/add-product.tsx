@@ -1,6 +1,6 @@
 import TextArea from "antd/es/input/TextArea";
 import { IProduct } from "../../../types/product";
-import { Form, Input, Button, Upload } from "antd";
+import { Form, Input, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import type { RcFile, UploadProps } from "antd/es/upload";
 import type { UploadFile } from "antd/es/upload/interface";
@@ -11,14 +11,6 @@ interface IProps {
   onAdd: (product: IProduct) => void;
 }
 
-const getBase64 = (file: RcFile): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
-
 const AddProduct = (props: IProps) => {
   const navigate = useNavigate();
   const onFinish = (values: IProduct) => {
@@ -27,7 +19,7 @@ const AddProduct = (props: IProps) => {
       name: values.name,
       price: values.price,
       desc: values.desc,
-      image: values.image.file.name,
+      image: values.image,
     };
     props.onAdd(newProduct);
     navigate("/admin/products");
@@ -36,35 +28,6 @@ const AddProduct = (props: IProps) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-
-  const handleCancel = () => setPreviewOpen(false);
-
-  const handlePreview = async (file: UploadFile) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj as RcFile);
-    }
-
-    setPreviewImage(file.url || (file.preview as string));
-    setPreviewOpen(true);
-    setPreviewTitle(
-      file.name || file.url!.substring(file.url!.lastIndexOf("/") + 1)
-    );
-  };
-
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
-    setFileList(newFileList);
-
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
 
   return (
     <div className="w-100" style={{ marginTop: 100, backgroundColor: "white" }}>
@@ -84,7 +47,12 @@ const AddProduct = (props: IProps) => {
         <Form.Item
           label="Product Name"
           name="name"
-          rules={[{ required: true, message: "Please input your name!" }]}
+          rules={[
+            { required: true, message: "Please input your name!" },
+            { whitespace: true },
+            { min: 6, max: 255 },
+          ]}
+          hasFeedback
         >
           <Input />
         </Form.Item>
@@ -92,7 +60,12 @@ const AddProduct = (props: IProps) => {
         <Form.Item
           label="Product Price"
           name="price"
-          rules={[{ required: true, message: "Please input your price!" }]}
+          rules={[
+            { required: true, message: "Please input your price!" },
+            { whitespace: true },
+            { min: 1 },
+          ]}
+          hasFeedback
         >
           <Input />
         </Form.Item>
@@ -103,23 +76,9 @@ const AddProduct = (props: IProps) => {
           rules={[
             { required: true, message: "Please input your description!" },
           ]}
+          hasFeedback
         >
           <TextArea />
-        </Form.Item>
-
-        <Form.Item
-          label="Product Image"
-          name="image"
-          rules={[{ required: true, message: "Please input your image!" }]}
-        >
-          <Upload
-            listType="picture-card"
-            fileList={fileList}
-            onPreview={handlePreview}
-            onChange={handleChange}
-          >
-            {fileList.length >= 8 ? null : uploadButton}
-          </Upload>
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

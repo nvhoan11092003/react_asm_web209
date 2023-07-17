@@ -3,7 +3,6 @@ import AdminLayout from "./pages/layout/AdminLayout";
 import DashBoard from "./pages/DashBoard";
 import Form from "./pages/Form";
 import Chart from "./pages/Chart";
-import Home from "./pages/Home";
 import ListProduct from "./pages/admin/products/list-product";
 import AddProduct from "./pages/admin/products/add-product";
 import { useEffect, useState } from "react";
@@ -25,6 +24,14 @@ import {
 import ListCategory from "./pages/admin/categories/list-category";
 import AddCategory from "./pages/admin/categories/add-category";
 import UpdateCategory from "./pages/admin/categories/update-category";
+import WebsiteLayouts from "./Layouts/websiteLayouts";
+import HomePage from "./pages/clientPages/HomePage";
+import AboutPage from "./pages/clientPages/AboutPage";
+import ServicePage from "./pages/clientPages/ServicePage";
+import MenuPage from "./pages/clientPages/MenuPage";
+import ContactPage from "./pages/clientPages/ContactPage";
+import BookingPage from "./pages/clientPages/BookingPage";
+import TeamPage from "./pages/clientPages/TeamPage";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -77,7 +84,15 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/*   client */}
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<WebsiteLayouts />}>
+          <Route index element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/service" element={<ServicePage />} />
+          <Route path="/menu" element={<MenuPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/team" element={<TeamPage />} />
+        </Route>
         {/* admin  */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="dashboard" />} />
