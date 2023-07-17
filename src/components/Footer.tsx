@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = () => {
   const inlineStyle = { maxWidth: "400px" };
   return (
@@ -122,3 +120,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

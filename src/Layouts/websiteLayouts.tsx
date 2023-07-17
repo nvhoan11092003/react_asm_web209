@@ -1,7 +1,8 @@
-import React from "react";
+
 import Header from "../components/header";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
+import LinkClient from "../components/LinkClient";
 
 const WebsiteLayouts = () => {
   const inlineStyle = {
@@ -9,6 +10,8 @@ const WebsiteLayouts = () => {
     height: "3rem",
   };
   return (
+   <>
+     <LinkClient/>
     <div className="container-xxl bg-white p-0">
       {/* <div
         id="spinner"
@@ -26,6 +29,7 @@ const WebsiteLayouts = () => {
       <Outlet />
       <Footer />
     </div>
+   </>
   );
 };
 
