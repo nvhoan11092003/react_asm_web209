@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import WebsiteLayouts from "./Layouts/websiteLayouts";
 import HomePage from "./pages/clientPages/HomePage";
@@ -9,12 +8,12 @@ import ContactPage from "./pages/clientPages/ContactPage";
 import BookingPage from "./pages/clientPages/BookingPage";
 import TeamPage from "./pages/clientPages/TeamPage";
 
-import AdminLayout from "./pages/layout/AdminLayout"
-import DashBoard from "./pages/DashBoard"
-import Form from "./pages/Form"
-import Chart from "./pages/Chart"
-import ProductManager from "./pages/ProductManager"
-
+import AdminLayout from "./pages/layout/AdminLayout";
+import DashBoard from "./pages/DashBoard";
+import Form from "./pages/Form";
+import Chart from "./pages/Chart";
+import ProductManager from "./pages/ProductManager";
+import ProductDetail from "./pages/clientPages/ProductDetail";
 
 function App() {
   return (
@@ -23,22 +22,30 @@ function App() {
         {/*   client */}
         <Route path="/" element={<WebsiteLayouts />}>
           <Route index element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/service" element={<ServicePage />} />
-          <Route path="/menu" element={<MenuPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="service" element={<ServicePage />} />
+          <Route path="menu">
+            <Route index element={<MenuPage />} />
+            <Route path=":id" element={<ProductDetail />} />
+          </Route>
+          <Route path=":id" element={<ProductDetail />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/team" element={<TeamPage />} />
         </Route>
+        {/* <Route path="menu" element={<WebsiteLayouts />}>
+          <Route index element={<MenuPage />} />
+          <Route path=":id" element={<ProductDetail />} />
+        </Route> */}
         {/* admin  */}
-        <Route path="/admin" element={<AdminLayout/>}>
-            <Route index element={<Navigate to="dashboard" />} />
-            <Route path="dashboard" element={<DashBoard/>} />
-            <Route path="form" element={<Form/>} />
-            <Route path="chart" element={<Chart/>} />
-            <Route path="products" >
-                <Route index element={<ProductManager/>} />               
-            </Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Navigate to="dashboard" />} />
+          <Route path="dashboard" element={<DashBoard />} />
+          <Route path="form" element={<Form />} />
+          <Route path="chart" element={<Chart />} />
+          <Route path="products">
+            <Route index element={<ProductManager />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
