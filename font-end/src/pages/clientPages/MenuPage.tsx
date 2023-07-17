@@ -1,5 +1,6 @@
 import React from "react";
 import Menu from "../../components/Menu";
+import Categories from "./Categories";
 
 const MenuPage = () => {
   return (
@@ -27,7 +28,7 @@ const MenuPage = () => {
           </nav>
         </div>
       </div>
-      <Menu />
+      <Categories />
     </div>
   );
 };

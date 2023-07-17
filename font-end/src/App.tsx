@@ -8,6 +8,9 @@ import MenuPage from "./pages/clientPages/MenuPage";
 import ContactPage from "./pages/clientPages/ContactPage";
 import BookingPage from "./pages/clientPages/BookingPage";
 import TeamPage from "./pages/clientPages/TeamPage";
+import SignInPage from "./pages/clientPages/SignInPage";
+import SignUpPage from "./pages/clientPages/SignUpPage";
+import SearchBar from "./components/search";
 
 import AdminLayout from "./pages/layout/AdminLayout"
 import DashBoard from "./pages/DashBoard"
@@ -30,6 +33,9 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/find" element={<SearchBar />} />
         </Route>
         {/* admin  */}
         <Route path="/admin" element={<AdminLayout/>}>
