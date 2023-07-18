@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Form } from "react-router-dom";
 // import AdminLayout from "./pages/layout/AdminLayout";
 // import DashBoard from "./pages/DashBoard";
 // import Form from "./pages/Form";
@@ -18,20 +18,17 @@ import Dashboard from "./pages/adminPages/Dashboard";
 import './Dashboard.css'
 import ProductManager from "./pages/adminPages/ProductManager";
 
-
-
-function App() {
-  
 import ListProduct from "./pages/admin/products/list-product";
 import AddProduct from "./pages/admin/products/add-product";
 import { useEffect, useState } from "react";
-import { IProduct,ICategory } from "./models/type";
-import { addProduct, updateProduct, deleteProduct, getAllProduct} from "./api/product";
+import { IProduct, ICategory } from "./models/type";
+import { addProduct, updateProduct, deleteProduct, getAllProduct } from "./api/product";
 import UpdateProduct from "./pages/admin/products/update-product";
-import {addCategory,updateCategory,deleteCategory,getAllCategory,} from "./api/category";
+import { addCategory, updateCategory, deleteCategory, getAllCategory, } from "./api/category";
 import ListCategory from "./pages/admin/categories/list-category";
 import AddCategory from "./pages/admin/categories/add-category";
 import UpdateCategory from "./pages/admin/categories/update-category";
+
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -40,11 +37,11 @@ function App() {
   }, []);
 
 
-  // const onHandleRemoveProduct = (id: number) => {
-  //   deleteProduct(id).then(() =>
-  //     setProducts(products.filter((item: IProduct) => item.id !== id))
-  //   );
-  // };
+  const onHandleRemoveProduct = (id: string) => {
+    deleteProduct(id).then(() =>
+      setProducts(products.filter((item: IProduct) => item._id !== id))
+    );
+  };
 
   const onHandleAddProduct = (product: IProduct) => {
     addProduct(product)
@@ -71,7 +68,7 @@ function App() {
   const onHandleAddCategory = (category: ICategory) => {
     addCategory(category)
     // console.log(category);
-    
+
   };
 
   // const onHandleUpdateCategory = (category: ICategory) => {
@@ -88,22 +85,22 @@ function App() {
         {/* admin  */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="dashboard" />} />
-          <Route path="dashboard" element={<DashBoard />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="form" element={<Form />} />
-          <Route path="chart" element={<Chart />} />
+          {/* <Route path="chart" element={<Chart />} /> */}
           <Route path="products">
             <Route
               index
-              // element={
-              //   <ListProduct
-              //     products={products}
-              //     onRemove={onHandleRemoveProduct}
-              //   />
-              // }
+              element={
+                <ListProduct
+                  products={products}
+                  onRemove={onHandleRemoveProduct}
+                />
+              }
             />
             <Route
               path="add"
-              element={<AddProduct onAdd={onHandleAddProduct}  category={categories}/>}
+              element={<AddProduct onAdd={onHandleAddProduct} category={categories} />}
             />
             {/* <Route
               path=":id/update"
@@ -118,12 +115,12 @@ function App() {
           <Route path="categories">
             <Route
               index
-              // element={
-              //   <ListCategory
-              //     categories={categories}
-              //     onRemove={onHandleRemoveCategory}
-              //   />
-              // }
+            // element={
+            //   <ListCategory
+            //     categories={categories}
+            //     onRemove={onHandleRemoveCategory}
+            //   />
+            // }
             />
             <Route
               path="add"

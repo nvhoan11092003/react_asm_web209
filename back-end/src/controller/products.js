@@ -70,7 +70,9 @@ export const getAll = async (req, res) => {
   };
 
   try {
-    const products = await Product.paginate({}, options);
+    const products = await Product.find().populate(
+      "categoryId"
+    )
     if (products.length === 0) {
       return res.status(401).json({
         message: "Không có dữ liệu sản phẩm",
