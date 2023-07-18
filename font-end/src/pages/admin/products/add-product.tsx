@@ -2,9 +2,10 @@ import TextArea from "antd/es/input/TextArea";
 import { ICategory, IProduct } from "../../../models/type";
 import { Form, Input, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { getAllCategory } from "../../../api/category";
 
 // interface IProps {
 //   onAdd: (product: IProduct) => void;
@@ -31,15 +32,21 @@ import axios from "axios";
 
 interface IProps {
   onAdd: (product: IProduct) => void;
-  category: ICategory[];
 }
 
 const AddProduct = (props: IProps) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  console.log(props);
+  const [categories, setCategories] = useState<ICategory[]>([]);
   const [imgUrls, setImgUrls] = useState<string[]>([]);
   const { register, handleSubmit, reset } = useForm();
 
+  useEffect(() => {
+    getAllCategory().then(({ data }) => setCategories(data));
+  }, []);
   const onSubmit = async (data: any) => {
+    console.log(data);
+
     try {
       // Prepare form data
       const formData = new FormData();
@@ -74,8 +81,10 @@ const AddProduct = (props: IProps) => {
           storageInstructions: data.storageInstructions,
           description: data.description,
         };
-        props.onAdd(newProduct);
 
+        props.onAdd(newProduct);
+        alert("thêm thành công sản phẩm");
+        navigate("/admin/products");
         // Đặt lại biểu mẫu sau khi gửi thành công
         reset();
       } else {
@@ -156,54 +165,73 @@ const AddProduct = (props: IProps) => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3 style={{ color: "black" }}>Tên sản phẩm</h3>
-        <input type="text" {...register("productName", { required: true })} />
+        <input
+          type="text"
+          {...register("productName", { required: true })}
+          className="form-control"
+        />
 
         <h3 style={{ color: "black" }}>Danh mục</h3>
-        <select id="" {...register("categoryId", { required: true })}>
-          {props.category.map((cate) => {
+        <select
+          className="form-control"
+          id=""
+          {...register("categoryId", { required: true })}
+        >
+          {categories?.map((cate) => {
             return <option value={cate._id}>{cate.name}</option>;
           })}
         </select>
 
         <h3 style={{ color: "black" }}>Giá gốc</h3>
-        <input type="number" {...register("price", { required: true })} />
+        <input
+          className="form-control"
+          type="number"
+          {...register("price", { required: true })}
+        />
 
         <h3 style={{ color: "black" }}>Giá đã giảm</h3>
-        <input type="number" {...register("originPrice", { required: true })} />
+        <input
+          type="number"
+          {...register("originPrice", { required: true })}
+          className="form-control"
+        />
 
         <h3 style={{ color: "black" }}>Hướng dẫn chế biến</h3>
         <textarea
+          className="form-control"
           id=""
-          cols={30}
-          rows={10}
+          rows={3}
           {...register("processingInstructions", { required: true })}
         ></textarea>
 
         <h3 style={{ color: "black" }}>Hướng dẫn bảo quản</h3>
         <textarea
+          className="form-control"
           id=""
-          cols={30}
-          rows={10}
+          rows={3}
           {...register("storageInstructions", { required: true })}
         ></textarea>
 
         <h3 style={{ color: "black" }}>Mô tả</h3>
         <textarea
+          className="form-control"
           id=""
-          cols={30}
-          rows={10}
+          rows={3}
           {...register("description", { required: true })}
         ></textarea>
 
         <h3 style={{ color: "black" }}>Hình ảnh</h3>
         <input
+          className="form-control"
           type="file"
           {...register("images", { required: true })}
           multiple
           style={{ color: "black" }}
         />
 
-        <button type="submit">Submit</button>
+        <button type="submit" className="mt-5 btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
   );

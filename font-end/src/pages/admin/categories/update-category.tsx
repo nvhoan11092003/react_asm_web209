@@ -39,10 +39,8 @@ const UpdateCategory = (props: IProps) => {
   };
 
   const onFinish = (values: IForm) => {
-    console.log("Submit ", values);
-
     props.onUpdate(values);
-
+    alert("cập nhật sản phẩm thành công");
     navigate("/admin/categories");
   };
   const onFinishfail = (values: any) => {

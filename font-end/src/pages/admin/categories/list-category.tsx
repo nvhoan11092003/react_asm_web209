@@ -22,8 +22,8 @@ const ListCategory = (props: IProps) => {
   const columns: ColumnsType<DataType> = [
     {
       title: "ID",
-      dataIndex: "id",
-      key: "id",
+      dataIndex: "_id",
+      key: "_id",
       render: (text) => <p>{text}</p>,
     },
     {
@@ -34,9 +34,9 @@ const ListCategory = (props: IProps) => {
     },
     {
       title: "Category Image",
-      dataIndex: "image",
-      key: "image",
-      render: (imgLink) => <img src={imgLink} alt="" style={{ width: 200 }} />,
+      dataIndex: "imgUrl",
+      key: "imgUrl",
+      render: (imgLink) => <img src={imgLink} alt="" style={{ width: 100 }} />,
     },
     {
       title: "Action",

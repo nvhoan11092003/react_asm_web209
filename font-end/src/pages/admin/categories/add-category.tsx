@@ -11,6 +11,7 @@ interface IProps {
 }
 
 const AddCategory = (props: IProps) => {
+  const navigate = useNavigate();
   // const navigate = useNavigate();
   // const onFinish = (values: ICategory) => {
   //   const newProduct = {
@@ -57,13 +58,13 @@ const AddCategory = (props: IProps) => {
         const newCategory: ICategory = {
           name: data.categoryName,
           imgUrl: linkUrl, // truyền đường dẫn ảnh server trả về và gán nó với imgUrl trong bảng category
-          productId: ["64b4e4d5a2e99a678a881194"],
         };
         console.log(newCategory);
         console.log(getAllCategory());
 
         props.onAdd(newCategory);
-
+        alert("Thêm danh mục thành công");
+        navigate("/admin/categories");
         // Đặt lại biểu mẫu sau khi gửi thành công
         reset();
       } else {
@@ -111,10 +112,15 @@ const AddCategory = (props: IProps) => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>Tên danh mục</h3>
-        <input type="text" {...register("categoryName", { required: true })} />
+        <input
+          className="form-control"
+          type="text"
+          {...register("categoryName", { required: true })}
+        />
 
         <h3>Hình ảnh</h3>
         <input
+          className="form-control"
           type="file"
           {...register("images", { required: true })}
           multiple
@@ -123,7 +129,9 @@ const AddCategory = (props: IProps) => {
 
         {/* <img src={imgUrls ? imgUrls[0] : ""} alt="" /> */}
 
-        <button type="submit">Submit</button>
+        <button type="submit" className="btn btn-primary mt-5">
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -17,7 +17,7 @@ const deleteProduct = (id: string) => {
   return instance.delete("/api/products/" + id);
 };
 
-const updateProduct = (_id: string, product: IProduct) => {
+const updateProduct = (product: IProduct) => {
   return instance.put("/api/products/" + product._id, product);
 };
 
