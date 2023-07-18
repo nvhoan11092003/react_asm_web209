@@ -18,7 +18,7 @@ const deleteCategory = (id: string) => {
 };
 
 const updateCategory = (category: ICategory) => {
-  return instance.put("categories/" + category._id, category);
+  return instance.put("categories/" + category.id, category);
 };
 
 export {

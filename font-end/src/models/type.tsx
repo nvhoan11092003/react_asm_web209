@@ -1,14 +1,32 @@
 export type IProduct = {
-  id: string;
+  _id?: string;
   name: string;
   price: number;
-  image: string;
+  imgUrl: string[];
+
+  // giá đã giảm
+  originPrice: {
+    type: number;
+  };
+
+  // hướng dẫn chế biến
+  processingInstructions: {
+    type: string;
+  };
+
+  // hướng dẫn bảo quản
+  storageInstructions: {
+    type: string;
+  };
+
   description: string;
+  categoryId: string;
 };
 
 export type ICategory = {
-  id: string;
+  _id?: string;
   name: string;
+  imgUrl?: string[];
 };
 
 export type IUser = {

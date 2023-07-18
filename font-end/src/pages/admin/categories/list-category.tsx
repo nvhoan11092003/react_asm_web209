@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 
 interface DataType {
   key: string | number;
-  id: string;
+  _id: string;
   name: string;
+  image: string;
 }
 interface IProps {
   categories: ICategory[];
@@ -32,6 +33,12 @@ const ListCategory = (props: IProps) => {
       render: (text) => <p>{text}</p>,
     },
     {
+      title: "Category Image",
+      dataIndex: "image",
+      key: "image",
+      render: (imgLink) => <img src={imgLink} alt="" style={{ width: 200 }} />,
+    },
+    {
       title: "Action",
       key: "action",
       render: (record) => (
@@ -39,12 +46,12 @@ const ListCategory = (props: IProps) => {
           <Button
             type="primary"
             style={{ backgroundColor: "red" }}
-            onClick={() => removeCategory(record.id)}
+            onClick={() => removeCategory(record._id)}
           >
             Remove
           </Button>
           <Button type="primary">
-            <Link to={`/admin/categories/${record.id}/update`}>Update</Link>
+            <Link to={`/admin/categories/${record._id}/update`}>Update</Link>
           </Button>
         </Space>
       ),
@@ -53,7 +60,7 @@ const ListCategory = (props: IProps) => {
 
   const data: DataType[] = props.categories.map((item: ICategory) => {
     return {
-      key: item.id,
+      key: item._id,
       ...item,
     };
   });

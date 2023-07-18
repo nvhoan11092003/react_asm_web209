@@ -13,11 +13,10 @@ const productSchema = joi.object({
         "number.min" : "Giá sản phẩm phải lớn hơn 0 và không âm"
     }),
     description: joi.string(),
-    imgUrl: joi.array().items(joi.string()).required().messages({
-        "any.required": "Trường imgUrl là bắt buộc.",
-        "array.base": "Trường imgUrl phải là một mảng.",
-        "string.base": "Giá trị trong mảng imgUrl phải là chuỗi."
-    }),
+    imgUrl: joi.array().items(joi.string()),
+    originPrice: joi.number(),
+    processingInstructions: joi.string(),
+    storageInstructions: joi.string(),
     categoryId: joi.string().required().messages({
         "any.required" : "CategoryId là bắt buộc"
     })

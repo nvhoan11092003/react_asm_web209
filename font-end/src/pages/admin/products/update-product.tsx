@@ -16,7 +16,7 @@ const UpdateProduct = (props: IProps) => {
   const [product, setProduct] = useState<IProduct>();
   useEffect(() => {
     const currentProduct = props.products.find(
-      (product: IProduct) => product.id == String(id)
+      (product: IProduct) => product._id == String(id)
     );
     setProduct(currentProduct);
   }, [props]);
@@ -29,11 +29,12 @@ const UpdateProduct = (props: IProps) => {
 
   const setFields = () => {
     form.setFieldsValue({
-      id: product?.id,
+      _id: product?._id,
+      categoryId: product?.categoryId,
       name: product?.name,
       price: product?.price,
       description: product?.description,
-      image: product?.image,
+      image: product?.imgUrl,
     });
   };
 
@@ -59,6 +60,15 @@ const UpdateProduct = (props: IProps) => {
           name="id"
           style={{ display: "none" }}
           rules={[{ required: true, message: "Please input your username!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="CategoryID"
+          name="categoryId"
+          rules={[{ required: true, message: "Please input your categoryId!" }]}
+          hasFeedback
         >
           <Input />
         </Form.Item>

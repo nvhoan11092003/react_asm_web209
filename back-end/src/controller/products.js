@@ -70,7 +70,9 @@ export const getAll = async (req, res) => {
   };
 
   try {
-    const products = await Product.paginate({}, options);
+    const products = await Product.find().populate(
+      "categoryId"
+    )
     if (products.length === 0) {
       return res.status(401).json({
         message: "Không có dữ liệu sản phẩm",
@@ -113,30 +115,17 @@ export const createProduct = async (req, res) => {
       });
     }
 
-    const { name, price, description, categoryId } = req.body;
-    const product = new Product({ name, price, description, categoryId });
+    const product = await Product.create(req.body)
 
-    // Kiểm tra xem có file ảnh được tải lên không
-    if (req.files && req.files.length > 0) {
-      const uploadedImages = [];
-      for (const file of req.files) {
-        const result = await cloudinary.uploader.upload(file.path);
-        uploadedImages.push(result.secure_url);
-      }
-      product.imgUrl = uploadedImages;
-    }
-
-    const savedProduct = await product.save();
-
-    await Category.findByIdAndUpdate(categoryId, {
+    await Category.findByIdAndUpdate(product.categoryId, {
       $addToSet: {
-        productId: savedProduct._id,
+        productId: product._id,
       },
     });
 
     return res.status(200).json({
       message: "Thêm sản phẩm thành công",
-      data: savedProduct,
+      data: product,
     });
   } catch (error) {
     return res.status(500).json({

@@ -1,4 +1,6 @@
 import React from "react";
+import Team from "../../components/Team";
+import { Link } from "react-router-dom";
 
 const AboutPage = () => {
   return (
@@ -11,10 +13,10 @@ const AboutPage = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-content-center text-uppercase">
               <li className="breadcrumb-item">
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li className="breadcrumb-item">
-                <a href="#">Pages</a>
+                <Link to="#">Pages</Link>
               </li>
               <li
                 className="breadcrumb-item text-white active"
@@ -108,150 +110,15 @@ const AboutPage = () => {
                   </div>
                 </div>
               </div>
-              <a className="btn btn-primary py-3 px-5 mt-2" href="">
+              <Link className="btn btn-primary py-3 px-5 mt-2" to="/about">
                 Read More
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container-xxl pt-5 pb-3">
-        <div className="container">
-          <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h5 className="section-title ff-secondary text-center text-primary fw-normal">
-              Team Members
-            </h5>
-            <h1 className="mb-5">Our Master Chefs</h1>
-          </div>
-          <div className="row g-4">
-            <div className="col-lg-1"></div>
-            <div
-              className="col-lg-2 col-md-6 wow fadeInUp"
-              data-wow-delay="0.1s"
-            >
-              <div className="team-item text-center rounded overflow-hidden">
-                <div className="rounded-circle overflow-hidden m-4">
-                  <img
-                    className="img-fluid w-[252px]"
-                    src="img/team-1.jpg"
-                    alt=""
-                  />
-                </div>
-                <h5 className="mb-0">Nguyễn Thị Hiệp</h5>
-                <small>PH28717</small>
-                <div className="d-flex justify-content-center mt-3">
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-lg-2 col-md-6 wow fadeInUp"
-              data-wow-delay="0.1s"
-            >
-              <div className="team-item text-center rounded overflow-hidden">
-                <div className="rounded-circle overflow-hidden m-4">
-                  <img
-                    className="img-fluid w-[252px]"
-                    src="img/team-1.jpg"
-                    alt=""
-                  />
-                </div>
-                <h5 className="mb-0">Vũ Hữu Quân</h5>
-                <small>Designation</small>
-                <div className="d-flex justify-content-center mt-3">
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-lg-2 col-md-6 wow fadeInUp"
-              data-wow-delay="0.3s"
-            >
-              <div className="team-item text-center rounded overflow-hidden">
-                <div className="rounded-circle overflow-hidden m-4">
-                  <img className="img-fluid" src="img/team-2.jpg" alt="" />
-                </div>
-                <h5 className="mb-0">Nguyễn Văn Mạnh</h5>
-                <small>Designation</small>
-                <div className="d-flex justify-content-center mt-3">
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-lg-2 col-md-6 wow fadeInUp"
-              data-wow-delay="0.5s"
-            >
-              <div className="team-item text-center rounded overflow-hidden">
-                <div className="rounded-circle overflow-hidden m-4">
-                  <img className="img-fluid" src="img/team-3.jpg" alt="" />
-                </div>
-                <h5 className="mb-0">Nguyễn Văn Hoàn</h5>
-                <small>Designation</small>
-                <div className="d-flex justify-content-center mt-3">
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-lg-2 col-md-6 wow fadeInUp"
-              data-wow-delay="0.7s"
-            >
-              <div className="team-item text-center rounded overflow-hidden">
-                <div className="rounded-circle overflow-hidden m-4">
-                  <img className="img-fluid" src="img/team-4.jpg" alt="" />
-                </div>
-                <h5 className="mb-0">Nguyễn Văn Quý</h5>
-                <small>Designation</small>
-                <div className="d-flex justify-content-center mt-3">
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a className="btn btn-square btn-primary mx-1" href="">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Team />
     </div>
   );
 };

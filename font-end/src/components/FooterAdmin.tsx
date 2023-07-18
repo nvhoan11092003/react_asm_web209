@@ -1,11 +1,13 @@
 const FooterAdmin = () => {
-    return (
-      <footer className="footer">
-      <div className="d-sm-flex justify-content-center justify-content-sm-between">
-        <span className=" d-block text-center text-sm-left d-sm-inline-block mx-auto" style={{color: "#00d25b" }}>Copyright © bootstrap 2020</span>
-      </div>
-  </footer>
-    )
-  }
-  
-  export default FooterAdmin
+  return (
+    <footer className="sticky-footer bg-white">
+                <div className="container my-auto">
+                    <div className="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div>
+            </footer>
+  )
+}
+
+export default FooterAdmin

@@ -1,18 +1,9 @@
 import React from "react";
 import Team from "../../components/Team";
 import Menu from "../../components/Menu";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
-  const wid_80 = {
-    width: "80px",
-  };
-  const wid_hei_50 = {
-    width: "50px",
-    height: "50px",
-  };
-  const hei_100 = {
-    height: "100px",
-  };
   return (
     <div>
       <div className="container-xxl py-5 bg-dark hero-header mb-5">
@@ -29,12 +20,12 @@ const HomePage = () => {
                 Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit,
                 sed stet lorem sit clita duo justo magna dolore erat amet
               </p>
-              <a
-                href="/booking"
+              <Link
+                to="/booking"
                 className="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft"
               >
                 Book A Table
-              </a>
+              </Link>
             </div>
             <div className="col-lg-6 text-center text-lg-end overflow-hidden">
               <img className="img-fluid" src="img/hero.png" alt="" />
@@ -42,6 +33,8 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <Menu />
+
       <div className="container-xxl py-5">
         <div className="container">
           <div className="row g-4">
@@ -191,15 +184,13 @@ const HomePage = () => {
                   </div>
                 </div>
               </div>
-              <a className="btn btn-primary py-3 px-5 mt-2" href="">
+              <Link className="btn btn-primary py-3 px-5 mt-2" to="/about">
                 Read More
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-
-      <Menu />
 
       <div
         className="container-xxl py-5 px-0 wow fadeInUp"
@@ -282,7 +273,7 @@ const HomePage = () => {
                         className="form-control"
                         placeholder="Special Request"
                         id="message"
-                        style={hei_100}
+                        style={{ height: "100px" }}
                       ></textarea>
                       <label>Special Request</label>
                     </div>

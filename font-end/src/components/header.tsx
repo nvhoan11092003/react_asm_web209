@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBar from "./SearchClient";
 
 const Header = () => {
   return (
@@ -10,15 +11,10 @@ const Header = () => {
           </h1> */}
           <img src="img/logo.png" alt="Logo" />
         </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
-        >
-          <span className="fa fa-bars"></span>
-        </button>
-        <div className=" show navbar-collapse" id="navbarCollapse">
+
+
+        <SearchBar />
+        <div className=" show navbar-collapse z-2" id="navbarCollapse">
           <div className="navbar-nav ms-auto py-0 pe-4">
             <a href="/" className="nav-item nav-link active">
               Home
@@ -26,9 +22,9 @@ const Header = () => {
             <a href="/about" className="nav-item nav-link">
               About
             </a>
-            <a href="/service" className="nav-item nav-link">
+            {/* <a href="/service" className="nav-item nav-link">
               Service
-            </a>
+            </a> */}
             <a href="/menu" className="nav-item nav-link">
               Menu
             </a>
@@ -44,17 +40,17 @@ const Header = () => {
                 <a href="/booking" className="dropdown-item">
                   Booking
                 </a>
-                <a href="/team" className="dropdown-item">
+                {/* <a href="/team" className="dropdown-item">
                   Our Team
-                </a>
+                </a> */}
               </div>
             </div>
-            <a href="/contact" className="nav-item nav-link">
+            {/* <a href="/contact" className="nav-item nav-link">
               Contact
-            </a>
+            </a> */}
           </div>
-          <a href="/booking" className="btn btn-primary py-2 px-4">
-            Book A Table
+          <a href="/signin" className="btn btn-primary py-2 px-4">
+            Account
           </a>
         </div>
       </nav>

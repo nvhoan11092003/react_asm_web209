@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 interface DataType {
   key: string | number;
-  id: string;
+  _id: string;
   name: string;
   price: number;
   description: string;
@@ -67,7 +67,7 @@ const ListProduct = (props: IProps) => {
 
   const data: DataType[] = props.products.map((item: IProduct) => {
     return {
-      key: item.id,
+      key: item._id,
       ...item,
     };
   });

@@ -19,7 +19,10 @@ router.post("/upload", upload.fields([{ name: "img", maxCount: 5 }]), (req, res)
       }
     }
 
-    res.send(imgUrls);
+    res.status(200).json({
+      message: "Upload image thành công",
+      imgUrl: imgUrls
+    });
   } else {
     res.status(400).json({ error: "Không tìm thấy tệp ảnh" });
   }

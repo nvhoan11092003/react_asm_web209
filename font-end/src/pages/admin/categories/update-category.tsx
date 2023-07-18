@@ -15,7 +15,7 @@ const UpdateCategory = (props: IProps) => {
   const [category, setCategory] = useState<ICategory>();
   useEffect(() => {
     const currentCategory = props.categories.find(
-      (category: ICategory) => category.id == String(id)
+      (category: ICategory) => category._id == String(id)
     );
     setCategory(currentCategory);
   }, [props]);
@@ -28,7 +28,7 @@ const UpdateCategory = (props: IProps) => {
 
   const setFields = () => {
     form.setFieldsValue({
-      id: category?.id,
+      _id: category?._id,
       name: category?.name,
     });
   };

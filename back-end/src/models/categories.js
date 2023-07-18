@@ -9,7 +9,12 @@ const categorySchema = new mongoose.Schema({
     productId: [{
         type: mongoose.Types.ObjectId,
         ref: "Product"
-    }]
+    }],
+    imgUrl: [
+        {
+            type: String
+        }
+    ]
 },{timestamps:true,versionKey: false})
 
 export default mongoose.model("Category",categorySchema)

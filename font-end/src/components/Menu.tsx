@@ -1,7 +1,4 @@
 const Menu = () => {
-  const wid_80 = {
-    width: "80px",
-  };
   return (
     <div className="container-xxl py-5">
       <div className="container">
@@ -65,7 +62,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-1.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -84,7 +81,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-2.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -103,7 +100,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-3.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -122,7 +119,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-4.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -141,7 +138,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-5.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -160,7 +157,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-6.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -179,7 +176,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-7.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -198,7 +195,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-8.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -221,7 +218,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-1.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -240,7 +237,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-2.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -259,7 +256,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-3.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -278,7 +275,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-4.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -297,7 +294,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-5.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -316,7 +313,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-6.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -335,7 +332,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-7.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -354,7 +351,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-8.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -377,7 +374,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-1.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -396,7 +393,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-2.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -415,7 +412,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-3.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -434,7 +431,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-4.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -453,7 +450,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-5.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -472,7 +469,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-6.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -491,7 +488,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-7.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">
@@ -510,7 +507,7 @@ const Menu = () => {
                       className="flex-shrink-0 img-fluid rounded"
                       src="img/menu-8.jpg"
                       alt=""
-                      style={wid_80}
+                      style={{ width: "80px" }}
                     />
                     <div className="w-100 d-flex flex-column text-start ps-4">
                       <h5 className="d-flex justify-content-between border-bottom pb-2">

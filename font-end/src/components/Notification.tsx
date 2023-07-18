@@ -1,52 +1,54 @@
 const Notification = () => {
   return (
-    <li className="nav-item dropdown border-left">
-    <a className="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-      <i className="mdi mdi-bell"></i>
-      <span className="count bg-danger"></span>
+    <li className="nav-item dropdown no-arrow mx-1">
+    <a className="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i className="fas fa-bell fa-fw"></i>
+        
+        <span className="badge badge-danger badge-counter">3+</span>
     </a>
-    <div className="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-      <h6 className="p-3 mb-0">Notifications</h6>
-      <div className="dropdown-divider"></div>
-      <a className="dropdown-item preview-item">
-        <div className="preview-thumbnail">
-          <div className="preview-icon bg-dark rounded-circle">
-            <i className="mdi mdi-calendar text-success"></i>
-          </div>
-        </div>
-        <div className="preview-item-content">
-          <p className="preview-subject mb-1">Event today</p>
-          <p className="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
-        </div>
-      </a>
-      <div className="dropdown-divider"></div>
-      <a className="dropdown-item preview-item">
-        <div className="preview-thumbnail">
-          <div className="preview-icon bg-dark rounded-circle">
-            <i className="mdi mdi-settings text-danger"></i>
-          </div>
-        </div>
-        <div className="preview-item-content">
-          <p className="preview-subject mb-1">Settings</p>
-          <p className="text-muted ellipsis mb-0"> Update dashboard </p>
-        </div>
-      </a>
-      <div className="dropdown-divider"></div>
-      <a className="dropdown-item preview-item">
-        <div className="preview-thumbnail">
-          <div className="preview-icon bg-dark rounded-circle">
-            <i className="mdi mdi-link-variant text-warning"></i>
-          </div>
-        </div>
-        <div className="preview-item-content">
-          <p className="preview-subject mb-1">Launch Admin</p>
-          <p className="text-muted ellipsis mb-0"> New admin wow! </p>
-        </div>
-      </a>
-      <div className="dropdown-divider"></div>
-      <p className="p-3 mb-0 text-center">See all notifications</p>
+    
+    <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+        aria-labelledby="alertsDropdown">
+        <h6 className="dropdown-header">
+            Alerts Center
+        </h6>
+        <a className="dropdown-item d-flex align-items-center" href="#">
+            <div className="mr-3">
+                <div className="icon-circle bg-primary">
+                    <i className="fas fa-file-alt text-white"></i>
+                </div>
+            </div>
+            <div>
+                <div className="small text-gray-500">December 12, 2019</div>
+                <span className="font-weight-bold">A new monthly report is ready to download!</span>
+            </div>
+        </a>
+        <a className="dropdown-item d-flex align-items-center" href="#">
+            <div className="mr-3">
+                <div className="icon-circle bg-success">
+                    <i className="fas fa-donate text-white"></i>
+                </div>
+            </div>
+            <div>
+                <div className="small text-gray-500">December 7, 2019</div>
+                $290.29 has been deposited into your account!
+            </div>
+        </a>
+        <a className="dropdown-item d-flex align-items-center" href="#">
+            <div className="mr-3">
+                <div className="icon-circle bg-warning">
+                    <i className="fas fa-exclamation-triangle text-white"></i>
+                </div>
+            </div>
+            <div>
+                <div className="small text-gray-500">December 2, 2019</div>
+                Spending Alert: We've noticed unusually high spending for your account.
+            </div>
+        </a>
+        <a className="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
     </div>
-  </li>
+</li>
   )
 }
 
