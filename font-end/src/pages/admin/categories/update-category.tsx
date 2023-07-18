@@ -5,7 +5,12 @@ import { Button, Form, Input } from "antd";
 
 interface IProps {
   categories: ICategory[];
-  onUpdate: (category: ICategory) => void;
+  onUpdate: (category: any) => void;
+}
+
+interface IForm {
+  _id: string;
+  name: string;
 }
 
 const UpdateCategory = (props: IProps) => {
@@ -33,11 +38,12 @@ const UpdateCategory = (props: IProps) => {
     });
   };
 
-  const onFinish = (values: string) => {
+  const onFinish = (values: IForm) => {
     console.log("Submit ", values);
 
-    props.onUpdate(id, values.name);
-    // navigate("/admin/categories");
+    props.onUpdate(values);
+
+    navigate("/admin/categories");
   };
   const onFinishfail = (values: any) => {
     console.log("valid : ", values.errorFields[0], values);
