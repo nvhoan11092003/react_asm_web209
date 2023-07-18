@@ -39,7 +39,7 @@ function App() {
 
   const onHandleRemoveProduct = (id: string) => {
     deleteProduct(id).then(() =>
-      setProducts(products.filter((item: IProduct) => item.id !== id))
+      setProducts(products.filter((item: IProduct) => item._id !== id))
     );
   };
 
@@ -62,7 +62,7 @@ function App() {
 
   const onHandleRemoveCategory = (id: string) => {
     deleteCategory(id).then(() =>
-      setCategories(categories.filter((item: ICategory) => item.id !== id))
+      setCategories(categories.filter((item: ICategory) => item._id !== id))
     );
   };
 
