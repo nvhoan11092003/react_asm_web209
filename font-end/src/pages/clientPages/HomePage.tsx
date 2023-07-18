@@ -1,7 +1,7 @@
-import React from "react";
+import React, { createContext, useEffect, useState } from "react";
 import Team from "../../components/Team";
 import Menu from "../../components/Menu";
-
+import { getAll } from "../../api/product";
 const HomePage = () => {
   const wid_80 = {
     width: "80px",
@@ -13,6 +13,18 @@ const HomePage = () => {
   const hei_100 = {
     height: "100px",
   };
+
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const getData = async () => {
+      const product = await getAll()
+      setData(product.data)
+      console.log(data);
+
+    }
+    getData()
+  }, [])
   return (
     <div>
       <div className="container-xxl py-5 bg-dark hero-header mb-5">
@@ -42,6 +54,28 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+
+
+      {/* ----------------------------- */}
+      <h1 className="container">Món ngon mỗi ngày</h1>
+      <div className="container grid" style={{ display: "grid", gridTemplateColumns: "22% 22% 22% 22%", gap: "4%" }} >
+        {data.map((item: any) =>
+          <div className="g-col-3" style={{}}>
+            <img src={item.imgURL[0]} className="card-img-top" alt="..." />
+            <div className="card-body">
+              <b className="text-danger">{item.price}đ</b>
+              <p className="card-text">{item.name}</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+
+
+
+      {/* ------------------------------ */}
+
       <div className="container-xxl py-5">
         <div className="container">
           <div className="row g-4">

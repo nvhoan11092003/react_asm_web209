@@ -1,0 +1,111 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "imgURL": "https://image.cooky.vn/icon/s60x60/4ad2e1c9-84ab-4b53-a4ad-f6bef08d71c8.png",
+            "name": "Thịt heo"
+        },
+        {
+            "id": 2,
+            "imgURL": "https://image.cooky.vn/icon/s60x60/7e72fc58-b4bf-48da-acec-f9b1b99a630d.png",
+            "name": "Thịt gà"
+        },
+        {
+            "id": 3,
+            "imgURL": "https://image.cooky.vn/icon/s60x60/1cb41d17-4c7b-4779-8f38-3fff600be836.png",
+            "name": "Thịt bò"
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Canh Sườn Non Heo Nấu Bí Đỏ",
+            "price": 64000,
+            "sale": 63000,
+            "imgURL": [
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/3e999d70-b205-47fe-83d4-fbb806ec5104.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/aa4d5171-6940-438a-84ab-c3fb30ece038.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/36c672bd-26dd-4f46-9fc8-ba8258c566fc.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/9f6d8115-1602-46d7-a791-c461cfa9ffa1.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/82a8ae4b-c9b2-47c2-8a3a-a577bb960069.png"
+            ],
+            "description": "Bí đỏ được xếp vào loại trái có giá trị dinh dưỡng cao, giàu vitamin A, chất xơ và nhiều khoáng chất tốt cho sức khỏe. Vì vậy các món ăn từ bí đỏ luôn được các chị em nội trợ ưu tiên chọn cho gia đình, trong đó có món canh bí đỏ sườn heo.",
+            "categoryId": 1
+        },
+        {
+            "id": 2,
+            "name": "Canh Sườn Non Heo Nấu Bí Đỏ",
+            "price": 64000,
+            "sale": 63000,
+            "imgURL": [
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/3e999d70-b205-47fe-83d4-fbb806ec5104.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/aa4d5171-6940-438a-84ab-c3fb30ece038.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/36c672bd-26dd-4f46-9fc8-ba8258c566fc.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/9f6d8115-1602-46d7-a791-c461cfa9ffa1.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/82a8ae4b-c9b2-47c2-8a3a-a577bb960069.png"
+            ],
+            "description": "Bí đỏ được xếp vào loại trái có giá trị dinh dưỡng cao, giàu vitamin A, chất xơ và nhiều khoáng chất tốt cho sức khỏe. Vì vậy các món ăn từ bí đỏ luôn được các chị em nội trợ ưu tiên chọn cho gia đình, trong đó có món canh bí đỏ sườn heo.",
+            "categoryId": 3
+        },
+        {
+            "id": 3,
+            "name": "Canh Sườn Non Heo Nấu Bí Đỏ",
+            "price": 64000,
+            "sale": 63000,
+            "imgURL": [
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/3e999d70-b205-47fe-83d4-fbb806ec5104.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/aa4d5171-6940-438a-84ab-c3fb30ece038.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/36c672bd-26dd-4f46-9fc8-ba8258c566fc.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/9f6d8115-1602-46d7-a791-c461cfa9ffa1.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/82a8ae4b-c9b2-47c2-8a3a-a577bb960069.png"
+            ],
+            "description": "Bí đỏ được xếp vào loại trái có giá trị dinh dưỡng cao, giàu vitamin A, chất xơ và nhiều khoáng chất tốt cho sức khỏe. Vì vậy các món ăn từ bí đỏ luôn được các chị em nội trợ ưu tiên chọn cho gia đình, trong đó có món canh bí đỏ sườn heo.",
+            "categoryId": 3
+        },
+        {
+            "id": 4,
+            "name": "Canh Sườn Non Heo Nấu Bí Đỏ",
+            "price": 64000,
+            "sale": 63000,
+            "imgURL": [
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/3e999d70-b205-47fe-83d4-fbb806ec5104.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/aa4d5171-6940-438a-84ab-c3fb30ece038.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/36c672bd-26dd-4f46-9fc8-ba8258c566fc.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/9f6d8115-1602-46d7-a791-c461cfa9ffa1.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/82a8ae4b-c9b2-47c2-8a3a-a577bb960069.png"
+            ],
+            "description": "Bí đỏ được xếp vào loại trái có giá trị dinh dưỡng cao, giàu vitamin A, chất xơ và nhiều khoáng chất tốt cho sức khỏe. Vì vậy các món ăn từ bí đỏ luôn được các chị em nội trợ ưu tiên chọn cho gia đình, trong đó có món canh bí đỏ sườn heo.",
+            "categoryId": 2
+        },
+        {
+            "id": 5,
+            "name": "Canh Sườn Non Heo Nấu Bí Đỏ",
+            "price": 64000,
+            "sale": 63000,
+            "imgURL": [
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/3e999d70-b205-47fe-83d4-fbb806ec5104.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/aa4d5171-6940-438a-84ab-c3fb30ece038.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/36c672bd-26dd-4f46-9fc8-ba8258c566fc.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/9f6d8115-1602-46d7-a791-c461cfa9ffa1.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/82a8ae4b-c9b2-47c2-8a3a-a577bb960069.png"
+            ],
+            "description": "Bí đỏ được xếp vào loại trái có giá trị dinh dưỡng cao, giàu vitamin A, chất xơ và nhiều khoáng chất tốt cho sức khỏe. Vì vậy các món ăn từ bí đỏ luôn được các chị em nội trợ ưu tiên chọn cho gia đình, trong đó có món canh bí đỏ sườn heo.",
+            "categoryId": 2
+        },
+        {
+            "id": 6,
+            "name": "Canh Sườn Non Heo Nấu Bí Đỏ",
+            "price": 64000,
+            "sale": 63000,
+            "imgURL": [
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/3e999d70-b205-47fe-83d4-fbb806ec5104.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/aa4d5171-6940-438a-84ab-c3fb30ece038.jpeg",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/36c672bd-26dd-4f46-9fc8-ba8258c566fc.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/9f6d8115-1602-46d7-a791-c461cfa9ffa1.png",
+                "https://image.cooky.vn/posproduct/g0/13881/s200x200/82a8ae4b-c9b2-47c2-8a3a-a577bb960069.png"
+            ],
+            "description": "Bí đỏ được xếp vào loại trái có giá trị dinh dưỡng cao, giàu vitamin A, chất xơ và nhiều khoáng chất tốt cho sức khỏe. Vì vậy các món ăn từ bí đỏ luôn được các chị em nội trợ ưu tiên chọn cho gia đình, trong đó có món canh bí đỏ sườn heo.",
+            "categoryId": 1
+        }
+    ]
+}

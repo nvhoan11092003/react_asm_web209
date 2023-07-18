@@ -1,45 +1,44 @@
 import { MDBInput, MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from "react-dom";
-interface Product {
-    id: number;
-    name: string;
-    typeId: number;
-    price: number;
-}
+import { getAll } from '../../api/product';
+import { getAllCategory } from '../../api/category';
+import { Product, ProductType } from '../../components/search';
 
-const products: Product[] = [
-    { id: 1, name: 'Product Adafadgghahahdadhhhhhhhhhhhhhhhaaaaaaa', typeId: 1, price: 100 },
-    { id: 2, name: 'Product B', typeId: 2, price: 200 },
-    { id: 3, name: 'Product C', typeId: 1, price: 300 },
-    { id: 4, name: 'Product D', typeId: 3, price: 400 },
-    { id: 5, name: 'Product E', typeId: 2, price: 500 },
-];
-
-interface ProductType {
-    id: number;
-    name: string;
-}
-
-const productTypes: ProductType[] = [
-    { id: 1, name: 'Type 1' },
-    { id: 2, name: 'Type 2' },
-    { id: 3, name: 'Type 3' },
-];
 interface ProductWithTypeName extends Product {
     typeName: string;
 }
-const productsWithTypeNames: ProductWithTypeName[] = products.map((product) => {
-    const productType = productTypes.find((type) => type.id === product.typeId);
-    return {
-        ...product,
-        typeName: productType?.name || '',
-    };
-});
+
 const Categories = () => {
     const [selectedType, setSelectedType] = useState('');
     const [selectedPrice, setSelectedPrice] = useState(0);
+    const [category, setCategory] = useState<ProductType[]>([]);
 
+    const [data2, setData2] = useState<Product[]>([])
+
+    useEffect(() => {
+        const getData = async () => {
+            const product = await getAll()
+            setData2(product.data)
+
+        }
+        getData()
+        const getCate = async () => {
+            const cate = await getAllCategory()
+            setCategory(cate.data)
+
+
+        }
+        getCate()
+
+    }, [])
+    const productsWithTypeNames: ProductWithTypeName[] = data2.map((product) => {
+        const productType = category.find((type) => type.id === product.categoryId);
+        return {
+            ...product,
+            typeName: productType?.name || '',
+        };
+    });
     const types = Array.from(new Set(productsWithTypeNames.map((product) => product.typeName)));
 
     const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -64,13 +63,17 @@ const Categories = () => {
                 ))}
             </select>
             <input type="number" value={selectedPrice} onChange={handlePriceChange} placeholder="Max Price" />
-            <ul>
-                {filteredProducts2.map((product) => (
-                    <li key={product.id}>
-                        {product.name} - {product.typeName} - ${product.price}
-                    </li>
-                ))}
-            </ul>
+            <div className="container grid" style={{ display: "grid", gridTemplateColumns: "22% 22% 22% 22%", gap: "4%" }} >
+                {filteredProducts2.map((item: any) =>
+                    <div className="g-col-3" style={{}}>
+                        <img src={item.imgURL[0]} className="card-img-top" alt="..." />
+                        <div className="card-body">
+                            <b className="text-danger">{item.price}đ</b>
+                            <p className="card-text">{item.name}</p>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
