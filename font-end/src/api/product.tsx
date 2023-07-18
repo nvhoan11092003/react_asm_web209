@@ -2,11 +2,11 @@ import instance from "../instance/instance";
 import { IProduct } from "../models/type";
 
 
-const getAll = () =>{
+const getAllProduct = () =>{
     return instance.get("/api/products")
 }
 
-const getOne = (id:string) =>{
+const getOneProduct = (id:string) =>{
     return instance.get("/api/products/"+id)
 }
 
@@ -22,4 +22,4 @@ const updateProduct = (product:IProduct) =>{
     return instance.put("/api/products/"+product._id,product)
 }
 
-export {getAll, getOne, addProduct, deleteProduct, updateProduct}
+export {getAllProduct, getOneProduct, addProduct, deleteProduct, updateProduct}

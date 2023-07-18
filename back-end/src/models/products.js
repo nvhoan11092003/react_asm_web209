@@ -7,6 +7,8 @@ const productSchema = new mongoose.Schema({
         minLength: 6,
         maxLength: 255
     },
+
+    // giá gốc
     price: {
         type: Number,
         require: true,
@@ -17,10 +19,30 @@ const productSchema = new mongoose.Schema({
     },
     imgUrl: [
         {
-            type :String,
-            require: true
+            type: String
         }
     ],
+
+    // giá đã giảm
+    originPrice: {
+        type:Number,
+        require: true
+    },
+
+    // hướng dẫn chế biến
+    processingInstructions: 
+        {
+        type:String,
+        require: true
+        },
+
+    // hướng dẫn bảo quản
+    storageInstructions: 
+        {
+            type:String,
+            require: true
+        },
+
     categoryId: {
         type: mongoose.Types.ObjectId,
         ref: "Category"
