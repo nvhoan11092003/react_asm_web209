@@ -10,16 +10,16 @@ import BookingPage from "./pages/clientPages/BookingPage";
 import TeamPage from "./pages/clientPages/TeamPage";
 import SignInPage from "./pages/clientPages/SignInPage";
 import SignUpPage from "./pages/clientPages/SignUpPage";
-import SearchBar from "./components/search";
+import SearchBar from "./components/SearchClient";
+import AdminLayout from "./Layouts/adminLayout";
+import Dashboard from "./pages/adminPages/Dashboard";
+import './Dashboard.css'
+import ProductManager from "./pages/adminPages/ProductManager";
 
-import AdminLayout from "./pages/layout/AdminLayout"
-import DashBoard from "./pages/DashBoard"
-import Form from "./pages/Form"
-import Chart from "./pages/Chart"
-import ProductManager from "./pages/ProductManager"
 
 
 function App() {
+  
 
   return (
     <BrowserRouter>
@@ -40,12 +40,8 @@ function App() {
         {/* admin  */}
         <Route path="/admin" element={<AdminLayout/>}>
             <Route index element={<Navigate to="dashboard" />} />
-            <Route path="dashboard" element={<DashBoard/>} />
-            <Route path="form" element={<Form/>} />
-            <Route path="chart" element={<Chart/>} />
-            <Route path="products" >
-                <Route index element={<ProductManager/>} />               
-            </Route>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="product" element={<ProductManager />} />
         </Route>
       </Routes>
     </BrowserRouter>
