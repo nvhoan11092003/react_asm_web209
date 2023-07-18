@@ -1,40 +1,39 @@
 export type IProduct = {
-    _id?: string;
-    name: string;
-    price: number;
-    imgUrl: string[];
+  _id?: string;
+  name: string;
+  price: number;
+  imgUrl: string[];
 
-    // giá đã giảm
-    originPrice: {
-        type:number,
-    },
+  // giá đã giảm
+  originPrice: {
+    type: number;
+  };
 
-    // hướng dẫn chế biến
-    processingInstructions: 
-        {
-        type:string,
-        },
+  // hướng dẫn chế biến
+  processingInstructions: {
+    type: string;
+  };
 
-    // hướng dẫn bảo quản
-    storageInstructions: 
-        {
-            type:string,
-        },
+  // hướng dẫn bảo quản
+  storageInstructions: {
+    type: string;
+  };
 
-    description: string;
-    categoryId: string;
-}
+  description: string;
+  categoryId: string;
+};
 
 export type ICategory = {
-    _id?: string,
-    name: string,
-    imgUrl?: string[];
-}
+  _id?: string;
+  name: string;
+  imgUrl?: string[];
+  productId: string[];
+};
 
 export type IUser = {
-    _id: string;
-    username: string;
-    email: string,
-    password: string;
-    confirmPassword: string;
-}
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};

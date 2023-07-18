@@ -34,7 +34,7 @@ const UpdateProduct = (props: IProps) => {
       name: product?.name,
       price: product?.price,
       description: product?.description,
-      image: product?.image,
+      image: product?.imgUrl,
     });
   };
 
@@ -100,7 +100,7 @@ const UpdateProduct = (props: IProps) => {
 
         <Form.Item
           label="Product Description"
-          name="desc"
+          name="description"
           rules={[
             { required: true, message: "Please input your description!" },
             { whitespace: true },

@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 interface DataType {
   key: string | number;
-  id: string;
+  _id: string;
   name: string;
   price: number;
-  desc: string;
+  description: string;
   image: string;
 }
 interface IProps {
@@ -41,8 +41,8 @@ const ListProduct = (props: IProps) => {
     },
     {
       title: "Description",
-      dataIndex: "desc",
-      key: "desc",
+      dataIndex: "description",
+      key: "description",
       render: (text) => <p>{text}</p>,
     },
     {

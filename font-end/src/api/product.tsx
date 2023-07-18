@@ -1,25 +1,30 @@
 import instance from "../instance/instance";
 import { IProduct } from "../models/type";
 
+const getAllProduct = () => {
+  return instance.get("/api/products");
+};
 
-const getAllProduct = () =>{
-    return instance.get("/api/products")
-}
+const getOneProduct = (id: string) => {
+  return instance.get("/api/products/" + id);
+};
 
-const getOneProduct = (id:string) =>{
-    return instance.get("/api/products/"+id)
-}
+const addProduct = (product: IProduct) => {
+  return instance.post("/api/products", product);
+};
 
-const addProduct = (product:IProduct) =>{
-    return instance.post("/api/products",product)
-}
+const deleteProduct = (id: string) => {
+  return instance.delete("/api/products/" + id);
+};
 
-const deleteProduct = (id:string) =>{
-    return instance.delete("/api/products/"+id)
-}
+const updateProduct = (product: IProduct) => {
+  return instance.put("/api/products/" + product._id, product);
+};
 
-const updateProduct = (product:IProduct) =>{
-    return instance.put("/api/products/"+product._id,product)
-}
-
-export {getAllProduct, getOneProduct, addProduct, deleteProduct, updateProduct}
+export {
+  getAllProduct,
+  getOneProduct,
+  addProduct,
+  deleteProduct,
+  updateProduct,
+};

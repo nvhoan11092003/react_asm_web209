@@ -33,9 +33,14 @@ const UpdateCategory = (props: IProps) => {
     });
   };
 
-  const onFinish = (values: any) => {
-    props.onUpdate(values);
-    navigate("/admin/category");
+  const onFinish = (values: string) => {
+    console.log("Submit ", values);
+
+    props.onUpdate(id, values.name);
+    // navigate("/admin/categories");
+  };
+  const onFinishfail = (values: any) => {
+    console.log("valid : ", values.errorFields[0], values);
   };
 
   return (
@@ -49,12 +54,14 @@ const UpdateCategory = (props: IProps) => {
         form={form}
         style={{ maxWidth: 800 }}
         onFinish={onFinish}
+        onFinishFailed={onFinishfail}
       >
         <Form.Item
           label=""
-          name="id"
+          name="_id"
+          initialValue={id}
           style={{ display: "none" }}
-          rules={[{ required: true, message: "Please input your name!" }]}
+          rules={[{ required: true, message: "Please input your id!" }]}
         >
           <Input />
         </Form.Item>

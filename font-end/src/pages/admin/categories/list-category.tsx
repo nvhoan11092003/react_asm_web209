@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 interface DataType {
   key: string | number;
-  id: string;
+  _id: string;
   name: string;
   image: string;
 }
@@ -46,12 +46,12 @@ const ListCategory = (props: IProps) => {
           <Button
             type="primary"
             style={{ backgroundColor: "red" }}
-            onClick={() => removeCategory(record.id)}
+            onClick={() => removeCategory(record._id)}
           >
             Remove
           </Button>
           <Button type="primary">
-            <Link to={`/admin/categories/${record.id}/update`}>Update</Link>
+            <Link to={`/admin/categories/${record._id}/update`}>Update</Link>
           </Button>
         </Space>
       ),
