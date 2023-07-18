@@ -46,10 +46,16 @@ const ListCategory = (props: IProps) => {
           <Button
             type="primary"
             style={{ backgroundColor: "red" }}
-            onClick={() => removeCategory(record._id)}
+            onClick={() => {
+              const is = confirm("ban có muốn xóa ko ");
+              if (is) {
+                removeCategory(record._id);
+              }
+            }}
           >
             Remove
           </Button>
+
           <Button type="primary">
             <Link to={`/admin/categories/${record._id}/update`}>Update</Link>
           </Button>

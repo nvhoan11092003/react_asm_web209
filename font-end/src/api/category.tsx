@@ -17,8 +17,10 @@ const deleteCategory = (id: string) => {
   return instance.delete("/api/category/" + id);
 };
 
-const updateCategory = (id: string, category: any) => {
-  return instance.put("/api/category/" + id, category);
+const updateCategory = (category: ICategory) => {
+  console.log(category.name);
+  const name = category.name;
+  return instance.put("/api/category/" + category._id, { name });
 };
 
 export {

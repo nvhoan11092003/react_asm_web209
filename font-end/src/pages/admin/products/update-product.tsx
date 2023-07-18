@@ -57,7 +57,7 @@ const UpdateProduct = (props: IProps) => {
       >
         <Form.Item
           label=""
-          name="id"
+          name="_id"
           style={{ display: "none" }}
           rules={[{ required: true, message: "Please input your username!" }]}
         >
