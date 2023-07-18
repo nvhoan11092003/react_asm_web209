@@ -1,21 +1,20 @@
 export type IProduct = {
-    _id: string;
-    name: string;
-    price: number;
-    image: string;
-    description: string;
-    categoryId: string;
-}
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+};
 
 export type ICategory = {
-    _id: string,
-    name: string
-}
+  id: string;
+  name: string;
+};
 
 export type IUser = {
-    _id: string;
-    username: string;
-    email: string,
-    password: string;
-    confirmPassword: string;
-}
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};

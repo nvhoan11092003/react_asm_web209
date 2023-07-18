@@ -6,8 +6,7 @@ import Chart from "./pages/Chart";
 import ListProduct from "./pages/admin/products/list-product";
 import AddProduct from "./pages/admin/products/add-product";
 import { useEffect, useState } from "react";
-import { IProduct } from "./types/product";
-import { ICategory } from "./types/category";
+import { IProduct, ICategory } from "./models/type";
 import {
   getAllProduct,
   addProduct,
@@ -39,7 +38,7 @@ function App() {
     getAllProduct().then(({ data }) => setProducts(data));
   }, []);
 
-  const onHandleRemoveProduct = (id: number) => {
+  const onHandleRemoveProduct = (id: string) => {
     deleteProduct(id).then(() =>
       setProducts(products.filter((item: IProduct) => item.id !== id))
     );
@@ -62,7 +61,7 @@ function App() {
     getAllCategory().then(({ data }) => setCategories(data));
   }, []);
 
-  const onHandleRemoveCategory = (id: number) => {
+  const onHandleRemoveCategory = (id: string) => {
     deleteCategory(id).then(() =>
       setCategories(categories.filter((item: ICategory) => item.id !== id))
     );

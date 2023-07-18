@@ -1,27 +1,26 @@
 import { Space, Table, Button } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { ICategory } from "../../../types/category";
+import { ICategory } from "../../../models/type";
 import { Link } from "react-router-dom";
 
 interface DataType {
   key: string | number;
-  id: number;
+  id: string;
   name: string;
-  image: string;
 }
 interface IProps {
   categories: ICategory[];
-  onRemove: (id: number) => void;
+  onRemove: (id: string) => void;
 }
 
 const ListCategory = (props: IProps) => {
-  const removeCategory = (id: number) => {
+  const removeCategory = (id: string) => {
     props.onRemove(id);
   };
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Category Id",
+      title: "ID",
       dataIndex: "id",
       key: "id",
       render: (text) => <p>{text}</p>,
@@ -31,12 +30,6 @@ const ListCategory = (props: IProps) => {
       dataIndex: "name",
       key: "name",
       render: (text) => <p>{text}</p>,
-    },
-    {
-      title: "Category Image",
-      dataIndex: "image",
-      key: "image",
-      render: (imgLink) => <img src={imgLink} alt="" style={{ width: 200 }} />,
     },
     {
       title: "Action",

@@ -1,23 +1,23 @@
 import { Space, Table, Button } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { IProduct } from "../../../types/product";
+import { IProduct } from "../../../models/type";
 import { Link } from "react-router-dom";
 
 interface DataType {
   key: string | number;
-  id: number;
+  id: string;
   name: string;
   price: number;
-  desc: string;
+  description: string;
   image: string;
 }
 interface IProps {
   products: IProduct[];
-  onRemove: (id: number) => void;
+  onRemove: (id: string) => void;
 }
 
 const ListProduct = (props: IProps) => {
-  const removeProduct = (id: number) => {
+  const removeProduct = (id: string) => {
     props.onRemove(id);
   };
 
@@ -41,8 +41,8 @@ const ListProduct = (props: IProps) => {
     },
     {
       title: "Description",
-      dataIndex: "desc",
-      key: "desc",
+      dataIndex: "description",
+      key: "description",
       render: (text) => <p>{text}</p>,
     },
     {

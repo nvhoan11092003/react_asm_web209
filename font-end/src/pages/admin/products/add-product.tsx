@@ -1,10 +1,6 @@
 import TextArea from "antd/es/input/TextArea";
-import { IProduct } from "../../../types/product";
+import { IProduct } from "../../../models/type";
 import { Form, Input, Button } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import type { RcFile, UploadProps } from "antd/es/upload";
-import type { UploadFile } from "antd/es/upload/interface";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface IProps {
@@ -18,7 +14,7 @@ const AddProduct = (props: IProps) => {
       id: values.id,
       name: values.name,
       price: values.price,
-      desc: values.desc,
+      description: values.description,
       image: values.image,
     };
     props.onAdd(newProduct);
@@ -79,6 +75,15 @@ const AddProduct = (props: IProps) => {
           hasFeedback
         >
           <TextArea />
+        </Form.Item>
+
+        <Form.Item className="form-group mb-3" label="Product Image">
+          <Input
+            type="file"
+            id="image"
+            className="form-control"
+            style={{ backgroundColor: "white", color: "black" }}
+          />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

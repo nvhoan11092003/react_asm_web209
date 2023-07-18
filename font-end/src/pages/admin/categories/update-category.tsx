@@ -1,50 +1,47 @@
 import { useEffect, useState } from "react";
-import { IProduct } from "../../../types/product";
+import { ICategory } from "../../../models/type";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Form, Input } from "antd";
-import TextArea from "antd/es/input/TextArea";
 
 interface IProps {
-  products: IProduct[];
-  onUpdate: (product: IProduct) => void;
+  categories: ICategory[];
+  onUpdate: (category: ICategory) => void;
 }
 
-const UpdateProduct = (props: IProps) => {
+const UpdateCategory = (props: IProps) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [product, setProduct] = useState<IProduct>();
+  const [category, setCategory] = useState<ICategory>();
   useEffect(() => {
-    const currentProduct = props.products.find(
-      (product: IProduct) => product.id == Number(id)
+    const currentCategory = props.categories.find(
+      (category: ICategory) => category.id == String(id)
     );
-    setProduct(currentProduct);
+    setCategory(currentCategory);
   }, [props]);
 
   useEffect(() => {
     setFields();
-  }, [product]);
+  }, [category]);
 
   const [form] = Form.useForm();
 
   const setFields = () => {
     form.setFieldsValue({
-      id: product?.id,
-      name: product?.name,
-      price: product?.price,
-      desc: product?.desc,
+      id: category?.id,
+      name: category?.name,
     });
   };
 
   const onFinish = (values: any) => {
     props.onUpdate(values);
-    navigate("/admin/products");
+    navigate("/admin/categories");
   };
 
   return (
     <div className="w-100" style={{ marginTop: 100, backgroundColor: "white" }}>
       <h3 style={{ marginBottom: 50, marginTop: 20, color: "black" }}>
-        Update Product
+        Update Category
       </h3>
       <Form
         labelCol={{ span: 8 }}
@@ -57,16 +54,16 @@ const UpdateProduct = (props: IProps) => {
           label=""
           name="id"
           style={{ display: "none" }}
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[{ required: true, message: "Please input your name!" }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          label="Product Name"
+          label="Category Name"
           name="name"
           rules={[
-            { required: true, message: "Please input your username!" },
+            { required: true, message: "Please input your name!" },
             { whitespace: true },
             { min: 6, max: 255 },
           ]}
@@ -75,29 +72,9 @@ const UpdateProduct = (props: IProps) => {
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label="Product Price"
-          name="price"
-          rules={[{ required: true, message: "Please input your password!" }]}
-          hasFeedback
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Product Description"
-          name="desc"
-          rules={[
-            { required: true, message: "Please input your description!" },
-          ]}
-          hasFeedback
-        >
-          <TextArea />
-        </Form.Item>
-
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
-            Update Product
+            Update Category
           </Button>
         </Form.Item>
       </Form>
@@ -105,4 +82,4 @@ const UpdateProduct = (props: IProps) => {
   );
 };
 
-export default UpdateProduct;
+export default UpdateCategory;
