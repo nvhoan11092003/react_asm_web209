@@ -1,13 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ContactPage = () => {
-  const wid_350 = {
-    "min-height": "350px",
-    border: 0,
-  };
-  const hei_150 = {
-    height: "150px",
-  };
   return (
     <div>
       <div className="container-xxl py-5 bg-dark hero-header mb-5">
@@ -18,10 +12,10 @@ const ContactPage = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-content-center text-uppercase">
               <li className="breadcrumb-item">
-                <a href="#">Home</a>
+                <Link to="#">Home</Link>
               </li>
               <li className="breadcrumb-item">
-                <a href="#">Pages</a>
+                <Link to="#">Pages</Link>
               </li>
               <li
                 className="breadcrumb-item text-white active"
@@ -78,7 +72,7 @@ const ContactPage = () => {
                 className="position-relative rounded w-100 h-100"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
                 frameBorder="0"
-                style={wid_350}
+                style={{ width: "350px" }}
                 aria-hidden="false"
                 tabIndex={0}
               ></iframe>
@@ -126,7 +120,7 @@ const ContactPage = () => {
                           className="form-control"
                           placeholder="Leave a message here"
                           id="message"
-                          style={hei_150}
+                          style={{ height: "150px" }}
                         ></textarea>
                         <label htmlFor="message">Message</label>
                       </div>

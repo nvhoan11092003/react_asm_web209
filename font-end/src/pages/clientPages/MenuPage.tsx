@@ -1,5 +1,7 @@
 import React from "react";
 import Menu from "../../components/Menu";
+import Categories from "./Categories";
+import { Link } from "react-router-dom";
 
 const MenuPage = () => {
   return (
@@ -12,10 +14,10 @@ const MenuPage = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-content-center text-uppercase">
               <li className="breadcrumb-item">
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li className="breadcrumb-item">
-                <a href="/">Pages</a>
+                <Link to="/">Pages</Link>
               </li>
               <li
                 className="breadcrumb-item text-white active"
@@ -27,7 +29,7 @@ const MenuPage = () => {
           </nav>
         </div>
       </div>
-      <Menu />
+      <Categories />
     </div>
   );
 };

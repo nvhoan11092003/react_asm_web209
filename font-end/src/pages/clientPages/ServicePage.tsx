@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ServicePage = () => {
   return (
@@ -11,10 +12,10 @@ const ServicePage = () => {
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb justify-content-center text-uppercase">
               <li className="breadcrumb-item">
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li className="breadcrumb-item">
-                <a href="#">Pages</a>
+                <Link to="/">Pages</Link>
               </li>
               <li
                 className="breadcrumb-item text-white active"
