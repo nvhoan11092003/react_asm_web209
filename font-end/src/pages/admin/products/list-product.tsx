@@ -17,6 +17,7 @@ interface IProps {
 }
 
 const ListProduct = (props: IProps) => {
+  console.log(props.products);
   const removeProduct = (id: string) => {
     props.onRemove(id);
   };
@@ -24,9 +25,9 @@ const ListProduct = (props: IProps) => {
   const columns: ColumnsType<DataType> = [
     {
       title: "Product Image",
-      dataIndex: "image",
-      key: "image",
-      render: (imgLink) => <img src={imgLink} alt="" style={{ width: 200 }} />,
+      dataIndex: "imgUrl",
+      key: "imgUrl",
+      render: (imgLink) => <img src={imgLink} alt="" style={{ width: 100 }} />,
     },
     {
       title: "Product Name",
@@ -38,6 +39,24 @@ const ListProduct = (props: IProps) => {
       title: "Product Price",
       dataIndex: "price",
       key: "price",
+    },
+    {
+      title: "Origin Price",
+      dataIndex: "originPrice",
+      key: "originPrice",
+      render: (text) => <p>{text}</p>,
+    },
+    {
+      title: "ProcessingInstructions",
+      dataIndex: "processingInstructions",
+      key: "processingInstructions",
+      render: (text) => <p>{text}</p>,
+    },
+    {
+      title: "StorageInstructions",
+      dataIndex: "storageInstructions",
+      key: "storageInstructions",
+      render: (text) => <p>{text}</p>,
     },
     {
       title: "Description",
@@ -53,12 +72,17 @@ const ListProduct = (props: IProps) => {
           <Button
             type="primary"
             style={{ backgroundColor: "red" }}
-            onClick={() => removeProduct(record.id)}
+            onClick={() => {
+              const delProduct = confirm("Bạn có muốn xoá không?");
+              if (delProduct) {
+                removeProduct(record._id);
+              }
+            }}
           >
             Remove
           </Button>
           <Button type="primary">
-            <Link to={`/admin/products/${record.id}/update`}>Update</Link>
+            <Link to={`/admin/products/${record._id}/update`}>Update</Link>
           </Button>
         </Space>
       ),

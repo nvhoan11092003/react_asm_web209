@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { IProduct } from "../../../models/type";
+import { ICategory, IProduct } from "../../../models/type";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import { getAllCategory } from "../../../api/category";
 
 interface IProps {
   products: IProduct[];
@@ -12,13 +13,16 @@ interface IProps {
 const UpdateProduct = (props: IProps) => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [categories, setCategories] = useState<ICategory[]>([]);
   const [product, setProduct] = useState<IProduct>();
+
   useEffect(() => {
-    const currentProduct = props.products.find(
-      (product: IProduct) => product._id == String(id)
-    );
+    const currentProduct = props.products.find((product) => product._id === id);
     setProduct(currentProduct);
+  }, [props]);
+
+  useEffect(() => {
+    getAllCategory().then(({ data }) => setCategories(data));
   }, [props]);
 
   useEffect(() => {
@@ -33,14 +37,24 @@ const UpdateProduct = (props: IProps) => {
       categoryId: product?.categoryId,
       name: product?.name,
       price: product?.price,
+      originPrice: product?.originPrice,
+      processingInstructions: product?.processingInstructions,
+      storageInstructions: product?.storageInstructions,
       description: product?.description,
       image: product?.imgUrl,
     });
   };
+  // console.log(product?.categoryId);
 
   const onFinish = (values: any) => {
     props.onUpdate(values);
+    console.log(values);
+    alert("Cập nhật sản phẩm thành công");
     navigate("/admin/products");
+  };
+
+  const onFinishfail = (values: any) => {
+    console.log("valid : ", values.errorFields[0], values);
   };
 
   return (
@@ -54,12 +68,13 @@ const UpdateProduct = (props: IProps) => {
         form={form}
         style={{ maxWidth: 800 }}
         onFinish={onFinish}
+        onFinishFailed={onFinishfail}
       >
         <Form.Item
           label=""
           name="_id"
           style={{ display: "none" }}
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[{ required: true, message: "Please input your id!" }]}
         >
           <Input />
         </Form.Item>
@@ -70,14 +85,18 @@ const UpdateProduct = (props: IProps) => {
           rules={[{ required: true, message: "Please input your categoryId!" }]}
           hasFeedback
         >
-          <Input />
+          <Select id="">
+            {categories?.map((cate) => {
+              return <option value={cate._id}>{cate.name}</option>;
+            })}
+          </Select>
         </Form.Item>
 
         <Form.Item
           label="Product Name"
           name="name"
           rules={[
-            { required: true, message: "Please input your username!" },
+            { required: true, message: "Please input your name!" },
             { whitespace: true },
             { min: 6, max: 255 },
           ]}
@@ -89,8 +108,46 @@ const UpdateProduct = (props: IProps) => {
         <Form.Item
           label="Product Price"
           name="price"
+          rules={[{ required: true, message: "Please input your price!" }]}
+          hasFeedback
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="OriginPrice"
+          name="originPrice"
           rules={[
-            { required: true, message: "Please input your password!" },
+            { required: true, message: "Please input your originPrice!" },
+          ]}
+          hasFeedback
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="ProcessingInstructions"
+          name="processingInstructions"
+          rules={[
+            {
+              required: true,
+              message: "Please input your processingInstructions!",
+            },
+            { whitespace: true },
+          ]}
+          hasFeedback
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="StorageInstructions"
+          name="storageInstructions"
+          rules={[
+            {
+              required: true,
+              message: "Please input your storageInstructions!",
+            },
             { whitespace: true },
           ]}
           hasFeedback
@@ -108,15 +165,6 @@ const UpdateProduct = (props: IProps) => {
           hasFeedback
         >
           <TextArea />
-        </Form.Item>
-
-        <Form.Item className="form-group mb-3" label="Product Image">
-          <Input
-            type="file"
-            id="image"
-            className="form-control"
-            style={{ backgroundColor: "white", color: "black" }}
-          />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
