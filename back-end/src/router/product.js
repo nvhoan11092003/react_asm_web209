@@ -1,5 +1,4 @@
 import  express  from "express";
-import upload from "../multer/multerConfig"
 import { createProduct, deleteProduct, getAll, getOne, searchProduct, sortByPriceRange, updateProduct } from "../controller/products";
 const router = express.Router()
 

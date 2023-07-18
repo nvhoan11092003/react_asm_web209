@@ -2,15 +2,15 @@ import instance from "../instance/instance";
 import { ICategory } from "../models/type";
 
 
-const getAll = () =>{
+const getAllCategory = () =>{
     return instance.get("/api/category")
 }
 
-const getOne = (id:string) =>{
+const getOneCategory = (id:string) =>{
     return instance.get("/api/category/"+id)
 }
 
-const addProduct = (category:ICategory) =>{
+const addCategory = (category:ICategory) =>{
     return instance.post("/api/category",category)
 }
 
@@ -22,4 +22,4 @@ const updateCategory = (category:ICategory) =>{
     return instance.put("/api/category/"+category._id,category)
 }
 
-export {getAll, getOne, addProduct, deleteCategory, updateCategory}
+export {getAllCategory, getOneCategory, addCategory, deleteCategory, updateCategory}

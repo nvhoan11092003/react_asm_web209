@@ -9,6 +9,7 @@ const categorySchma = joi.object({
         "string.min" : "Tên danh mục tối thiểu {#limit} ký tự",
         "string.max" : "Tên danh mục không được vượt quá {#limit} ký tự",
     }),
+    imgUrl: joi.array().items(joi.string()),
     productId: joi.array().items(joi.string())
 })
 

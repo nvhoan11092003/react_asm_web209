@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
-  const inlineStyle = { maxWidth: "400px" };
   return (
     <div className="footer">
       <div
@@ -12,12 +13,12 @@ const Footer = () => {
               <h4 className="section-title ff-secondary text-start text-primary fw-normal mb-4">
                 Company
               </h4>
-              <a className="btn btn-link" href="">
+              <Link className="btn btn-link" to="about">
                 About Us
-              </a>
-              <a className="btn btn-link" href="">
+              </Link>
+              <Link className="btn btn-link" to="contact">
                 Contact Us
-              </a>
+              </Link>
               <a className="btn btn-link" href="">
                 Reservation
               </a>
@@ -71,7 +72,10 @@ const Footer = () => {
                 Newsletter
               </h4>
               <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-              <div className="position-relative mx-auto" style={inlineStyle}>
+              <div
+                className="position-relative mx-auto"
+                style={{ maxWidth: "400px" }}
+              >
                 <input
                   className="form-control border-primary w-100 py-3 ps-4 pe-5"
                   type="text"
@@ -120,4 +124,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
