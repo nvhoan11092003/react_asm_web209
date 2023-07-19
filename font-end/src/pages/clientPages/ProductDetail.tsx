@@ -1,7 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IProduct } from "../../models/type";
+import { useParams } from "react-router-dom";
 
-const ProductDetail = () => {
+interface IProps {
+  products: IProduct[];
+}
+const ProductDetail = (props: IProps) => {
+  let { id } = useParams();
+  // console.log(props.products);
+  const currentProduct = props.products.find(
+    (product) => product._id === String(id)
+  );
+
   return (
     <div>
       <div className="container-xxl py-5 bg-dark food-detail-header mb-5">
@@ -31,13 +42,10 @@ const ProductDetail = () => {
         <div className="container">
           <div className="menu-card">
             <div className="product-imgs">
-              <img
-                src="https://img.tastykitchen.vn/crop/820x642/2021/06/03/18-salad-rau-mua-3-fea4.jpg"
-                alt="shoe image"
-              />
+              <img src={currentProduct?.imgUrl[0]} alt="shoe image" />
             </div>
             <div className="product-content">
-              <h2 className="product-title">SALAD RAU MÙA SỐT MÁC MÁC</h2>
+              <h2 className="product-title">{currentProduct?.name}</h2>
               <div className="product-rating">
                 <i className="fas fa-star"></i>
                 <span>
@@ -48,7 +56,7 @@ const ProductDetail = () => {
               </div>
 
               <div className="product-price">
-                <h1>69.000 đ</h1>
+                <h1>{currentProduct?.price} đ</h1>
               </div>
               <div className="add-card">
                 <button className="btn-order">Đặt món</button>
@@ -65,9 +73,7 @@ const ProductDetail = () => {
                     <p>Thành phần:</p>
                   </div>
                   <div className="pro-desc-ct">
-                    Mật ong, dầu hào, rượu, tương cà, tương ớt, đường trắng,
-                    muối thái, bột ngọt, Coca Cola, hành baro, lá nguyệt quế,
-                    gạo
+                    {currentProduct?.description}
                   </div>
                 </div>
                 <div className="pro-desc border-dashed">
