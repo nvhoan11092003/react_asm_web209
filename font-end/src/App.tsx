@@ -86,11 +86,11 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="service" element={<ServicePage />} />
-          {/* <Route path="menu">
+          <Route path="menu">
             <Route index element={<MenuPage />} />
-            <Route path=":id" element={<ProductDetail />} />
-          </Route> */}
-          <Route path=":id" element={<ProductDetail products={products} />} />
+            <Route path=":id" element={<ProductDetail products={products} />} />
+          </Route>
+
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/team" element={<TeamPage />} />
