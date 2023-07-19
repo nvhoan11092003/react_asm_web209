@@ -17,12 +17,19 @@ export interface IFood {
     id?: string;
     name: string;
     Url_Img: string[];
+    originPrice: number;
+    processingInstructions: string;
+    storageInstructions: string;
     price: number;
-    category: string; // Updated property name to "category"
+    categoryId: string; // Updated property name to "category"
 }
 
 export interface ICategory {
     id?: string;
     name: string;
+    imgUrl?: string[]
+}
+export interface ProductWithTypeName extends IFood {
+    typeName: string;
 }
 

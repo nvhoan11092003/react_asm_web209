@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Team from "../../components/Team";
 import Menu from "../../components/Menu";
 import { Link } from "react-router-dom";
+import { getAllProduct } from "../../api/product";
 
 const HomePage = () => {
+
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const getData = async () => {
+      const product = await getAllProduct()
+      setData(product.data)
+      // console.log(product.data);
+
+    }
+    getData()
+  }, [])
+  console.log(data);
+
   return (
     <div>
       <div className="container-xxl py-5 bg-dark hero-header mb-5">
@@ -33,6 +48,25 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      {/* ----------------------------- */}
+      <h1 className="container">Món ngon mỗi ngày</h1>
+      <div className="container grid" style={{ display: "grid", gridTemplateColumns: "22% 22% 22% 22%", gap: "4%" }} >
+        {data.map((item: any) =>
+          <div className="g-col-3" style={{}}>
+            <img src={item.imgUrl[0]} className="card-img-top" style={{ height: "150px" }} alt="..." />
+            <div className="card-body">
+              <b className="text-danger">{item.price}đ</b>
+              <p className="card-text">{item.name}</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+
+
+
+      {/* ------------------------------ */}
+
       <Menu />
 
       <div className="container-xxl py-5">
