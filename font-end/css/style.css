@@ -635,3 +635,6 @@
     padding-top: 0;
   }
 }
+.breadcrumb {
+  background-color: transparent;
+}
