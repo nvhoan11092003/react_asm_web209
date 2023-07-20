@@ -14,7 +14,7 @@ export interface ISignin_User {
 }
 
 export interface IFood {
-    id?: string;
+    _id?: string;
     name: string;
     Url_Img: string[];
     originPrice: number;

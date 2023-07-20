@@ -3,6 +3,7 @@ import { getAllProduct } from "../api/product";
 import { getAllCategory } from "../api/category";
 import { IFood, ProductWithTypeName, ICategory } from "../models";
 import ReactDOM from 'react-dom'
+import { Link } from "react-router-dom";
 import { MDBInput, MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -77,6 +78,8 @@ const Search = () => {
     }
 
   });
+  console.log(filteredProducts);
+
   return (
     <div>
       <div ref={close} onClick={() => { setState(false), setCondition(false) }} style={{ zIndex: "1", display: "none", opacity: "0.5", position: "fixed", width: "100%", top: "0", bottom: "0", left: "0", right: "0", backgroundColor: "gray" }}></div>
@@ -94,9 +97,9 @@ const Search = () => {
                 return ""
               }
               else return (
-                <MDBListGroupItem key={product.id} className='text-truncate
+                <MDBListGroupItem key={product._id} className='text-truncate
                             ' style={{ width: "20rem" }}>
-                  {product.name}
+                  <Link to={`/${product._id}`}>{product.name}</Link>
                 </MDBListGroupItem>
               )
             })
