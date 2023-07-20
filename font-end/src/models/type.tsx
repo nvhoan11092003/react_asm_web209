@@ -26,7 +26,6 @@ export type IProduct = {
 export type ICategory = {
   _id?: string;
   name: string;
-  imgUrl?: string[];
 };
 
 export type IUser = {
