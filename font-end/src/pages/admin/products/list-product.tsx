@@ -24,6 +24,7 @@ const ListProduct = (props: IProps) => {
 
   const columns: ColumnsType<DataType> = [
     {
+
       title: "Product Image",
       dataIndex: "imgUrl",
       key: "imgUrl",
@@ -47,22 +48,26 @@ const ListProduct = (props: IProps) => {
       render: (text) => <p>{text}</p>,
     },
     {
+
       title: "ProcessingInstructions",
       dataIndex: "processingInstructions",
       key: "processingInstructions",
-      render: (text) => <div className=" text-truncate w-25 ">{text}</div>,
+      ellipsis: true,
+      render: (text) => <div >{text}</div>,
     },
     {
       title: "StorageInstructions",
       dataIndex: "storageInstructions",
       key: "storageInstructions",
-      render: (text) => <div className=" text-truncate w-25 ">{text}</div>,
+      ellipsis: true,
+      render: (text) => <div >{text}</div>,
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
-      render: (text) => <div className=" text-truncate w-25 ">{text}</div>,
+      ellipsis: true,
+      render: (text) => <div >{text}</div>,
     },
     {
       title: "Action",
@@ -97,14 +102,14 @@ const ListProduct = (props: IProps) => {
   });
 
   return (
-    <div style={{ marginTop: 100, width: 1200 }}>
+    <div style={{ marginTop: 100 }}>
       <Button type="primary" style={{ marginBottom: 30 }}>
         <Link to={"/admin/products/add"}>Add New Product</Link>
       </Button>
       <Table
 
-        className="table"
-        style={{ backgroundColor: "white", marginTop: 100, width: 1200 }}
+        className=""
+        style={{ backgroundColor: "white", marginTop: 100, }}
         columns={columns}
         dataSource={data}
         pagination={{ pageSize: 5 }}
