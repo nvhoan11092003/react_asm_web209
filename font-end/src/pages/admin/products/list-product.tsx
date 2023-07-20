@@ -50,19 +50,19 @@ const ListProduct = (props: IProps) => {
       title: "ProcessingInstructions",
       dataIndex: "processingInstructions",
       key: "processingInstructions",
-      render: (text) => <p>{text}</p>,
+      render: (text) => <div className=" text-truncate w-25 ">{text}</div>,
     },
     {
       title: "StorageInstructions",
       dataIndex: "storageInstructions",
       key: "storageInstructions",
-      render: (text) => <p>{text}</p>,
+      render: (text) => <div className=" text-truncate w-25 ">{text}</div>,
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
-      render: (text) => <p>{text}</p>,
+      render: (text) => <div className=" text-truncate w-25 ">{text}</div>,
     },
     {
       title: "Action",
@@ -102,7 +102,9 @@ const ListProduct = (props: IProps) => {
         <Link to={"/admin/products/add"}>Add New Product</Link>
       </Button>
       <Table
-        style={{ backgroundColor: "white" }}
+
+        className="table"
+        style={{ backgroundColor: "white", marginTop: 100, width: 1200 }}
         columns={columns}
         dataSource={data}
         pagination={{ pageSize: 5 }}

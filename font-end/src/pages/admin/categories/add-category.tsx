@@ -27,6 +27,16 @@ const AddCategory = (props: IProps) => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
+  const validateMessages = {
+    required: '${label} is required!',
+    types: {
+      email: '${label} is not a valid email!',
+      number: '${label} is not a valid number!',
+    },
+    number: {
+      range: '${label} must be between ${min} and ${max}',
+    }
+  };
 
   // const [imgUrls, setImgUrls] = useState<string[]>([]);
 
@@ -91,6 +101,7 @@ const AddCategory = (props: IProps) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        validateMessages={validateMessages}
       >
         <Form.Item
           label="Category Name"

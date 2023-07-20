@@ -46,7 +46,16 @@ const UpdateCategory = (props: IProps) => {
   const onFinishFailed = (values: any) => {
     console.log("errors", values);
   };
-
+  const validateMessages = {
+    required: '${label} is required!',
+    types: {
+      email: '${label} is not a valid email!',
+      number: '${label} is not a valid number!',
+    },
+    number: {
+      range: '${label} must be between ${min} and ${max}',
+    }
+  };
   return (
     <div className="w-100" style={{ marginTop: 100, backgroundColor: "white" }}>
       <h3 style={{ marginBottom: 50, marginTop: 20, color: "black" }}>
@@ -59,6 +68,7 @@ const UpdateCategory = (props: IProps) => {
         style={{ maxWidth: 800 }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        validateMessages={validateMessages}
       >
         <Form.Item
           label=""
