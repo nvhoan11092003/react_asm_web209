@@ -1,6 +1,6 @@
 import TextArea from "antd/es/input/TextArea";
 import { ICategory, IProduct } from "../../../models/type";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Upload, Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -39,11 +39,26 @@ const AddProduct = (props: IProps) => {
   console.log(props);
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [imgUrls, setImgUrls] = useState<string[]>([]);
-  const { register, handleSubmit, reset } = useForm();
+
+  const validateMessages = {
+    required: '${label} is required!',
+    types: {
+      email: '${label} is not a valid email!',
+      number: '${label} is not a valid number!',
+    },
+    number: {
+      range: '${label} must be between ${min} and ${max}',
+    }
+  };
 
   useEffect(() => {
     getAllCategory().then(({ data }) => setCategories(data));
   }, []);
+
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
   const onSubmit = async (data: any) => {
     console.log(data);
 
@@ -60,6 +75,7 @@ const AddProduct = (props: IProps) => {
         "http://localhost:8080/api/upload",
         formData
       );
+
 
       // kiểm tra nếu thành công
       if (response.status === 200) {
@@ -86,7 +102,7 @@ const AddProduct = (props: IProps) => {
         alert("thêm thành công sản phẩm");
         navigate("/admin/products");
         // Đặt lại biểu mẫu sau khi gửi thành công
-        reset();
+
       } else {
         console.error("Image upload failed!");
       }
@@ -100,21 +116,22 @@ const AddProduct = (props: IProps) => {
       <h3 style={{ marginTop: 20, marginBottom: 50, color: "black" }}>
         Add New Product
       </h3>
-      {/* <Form
+      <Form
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 800 }}
         initialValues={{ remember: true }}
-        onFinish={onFinish}
+        onFinish={onSubmit}
         onFinishFailed={onFinishFailed}
+        validateMessages={validateMessages}
         autoComplete="off"
       >
         <Form.Item
           label="Product Name"
           name="name"
           rules={[
-            { required: true, message: "Please input your name!" },
+            { required: true, },
             { whitespace: true },
             { min: 6, max: 255 },
           ]}
@@ -122,117 +139,103 @@ const AddProduct = (props: IProps) => {
         >
           <Input />
         </Form.Item>
+        <Form.Item
+          label="Category"
+          name="Category"
+          rules={[
+            { required: true, },
+          ]}
+          hasFeedback
+        >
+          <Select id="">
+            {categories?.map((cate) => {
+              return <option value={cate._id}>{cate.name}</option>;
+            })}
+          </Select>
+        </Form.Item>
 
         <Form.Item
           label="Product Price"
-          name="price"
+          name="Product Price"
           rules={[
-            { required: true, message: "Please input your price!" },
-            { whitespace: true },
-            { min: 1 },
+            { required: true, min: 1, max: 100000000, },
           ]}
           hasFeedback
         >
           <Input />
         </Form.Item>
-
         <Form.Item
-          label="Product Description"
-          name="desc"
+          label="origin Price"
+          name="origin Price"
+
           rules={[
-            { required: true, message: "Please input your description!" },
+            { required: true, min: 1, max: 100000000, },
+          ]}
+          hasFeedback
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="processingInstructions"
+          name="processingInstructions"
+          rules={[
+            { required: true, },
+          ]}
+          hasFeedback
+        >
+          <TextArea />
+        </Form.Item>
+        <Form.Item
+          label="storageInstructions"
+          name="storageInstructions"
+          rules={[
+            { required: true, },
           ]}
           hasFeedback
         >
           <TextArea />
         </Form.Item>
 
-        <Form.Item className="form-group mb-3" label="Product Image">
+        <Form.Item
+          label="Product Description"
+          name="desc"
+          rules={[
+            { required: true, },
+          ]}
+          hasFeedback
+        >
+          <TextArea />
+        </Form.Item>
+
+
+        {/* <Form.Item
+          className="form-group mb-3"
+          label="Product Image"
+          id="image"
+          name="images"
+          rules={[
+            { required: true, type: "url" },
+          ]}
+        >
           <Input
             type="file"
-            id="image"
-            className="form-control"
             style={{ backgroundColor: "white", color: "black" }}
           />
-        </Form.Item>
+        </Form.Item> */}
+
+        <Upload beforeUpload={handleUpload}
+          listType="picture" multiple
+        >
+
+          <Button name="images" icon={<UploadOutlined />}>Chọn ảnh</Button>
+        </Upload>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Add Product
           </Button>
         </Form.Item>
-      </Form> */}
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h3 style={{ color: "black" }}>Tên sản phẩm</h3>
-        <input
-          type="text"
-          {...register("productName", { required: true })}
-          className="form-control"
-        />
-
-        <h3 style={{ color: "black" }}>Danh mục</h3>
-        <select
-          className="form-control"
-          id=""
-          {...register("categoryId", { required: true })}
-        >
-          {categories?.map((cate) => {
-            return <option value={cate._id}>{cate.name}</option>;
-          })}
-        </select>
-
-        <h3 style={{ color: "black" }}>Giá gốc</h3>
-        <input
-          className="form-control"
-          type="number"
-          {...register("price", { required: true })}
-        />
-
-        <h3 style={{ color: "black" }}>Giá đã giảm</h3>
-        <input
-          type="number"
-          {...register("originPrice", { required: true })}
-          className="form-control"
-        />
-
-        <h3 style={{ color: "black" }}>Hướng dẫn chế biến</h3>
-        <textarea
-          className="form-control"
-          id=""
-          rows={3}
-          {...register("processingInstructions", { required: true })}
-        ></textarea>
-
-        <h3 style={{ color: "black" }}>Hướng dẫn bảo quản</h3>
-        <textarea
-          className="form-control"
-          id=""
-          rows={3}
-          {...register("storageInstructions", { required: true })}
-        ></textarea>
-
-        <h3 style={{ color: "black" }}>Mô tả</h3>
-        <textarea
-          className="form-control"
-          id=""
-          rows={3}
-          {...register("description", { required: true })}
-        ></textarea>
-
-        <h3 style={{ color: "black" }}>Hình ảnh</h3>
-        <input
-          className="form-control"
-          type="file"
-          {...register("images", { required: true })}
-          multiple
-          style={{ color: "black" }}
-        />
-
-        <button type="submit" className="mt-5 btn btn-primary">
-          Submit
-        </button>
-      </form>
+      </Form>
     </div>
   );
 };
