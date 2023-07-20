@@ -17,7 +17,7 @@ const UpdateProduct = (props: IProps) => {
   const [product, setProduct] = useState<IProduct>();
 
   useEffect(() => {
-    const currentProduct = props.products.find((product) => product._id === id);
+    const currentProduct = props.products.find((product) => product._id == id);
     setProduct(currentProduct);
   }, [props]);
 
@@ -53,8 +53,8 @@ const UpdateProduct = (props: IProps) => {
     navigate("/admin/products");
   };
 
-  const onFinishfail = (values: any) => {
-    console.log("valid : ", values.errorFields[0], values);
+  const onFinishFailed = (values: any) => {
+    console.log("errors", values);
   };
 
   return (
@@ -68,7 +68,7 @@ const UpdateProduct = (props: IProps) => {
         form={form}
         style={{ maxWidth: 800 }}
         onFinish={onFinish}
-        onFinishFailed={onFinishfail}
+        onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label=""
@@ -80,7 +80,7 @@ const UpdateProduct = (props: IProps) => {
         </Form.Item>
 
         <Form.Item
-          label="CategoryID"
+          label="Category"
           name="categoryId"
           rules={[{ required: true, message: "Please input your categoryId!" }]}
           hasFeedback
@@ -97,7 +97,6 @@ const UpdateProduct = (props: IProps) => {
           name="name"
           rules={[
             { required: true, message: "Please input your name!" },
-            { whitespace: true },
             { min: 6, max: 255 },
           ]}
           hasFeedback
@@ -133,7 +132,6 @@ const UpdateProduct = (props: IProps) => {
               required: true,
               message: "Please input your processingInstructions!",
             },
-            { whitespace: true },
           ]}
           hasFeedback
         >
@@ -148,7 +146,6 @@ const UpdateProduct = (props: IProps) => {
               required: true,
               message: "Please input your storageInstructions!",
             },
-            { whitespace: true },
           ]}
           hasFeedback
         >
@@ -160,7 +157,6 @@ const UpdateProduct = (props: IProps) => {
           name="description"
           rules={[
             { required: true, message: "Please input your description!" },
-            { whitespace: true },
           ]}
           hasFeedback
         >
