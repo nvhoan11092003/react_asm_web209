@@ -18,7 +18,22 @@ const deleteProduct = (id: string) => {
 };
 
 const updateProduct = (product: IProduct) => {
-  return instance.put("/api/products/" + product._id, product);
+  const name = product.name;
+  const price = product.price;
+  const originPrice = product.originPrice;
+  const processingInstructions = product.processingInstructions;
+  const storageInstructions = product.storageInstructions;
+  const description = product.description;
+  const categoryId = product.categoryId;
+  return instance.put("/api/products/" + product._id, {
+    name,
+    price,
+    originPrice,
+    processingInstructions,
+    storageInstructions,
+    description,
+    categoryId,
+  });
 };
 
 export {

@@ -43,8 +43,8 @@ const UpdateCategory = (props: IProps) => {
     alert("cập nhật sản phẩm thành công");
     navigate("/admin/categories");
   };
-  const onFinishfail = (values: any) => {
-    console.log("valid : ", values.errorFields[0], values);
+  const onFinishFailed = (values: any) => {
+    console.log("errors", values);
   };
 
   return (
@@ -58,7 +58,7 @@ const UpdateCategory = (props: IProps) => {
         form={form}
         style={{ maxWidth: 800 }}
         onFinish={onFinish}
-        onFinishFailed={onFinishfail}
+        onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label=""
@@ -75,7 +75,6 @@ const UpdateCategory = (props: IProps) => {
           name="name"
           rules={[
             { required: true, message: "Please input your name!" },
-            { whitespace: true },
             { min: 6, max: 255 },
           ]}
           hasFeedback

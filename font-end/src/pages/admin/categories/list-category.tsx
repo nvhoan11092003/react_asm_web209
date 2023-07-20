@@ -33,12 +33,6 @@ const ListCategory = (props: IProps) => {
       render: (text) => <p>{text}</p>,
     },
     {
-      title: "Category Image",
-      dataIndex: "imgUrl",
-      key: "imgUrl",
-      render: (imgLink) => <img src={imgLink} alt="" style={{ width: 100 }} />,
-    },
-    {
       title: "Action",
       key: "action",
       render: (record) => (

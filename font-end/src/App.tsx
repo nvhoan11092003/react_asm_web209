@@ -88,17 +88,13 @@ function App() {
           <Route path="service" element={<ServicePage />} />
           <Route path="menu">
             <Route index element={<MenuPage />} />
-            <Route path=":id" element={<ProductDetail />} />
+            <Route path=":id" element={<ProductDetail products={products} />} />
           </Route>
-          <Route path=":id" element={<ProductDetail />} />
+
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/team" element={<TeamPage />} />
         </Route>
-        {/* <Route path="menu" element={<WebsiteLayouts />}>
-          <Route index element={<MenuPage />} />
-          <Route path=":id" element={<ProductDetail />} />
-        </Route> */}
         {/* admin  */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="dashboard" />} />
