@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { getAllProduct } from "../api/product";
 import { getAllCategory } from "../api/category";
 import { IFood, ProductWithTypeName, ICategory } from "../models";
-import ReactDOM from 'react-dom'
-import { MDBInput, MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
+import ReactDOM from "react-dom";
+import { MDBInput, MDBListGroup, MDBListGroupItem } from "mdb-react-ui-kit";
+import { IProduct } from "../models/type";
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [state, setState] = useState(false);
@@ -90,25 +91,45 @@ const Search = () => {
         }}
       ></div>
 
-      <div className=' ' style={{ zIndex: 3, position: "relative", width: "20rem" }}>
-        <MDBInput className="" type="text" onClick={() => {
-          setCondition(true), setState(false)
-        }} value={searchTerm} style={{ zIndex: "6" }}
-          onChange={handleSearchInputChange} placeholder="Search..." />
-        <MDBListGroup ref={myRef} style={{ display: "none", position: "absolute", backgroundColor: "white", width: "100%" }}>
-          {
-
-            filteredProducts.map((product) => {
-              if (product == null) {
-                return ""
-              }
-              else return (
-                <MDBListGroupItem key={product.id} className='text-truncate
-                            ' style={{ width: "20rem" }}>
+      <div
+        className=" "
+        style={{ zIndex: 3, position: "relative", width: "20rem" }}
+      >
+        <MDBInput
+          className=""
+          type="text"
+          onClick={() => {
+            setCondition(true), setState(false);
+          }}
+          value={searchTerm}
+          style={{ zIndex: "6" }}
+          onChange={handleSearchInputChange}
+          placeholder="Search..."
+        />
+        <MDBListGroup
+          ref={myRef}
+          style={{
+            display: "none",
+            position: "absolute",
+            backgroundColor: "white",
+            width: "100%",
+          }}
+        >
+          {filteredProducts.map((product) => {
+            if (product == null) {
+              return "";
+            } else
+              return (
+                <MDBListGroupItem
+                  key={product._id}
+                  className="text-truncate
+                            "
+                  style={{ width: "20rem" }}
+                >
                   {product.name}
                 </MDBListGroupItem>
               );
-            })}
+          })}
         </MDBListGroup>
       </div>
     </div>

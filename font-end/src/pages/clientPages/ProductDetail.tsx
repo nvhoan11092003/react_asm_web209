@@ -65,15 +65,15 @@ const ProductDetail = (props: IProps) => {
                 <div className="pro-desc">
                   <div className="pro-desc-tt">
                     <img
-                      src="https://img.tastykitchen.vn/cates/2021/12/17/icon1-e753.svg"
+                      src="https://img.tastykitchen.vn/cates/2021/12/17/icon3-420b.svg"
                       alt=""
                       width={22}
                       height={22}
                     />
-                    <p>Thành phần:</p>
+                    <p>Cách bảo quản :</p>
                   </div>
                   <div className="pro-desc-ct">
-                    {currentProduct?.description}
+                    {currentProduct?.storageInstructions}
                   </div>
                 </div>
                 <div className="pro-desc border-dashed">
@@ -108,14 +108,16 @@ const ProductDetail = (props: IProps) => {
           <div className="pro-desc border-dashed ">
             <div className="pro-desc-tt">
               <img
-                src="https://img.tastykitchen.vn/cates/2021/12/17/icon3-420b.svg"
+                src="https://img.tastykitchen.vn/cates/2021/12/17/icon1-e753.svg "
                 alt=""
                 width={22}
                 height={22}
               />
-              <p>Thời gian hoàn tất:</p>
+              <p>Cách chế biến:</p>
             </div>
-            <div className="pro-desc-ct">15 phút</div>
+            <div className="pro-desc-ct">
+              {currentProduct?.processingInstructions}
+            </div>
           </div>
           <div className="pro-desc border-dashed ">
             <div className="pro-desc-tt">
@@ -127,15 +129,7 @@ const ProductDetail = (props: IProps) => {
               />
               <p>Mô tả món:</p>
             </div>
-            <div className="pro-desc-ct">
-              Salad rau mùa sốt mác mác được lựa chọn từ những loại rau củ ẩm
-              thực phương Tây như xà lách lolo, xà lách carron, dầu oliu, kết
-              hợp với hương đồng cỏ nội trong văn hoá ẩm thực Việt Nam là củ
-              dền, táo đỏ, táo xanh, chanh dây và rau quế. Tất cả được hòa quyện
-              dưới lớp sốt mác mác rau mùi được cấu thành bởi 3 thành phần chính
-              là chanh dây, rau mùi và mayonaise, đem đến hương vị độc đáo, giàu
-              vitamin C và chất xơ.
-            </div>
+            <div className="pro-desc-ct">{currentProduct?.description}</div>
           </div>
         </div>
       </div>
