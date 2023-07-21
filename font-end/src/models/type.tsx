@@ -10,14 +10,10 @@ export type IProduct = {
   };
 
   // hướng dẫn chế biến
-  processingInstructions: {
-    type: string;
-  };
+  processingInstructions: string;
 
   // hướng dẫn bảo quản
-  storageInstructions: {
-    type: string;
-  };
+  storageInstructions: string;
 
   description: string;
   categoryId: string;
