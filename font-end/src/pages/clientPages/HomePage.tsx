@@ -53,10 +53,10 @@ const HomePage = () => {
       <div className="container grid" style={{ display: "grid", gridTemplateColumns: "22% 22% 22% 22%", gap: "4%" }} >
         {data.map((item: any) =>
           <div className="g-col-3" style={{}}>
-            <img src={item.imgUrl[0]} className="card-img-top" style={{ height: "150px" }} alt="..." />
+            <img src={item.imgUrl[0]} className="card-img-top" style={{ height: "180px" }} alt="..." />
             <div className="card-body">
               <b className="text-danger">{item.price}đ</b>
-              <p className="card-text">{item.name}</p>
+              <p className="card-text"><Link to={`menu/${item._id}`}>{item.name}</Link></p>
             </div>
           </div>
         )}
