@@ -95,12 +95,12 @@ function App() {
       ]
     },
     {
-      path: "admin", element: <AdminLayout />, children: [
+      path: "admin/", element: <AdminLayout />, children: [
         { path: "", element: <Navigate to="dashboard" /> },
         { path: "dashboard", element: <Dashboard /> },
         { path: "form", element: <Form /> },
         {
-          path: "products", element: <MenuPage />, children: [
+          path: "products", children: [
             {
               path: "", element: <ListProduct
                 products={products}
@@ -117,7 +117,7 @@ function App() {
           ]
         },
         {
-          path: "categories", element: <MenuPage />, children: [
+          path: "categories", children: [
             {
               path: "", element: <ListCategory
                 categories={categories}
