@@ -81,33 +81,33 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/", element: <WebsiteLayouts />, children: [
-        { path: "/", element: <HomePage /> },
-        { path: "/about", element: <AboutPage /> },
-        { path: "/service", element: <ServicePage /> },
+        { path: "", element: <HomePage /> },
+        { path: "about", element: <AboutPage /> },
+        { path: "service", element: <ServicePage /> },
         {
-          path: "/menu", element: <MenuPage />, children: [
+          path: "menu", element: <MenuPage />, children: [
             { path: ":id", element: <ProductDetail products={products} /> }
           ]
         },
-        { path: "/contact", element: <ContactPage /> },
-        { path: "/booking", element: <BookingPage /> },
-        { path: "/team", element: <TeamPage /> },
+        { path: "contact", element: <ContactPage /> },
+        { path: "booking", element: <BookingPage /> },
+        { path: "team", element: <TeamPage /> },
       ]
     },
     {
-      path: "/admin", element: <AdminLayout />, children: [
-        { path: "/", element: <Navigate to="dashboard" /> },
-        { path: "/dashboard", element: <Dashboard /> },
-        { path: "/form", element: <Form /> },
+      path: "admin", element: <AdminLayout />, children: [
+        { path: "", element: <Navigate to="dashboard" /> },
+        { path: "dashboard", element: <Dashboard /> },
+        { path: "form", element: <Form /> },
         {
-          path: "/products", element: <MenuPage />, children: [
+          path: "products", element: <MenuPage />, children: [
             {
-              path: "/", element: <ListProduct
+              path: "", element: <ListProduct
                 products={products}
                 onRemove={onHandleRemoveProduct}
               />
             }, {
-              path: "/add", element: <AddProduct onAdd={onHandleAddProduct} />
+              path: "add", element: <AddProduct onAdd={onHandleAddProduct} />
             }, {
               path: ":id/update", element: <UpdateProduct
                 onUpdate={onHandleUpdateProduct}
@@ -117,14 +117,14 @@ function App() {
           ]
         },
         {
-          path: "/categories", element: <MenuPage />, children: [
+          path: "categories", element: <MenuPage />, children: [
             {
-              path: "/", element: <ListCategory
+              path: "", element: <ListCategory
                 categories={categories}
                 onRemove={onHandleRemoveCategory}
               />
             }, {
-              path: "/add", element: <AddCategory onAdd={onHandleAddCategory} />
+              path: "add", element: <AddCategory onAdd={onHandleAddCategory} />
             }, {
               path: ":id/update", element: <UpdateCategory
                 categories={categories}
