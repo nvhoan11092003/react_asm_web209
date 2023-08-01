@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { getAllProduct } from "../api/product";
-import { getAllCategory } from "../api/category";
+// import { getAllCategory } from "../api/category";
 import { IFood, ProductWithTypeName, ICategory } from "../models";
 import ReactDOM from 'react-dom'
 import { MDBInput, MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
+// import { Link } from "react-router-dom";
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [state, setState] = useState(false);
 
   // const [category, setCategory] = useState<ICategory[]>([]);
 
-  const [data2, setData2] = useState<IProduct[]>([]);
+  const [data2, setData2] = useState<IFood[]>([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -103,9 +104,9 @@ const Search = () => {
                 return ""
               }
               else return (
-                <MDBListGroupItem key={product.id} className='text-truncate
+                <MDBListGroupItem key={product._id} className='text-truncate
                             ' style={{ width: "20rem" }}>
-                  {product.name}
+                  <a href={`/menu/${product._id}`}>{product.name}</a>
                 </MDBListGroupItem>
               );
             })}

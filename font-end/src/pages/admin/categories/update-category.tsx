@@ -42,6 +42,7 @@ const UpdateCategory = (props: IProps) => {
     props.onUpdate(values);
     alert("cập nhật sản phẩm thành công");
     navigate("/admin/categories");
+    location.reload()
   };
   const onFinishFailed = (values: any) => {
     console.log("errors", values);
