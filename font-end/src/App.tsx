@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Children, useEffect, useState } from "react";
 import { ICategory, IProduct } from "./models/type";
 import {
   addProduct,
@@ -12,7 +12,7 @@ import {
   getAllCategory,
   updateCategory,
 } from "./api/category";
-import { BrowserRouter, Form, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Form, Navigate, Route, RouterProvider, Routes, createBrowserRouter } from "react-router-dom";
 import WebsiteLayouts from "./Layouts/websiteLayouts";
 import HomePage from "./pages/clientPages/HomePage";
 import AboutPage from "./pages/clientPages/AboutPage";
@@ -78,81 +78,67 @@ function App() {
     );
   };
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        {/*   client */}
-        <Route path="/" element={<WebsiteLayouts />}>
-          <Route index element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="service" element={<ServicePage />} />
-          <Route path="menu">
-            <Route index element={<MenuPage />} />
-            <Route path=":id" element={<ProductDetail products={products} />} />
-          </Route>
+  const router = createBrowserRouter([
+    {
+      path: "/", element: <WebsiteLayouts />, children: [
+        { path: "", element: <HomePage /> },
+        { path: "about", element: <AboutPage /> },
+        { path: "service", element: <ServicePage /> },
+        {
+          path: "menu", element: <MenuPage />, children: [
+            { path: ":id", element: <ProductDetail products={products} /> }
+          ]
+        },
+        { path: "contact", element: <ContactPage /> },
+        { path: "booking", element: <BookingPage /> },
+        { path: "team", element: <TeamPage /> },
+      ]
+    },
+    {
+      path: "admin/", element: <AdminLayout />, children: [
+        { path: "", element: <Navigate to="dashboard" /> },
+        { path: "dashboard", element: <Dashboard /> },
+        { path: "form", element: <Form /> },
+        {
+          path: "products", children: [
+            {
+              path: "", element: <ListProduct
+                products={products}
+                onRemove={onHandleRemoveProduct}
+              />
+            }, {
+              path: "add", element: <AddProduct onAdd={onHandleAddProduct} />
+            }, {
+              path: ":id/update", element: <UpdateProduct
+                onUpdate={onHandleUpdateProduct}
+                products={products}
+              />
+            }
+          ]
+        },
+        {
+          path: "categories", children: [
+            {
+              path: "", element: <ListCategory
+                categories={categories}
+                onRemove={onHandleRemoveCategory}
+              />
+            }, {
+              path: "add", element: <AddCategory onAdd={onHandleAddCategory} />
+            }, {
+              path: ":id/update", element: <UpdateCategory
+                categories={categories}
+                onUpdate={onHandleUpdateCategory}
+              />
+            }
+          ]
+        }
+      ]
+    }
+  ])
 
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/booking" element={<BookingPage />} />
-          <Route path="/team" element={<TeamPage />} />
-        </Route>
-        {/* admin  */}
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Navigate to="dashboard" />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="form" element={<Form />} />
-          {/* <Route path="chart" element={<Chart />} /> */}
-          <Route path="products">
-            <Route
-              index
-              element={
-                <ListProduct
-                  products={products}
-                  onRemove={onHandleRemoveProduct}
-                />
-              }
-            />
-            <Route
-              path="add"
-              element={<AddProduct onAdd={onHandleAddProduct} />}
-            />
-            <Route
-              path=":id/update"
-              element={
-                <UpdateProduct
-                  onUpdate={onHandleUpdateProduct}
-                  products={products}
-                />
-              }
-            />
-          </Route>
-          <Route path="categories">
-            <Route
-              index
-              element={
-                <ListCategory
-                  categories={categories}
-                  onRemove={onHandleRemoveCategory}
-                />
-              }
-            />
-            <Route
-              path="add"
-              element={<AddCategory onAdd={onHandleAddCategory} />}
-            />
-            <Route
-              path=":id/update"
-              element={
-                <UpdateCategory
-                  categories={categories}
-                  onUpdate={onHandleUpdateCategory}
-                />
-              }
-            />
-          </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />
+
 }
 
 export default App;
