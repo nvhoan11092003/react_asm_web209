@@ -34,15 +34,17 @@ const UpdateProduct = (props: IProps) => {
   const setFields = () => {
     form.setFieldsValue({
       _id: product?._id,
-      categoryId: product?.categoryId,
+      categoryId: product?.categoryId.name,
       name: product?.name,
       price: product?.price,
       originPrice: product?.originPrice,
       processingInstructions: product?.processingInstructions,
       storageInstructions: product?.storageInstructions,
       description: product?.description,
-      image: product?.imgUrl,
+      imgUrl: product?.imgUrl,
     });
+    // console.log(product?.categoryId._id);
+    
   };
   // console.log(product?.categoryId);
 
@@ -96,7 +98,7 @@ const UpdateProduct = (props: IProps) => {
           rules={[{ required: true, message: "Please input your categoryId!" }]}
           hasFeedback
         >
-          <Select id="">
+          <Select id="categoryId">
             {categories?.map((cate) => {
               return <option value={cate._id}>{cate.name}</option>;
             })}
