@@ -85,7 +85,8 @@ function App() {
         { path: "about", element: <AboutPage /> },
         { path: "service", element: <ServicePage /> },
         {
-          path: "menu", element: <MenuPage />, children: [
+          path: "menu", children: [
+            { path: "", element: <MenuPage /> },
             { path: ":id", element: <ProductDetail products={products} /> }
           ]
         },

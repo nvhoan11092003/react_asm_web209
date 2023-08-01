@@ -12,12 +12,8 @@ interface IProps {
 }
 
 const AddProduct = (props: IProps) => {
-
+  const navigate = useNavigate();
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const [imgUrls, setImgUrls] = useState<string[]>([]);
-  const [fileList, setFileList] = useState<any[]>([]);
-
-
   const validateMessages = {
     required: '${label} is required!',
     types: {
@@ -61,12 +57,12 @@ const AddProduct = (props: IProps) => {
           originPrice: data.originPrice,
           processingInstructions: data.processingInstructions,
           storageInstructions: data.storageInstructions,
-          description: data.desc,
+          description: data.description,
         };
         console.log(newProduct);
-
         props.onAdd(newProduct)
-
+        alert("Thêm sản phẩm thành công");
+        navigate("/admin/products");
       } else {
         console.error("Image upload failed!");
       }
@@ -166,7 +162,7 @@ const AddProduct = (props: IProps) => {
 
         <Form.Item
           label="Product Description"
-          name="desc"
+          name="description"
           rules={[
             { required: true, },
           ]}
@@ -179,7 +175,7 @@ const AddProduct = (props: IProps) => {
           name="images"
           rules={[{ required: true, message: "Vui lòng chọn ảnh sản phẩm" }]}
         >
-          <Upload accept="image/*" multiple beforeUpload={beforeUpload}>
+          <Upload accept="image/*" listType="picture" multiple beforeUpload={beforeUpload} maxCount={5}>
             <Button icon={<UploadOutlined />} block>
               Chọn ảnh
             </Button>
