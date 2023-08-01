@@ -58,7 +58,6 @@ const UpdateProduct = (props: IProps) => {
   useEffect(() => {
     console.log(fileList);
   })
-
   const prop: UploadProps = {
     onRemove: (file) => {
       const index = fileList.indexOf(file);
@@ -66,16 +65,20 @@ const UpdateProduct = (props: IProps) => {
       newFileList.splice(index, 1);
       setFileList(newFileList);
     },
-    beforeUpload: async (file) => {
+    beforeUpload(file, FileList) {
+      return false;
+    },
+    onChange: async (file) => {
       // Xử lý data tải lên hình ảnh 
       console.log(file);
       const formData = new FormData();
-      formData.append("img", file);
+      formData.append("img", file.file);
       const response = await axios.post(
         "http://localhost:8080/api/upload",
         formData
       );
       const urlImages = response.data.imgUrl;
+
       const img = {
         name: "image",
         status: 'done',
@@ -84,14 +87,14 @@ const UpdateProduct = (props: IProps) => {
       console.log(img);
       console.log(setFileList([...fileList, img]));
 
-      return false;
     },
     fileList,
   };
 
-  const onFinish = (values: any) => {
-    console.log(values);
-    props.onUpdate(values)
+  const onFinish = async (values: any) => {
+
+    console.log(values.images);
+    // props.onUpdate(values)
     alert("Cập nhật sản phẩm thành công");
     // navigate("/admin/products");
   };
@@ -218,16 +221,11 @@ const UpdateProduct = (props: IProps) => {
           wrapperCol={{ offset: 3, span: 16 }}
           rules={[{ required: true, message: "Vui lòng chọn ảnh sản phẩm" }]}
         >
-          <Upload accept="image/*"
-            maxCount={5}
+          <Upload
             {...prop}
-            listType="picture-circle"
-            multiple
-
-            fileList={fileList}
-
-          >
-            <Button icon={<UploadOutlined />}>
+            // fileList={fileList}
+            accept="image/*" listType="picture-circle" multiple maxCount={5}>
+            <Button icon={<UploadOutlined />} block>
               Chọn ảnh
             </Button>
           </Upload>
@@ -239,7 +237,7 @@ const UpdateProduct = (props: IProps) => {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </div >
   );
 };
 

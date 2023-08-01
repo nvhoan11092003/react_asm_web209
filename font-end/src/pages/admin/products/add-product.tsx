@@ -173,16 +173,15 @@ const AddProduct = (props: IProps) => {
         <Form.Item
           label="Ảnh sản phẩm"
           name="images"
+          wrapperCol={{ offset: 3, span: 16 }}
           rules={[{ required: true, message: "Vui lòng chọn ảnh sản phẩm" }]}
         >
-          <Upload accept="image/*" listType="picture" multiple beforeUpload={beforeUpload} maxCount={5}>
+          <Upload accept="image/*" listType="picture-circle" multiple beforeUpload={beforeUpload} maxCount={5}>
             <Button icon={<UploadOutlined />} block>
               Chọn ảnh
             </Button>
           </Upload>
         </Form.Item>
-
-
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Add Product
