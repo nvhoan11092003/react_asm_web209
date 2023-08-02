@@ -51,7 +51,7 @@ const UpdateProduct = (props: IProps) => {
       processingInstructions: product?.processingInstructions,
       storageInstructions: product?.storageInstructions,
       description: product?.description,
-      images: imgdefaul
+      // images: imgdefaul
     });
 
   };
@@ -65,28 +65,32 @@ const UpdateProduct = (props: IProps) => {
       newFileList.splice(index, 1);
       setFileList(newFileList);
     },
-    beforeUpload(file, FileList) {
-      return false;
-    },
-    onChange: async (file) => {
+    beforeUpload(file, listfile) {
       // Xử lý data tải lên hình ảnh 
-      console.log(file);
-      const formData = new FormData();
-      formData.append("img", file.file);
-      const response = await axios.post(
-        "http://localhost:8080/api/upload",
-        formData
-      );
-      const urlImages = response.data.imgUrl;
-
-      const img = {
-        name: "image",
-        status: 'done',
-        url: urlImages[0],
+      console.log(listfile);
+      async function setimg() {
+        const formData = new FormData();
+        for (const item of listfile) {
+          console.log(item);
+          formData.append("img", item);
+        }
+        const response = await axios.post(
+          "http://localhost:8080/api/upload",
+          formData
+        );
+        const urlImages = response.data.imgUrl;
+        const listimg = urlImages.map((item: any, index: number) => {
+          return {
+            name: "image",
+            uid: `${index}`,
+            status: 'done',
+            url: item,
+          }
+        });
+        setFileList([...fileList, ...listimg]);
       }
-      console.log(img);
-      console.log(setFileList([...fileList, img]));
-
+      setimg()
+      return false;
     },
     fileList,
   };
@@ -94,9 +98,25 @@ const UpdateProduct = (props: IProps) => {
   const onFinish = async (values: any) => {
 
     console.log(values.images);
-    // props.onUpdate(values)
+    const imgUrl = fileList.map((item: any) => {
+      return item.url
+    })
+    const newProduct: IProduct = {
+      _id: values._id,
+      name: values.name,
+      categoryId: values.categoryId,
+      imgUrl: imgUrl,
+      price: values.price,
+      originPrice: values.originPrice,
+      processingInstructions: values.processingInstructions,
+      storageInstructions: values.storageInstructions,
+      description: values.description,
+    };
+    console.log(newProduct);
+
+    props.onUpdate(newProduct)
     alert("Cập nhật sản phẩm thành công");
-    // navigate("/admin/products");
+    navigate("/admin/products");
   };
 
   const onFinishFailed = (values: any) => {
@@ -130,6 +150,15 @@ const UpdateProduct = (props: IProps) => {
         validateMessages={validateMessages}
         autoComplete="off"
       >
+        <Form.Item
+          label=""
+          name="_id"
+          initialValue={id}
+          style={{ display: "none" }}
+          rules={[{ required: true, message: "Please input your id!" }]}
+        >
+          <Input />
+        </Form.Item>
         <Form.Item
           label="Product Name"
           name="name"
