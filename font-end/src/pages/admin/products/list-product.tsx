@@ -28,7 +28,7 @@ const ListProduct = (props: IProps) => {
       title: "Product Image",
       dataIndex: "imgUrl",
       key: "imgUrl",
-      render: (imgLink) => <img src={imgLink} alt="" style={{ width: 100 }} />,
+      render: (imgLink) => <img src={imgLink[0]} alt="" style={{ width: 100 }} />,
     },
     {
       title: "Product Name",

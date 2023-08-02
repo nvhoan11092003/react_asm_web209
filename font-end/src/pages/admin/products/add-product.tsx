@@ -1,92 +1,68 @@
 import TextArea from "antd/es/input/TextArea";
 import { ICategory, IProduct } from "../../../models/type";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Upload, Select, message, InputNumber } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { UploadOutlined } from '@ant-design/icons';
 import axios from "axios";
 import { getAllCategory } from "../../../api/category";
-
-// interface IProps {
-//   onAdd: (product: IProduct) => void;
-
-// }
-
-// const AddProduct = (props: IProps) => {
-//   const navigate = useNavigate();
-//   const onFinish = (values: IProduct) => {
-//     const newProduct = {
-//       id: values.id,
-//       name: values.name,
-//       price: values.price,
-//       description: values.description,
-//       image: values.image,
-//     };
-//     props.onAdd(newProduct);
-//     navigate("/admin/products");
-//   };
-
-//   const onFinishFailed = (errorInfo: any) => {
-//     console.log("Failed:", errorInfo);
-//   };
-
+import { RcFile, UploadFile, UploadProps } from "antd/es/upload";
 interface IProps {
   onAdd: (product: IProduct) => void;
 }
 
 const AddProduct = (props: IProps) => {
   const navigate = useNavigate();
-  console.log(props);
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const [imgUrls, setImgUrls] = useState<string[]>([]);
-  const { register, handleSubmit, reset } = useForm();
-
+  const validateMessages = {
+    required: '${label} is required!',
+    types: {
+      email: '${label} is not a valid email!',
+      number: '${label} is not a valid number!',
+    },
+    number: {
+      range: '${label} must be between ${min} and ${max}',
+    }
+  };
   useEffect(() => {
     getAllCategory().then(({ data }) => setCategories(data));
   }, []);
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
+  const beforeUpload = () => {
+    return false;
+  };
+
   const onSubmit = async (data: any) => {
-    console.log(data);
-
     try {
-      // Prepare form data
+      // Xử lý data tải lên hình ảnh 
       const formData = new FormData();
-      const imageFiles = data.images;
-      for (let i = 0; i < imageFiles.length; i++) {
-        formData.append("img", imageFiles[i]);
+      for (const item of data.images.fileList) {
+        formData.append("img", item.originFileObj);
       }
-
-      // call api backend
       const response = await axios.post(
         "http://localhost:8080/api/upload",
         formData
       );
+      const urlImages = response.data.imgUrl;
+      console.log(urlImages);
 
-      // kiểm tra nếu thành công
       if (response.status === 200) {
-        const linkUrl = response.data.imgUrl;
-        console.log(linkUrl);
-
-        // link ảnh khi được server trả về thành công
-        // console.log(linkUrl);
-
-        setImgUrls(linkUrl);
-
         const newProduct: IProduct = {
-          name: data.productName,
-          categoryId: data.categoryId,
-          imgUrl: linkUrl,
-          price: data.price,
+          name: data.name,
+          categoryId: data.CategoryID,
+          imgUrl: urlImages,
+          price: data.Price,
           originPrice: data.originPrice,
           processingInstructions: data.processingInstructions,
           storageInstructions: data.storageInstructions,
           description: data.description,
         };
-
-        props.onAdd(newProduct);
-        alert("thêm thành công sản phẩm");
+        console.log(newProduct);
+        props.onAdd(newProduct)
+        alert("Thêm sản phẩm thành công");
         navigate("/admin/products");
-        // Đặt lại biểu mẫu sau khi gửi thành công
-        reset();
       } else {
         console.error("Image upload failed!");
       }
@@ -95,26 +71,31 @@ const AddProduct = (props: IProps) => {
     }
   };
 
+
   return (
     <div className="w-100" style={{ marginTop: 100, backgroundColor: "white" }}>
       <h3 style={{ marginTop: 20, marginBottom: 50, color: "black" }}>
         Add New Product
       </h3>
-      {/* <Form
+      <Form
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 800 }}
         initialValues={{ remember: true }}
-        onFinish={onFinish}
+        onFinish={onSubmit}
         onFinishFailed={onFinishFailed}
+        validateMessages={validateMessages}
         autoComplete="off"
       >
+
+
+
         <Form.Item
           label="Product Name"
           name="name"
           rules={[
-            { required: true, message: "Please input your name!" },
+            { required: true, },
             { whitespace: true },
             { min: 6, max: 255 },
           ]}
@@ -122,117 +103,91 @@ const AddProduct = (props: IProps) => {
         >
           <Input />
         </Form.Item>
+        <Form.Item
+          label="Category"
+          name="CategoryID"
+          rules={[
+            { required: true, },
+          ]}
+          hasFeedback
+        >
+          <Select id="" >
+            {categories?.map((Category) => {
+              return <Select.Option key={Category._id} value={Category._id}>{Category.name}</Select.Option>;
+            })}
+          </Select>
+        </Form.Item>
 
         <Form.Item
           label="Product Price"
-          name="price"
+          name="Price"
           rules={[
-            { required: true, message: "Please input your price!" },
-            { whitespace: true },
-            { min: 1 },
+            { required: true, min: 1, max: 100000000, pattern: new RegExp(/^[0-9]+$/), message: "Price is not valid number" },
           ]}
           hasFeedback
         >
           <Input />
         </Form.Item>
-
         <Form.Item
-          label="Product Description"
-          name="desc"
+          label="origin Price"
+          name="originPrice"
+
           rules={[
-            { required: true, message: "Please input your description!" },
+            { required: true, min: 1, max: 100000000, pattern: new RegExp(/^[0-9]+$/), message: "originPrice is not valid number" },
+          ]}
+          hasFeedback
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="processingInstructions"
+          name="processingInstructions"
+          rules={[
+            { required: true, },
+          ]}
+          hasFeedback
+        >
+          <TextArea />
+        </Form.Item>
+        <Form.Item
+          label="storageInstructions"
+          name="storageInstructions"
+          rules={[
+            { required: true, },
           ]}
           hasFeedback
         >
           <TextArea />
         </Form.Item>
 
-        <Form.Item className="form-group mb-3" label="Product Image">
-          <Input
-            type="file"
-            id="image"
-            className="form-control"
-            style={{ backgroundColor: "white", color: "black" }}
-          />
+        <Form.Item
+          label="Product Description"
+          name="description"
+          rules={[
+            { required: true, },
+          ]}
+          hasFeedback
+        >
+          <TextArea />
         </Form.Item>
-
+        <Form.Item
+          label="Ảnh sản phẩm"
+          name="images"
+          wrapperCol={{ offset: 3, span: 16 }}
+          rules={[{ required: true, message: "Vui lòng chọn ảnh sản phẩm" }]}
+        >
+          <Upload accept="image/*" listType="picture-circle" multiple beforeUpload={beforeUpload} maxCount={5}>
+            <Button icon={<UploadOutlined />} block>
+              Chọn ảnh
+            </Button>
+          </Upload>
+        </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Add Product
           </Button>
         </Form.Item>
-      </Form> */}
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h3 style={{ color: "black" }}>Tên sản phẩm</h3>
-        <input
-          type="text"
-          {...register("productName", { required: true })}
-          className="form-control"
-        />
-
-        <h3 style={{ color: "black" }}>Danh mục</h3>
-        <select
-          className="form-control"
-          id=""
-          {...register("categoryId", { required: true })}
-        >
-          {categories?.map((cate) => {
-            return <option value={cate._id}>{cate.name}</option>;
-          })}
-        </select>
-
-        <h3 style={{ color: "black" }}>Giá gốc</h3>
-        <input
-          className="form-control"
-          type="number"
-          {...register("price", { required: true })}
-        />
-
-        <h3 style={{ color: "black" }}>Giá đã giảm</h3>
-        <input
-          type="number"
-          {...register("originPrice", { required: true })}
-          className="form-control"
-        />
-
-        <h3 style={{ color: "black" }}>Hướng dẫn chế biến</h3>
-        <textarea
-          className="form-control"
-          id=""
-          rows={3}
-          {...register("processingInstructions", { required: true })}
-        ></textarea>
-
-        <h3 style={{ color: "black" }}>Hướng dẫn bảo quản</h3>
-        <textarea
-          className="form-control"
-          id=""
-          rows={3}
-          {...register("storageInstructions", { required: true })}
-        ></textarea>
-
-        <h3 style={{ color: "black" }}>Mô tả</h3>
-        <textarea
-          className="form-control"
-          id=""
-          rows={3}
-          {...register("description", { required: true })}
-        ></textarea>
-
-        <h3 style={{ color: "black" }}>Hình ảnh</h3>
-        <input
-          className="form-control"
-          type="file"
-          {...register("images", { required: true })}
-          multiple
-          style={{ color: "black" }}
-        />
-
-        <button type="submit" className="mt-5 btn btn-primary">
-          Submit
-        </button>
-      </form>
+      </Form>
     </div>
   );
 };

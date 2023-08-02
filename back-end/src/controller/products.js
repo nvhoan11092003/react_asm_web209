@@ -176,9 +176,10 @@ export const updateProduct = async (req, res) => {
         message: error.details[0].message,
       });
     }
-
     const { id } = req.params;
+    console.log(req.params);
     if (!mongoose.Types.ObjectId.isValid(id)) {
+      console.log("Không tìm thấy ID của sản phẩm cần cập nhật");
       return res.status(401).json({
         message: "Không tìm thấy ID của sản phẩm cần cập nhật",
       });
