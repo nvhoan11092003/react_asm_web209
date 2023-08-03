@@ -3,21 +3,12 @@ import Team from "../../components/Team";
 import Menu from "../../components/Menu";
 import { Link } from "react-router-dom";
 import { getAllProduct } from "../../api/product";
+import { useGetFoodsQuery } from "../../service/food.service";
+import LoadingSkeleton from "../../components/Skeleton";
 
 const HomePage = () => {
 
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    const getData = async () => {
-      const product = await getAllProduct()
-      setData(product.data)
-      // console.log(product.data);
-
-    }
-    getData()
-  }, [])
-  console.log(data);
+  const { data, error, isLoading: isLoadingFecth } = useGetFoodsQuery();
 
   return (
     <div>
@@ -51,7 +42,8 @@ const HomePage = () => {
       {/* ----------------------------- */}
       <h1 className="container">Món ngon mỗi ngày</h1>
       <div className="container grid" style={{ display: "grid", gridTemplateColumns: "22% 22% 22% 22%", gap: "4%" }} >
-        {data.map((item: any) =>
+        {isLoadingFecth && <LoadingSkeleton />}
+        {data?.map((item: any) =>
           <div className="g-col-3" style={{}}>
             <img src={item.imgUrl[0]} className="card-img-top" style={{ height: "180px" }} alt="..." />
             <div className="card-body">
