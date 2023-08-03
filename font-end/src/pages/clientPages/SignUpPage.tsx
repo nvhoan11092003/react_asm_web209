@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import {
     MDBBtn,
     MDBContainer,
@@ -8,6 +8,7 @@ import {
     MDBInput
 }
     from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom';
 type signInType = {
     name: string,
     email: string,
@@ -20,8 +21,20 @@ const intialSignUp = {
     email: "",
     password: "",
     re_password: "",
+}
 
+type FormValidType = {
+    isValidname: boolean,
+    isValidemail: boolean,
+    isValidpassword: boolean,
+    isValidre_password: boolean,
+}
 
+const intialFormValid = {
+    isValidname: true,
+    isValidemail: true,
+    isValidpassword: true,
+    isValidre_password: true,
 }
 const reducerSignUp = (state: signInType, action: { type: string, payload: string }) => {
     switch (action.type) {
@@ -38,17 +51,49 @@ const reducerSignUp = (state: signInType, action: { type: string, payload: strin
             return state
     }
 }
+const reducerFormValid = (state: FormValidType, action: { type: string, payload: any }) => {
+
+    switch (action.type) {
+        case "VALIDATE_NAME":
+            if (action.payload.length == 0) {
+                return { ...state, isValidname: true }
+            }
+            return { ...state, isValidname: false }
+
+        case "VALIDATE_EMAIL":
+            if (action.payload.length == 0) {
+                return { ...state, isValidemail: true }
+            }
+            return { ...state, isValidemail: false }
+
+        case "VALIDATE_PASS":
+            if (action.payload.length == 0) {
+                return { ...state, isValidpassword: true }
+            }
+            return { ...state, isValidpassword: false }
+
+        case "VALIDATE_RE_PASS":
+            console.log(action)
+            if (!action.payload) {
+                return { ...state, isValidre_password: true }
+            }
+            return { ...state, isValidre_password: false }
+        default:
+            return state
+    }
+}
 const SignUpPage = () => {
     const [formSignUp, dispatchFormSignUp] = useReducer(reducerSignUp, intialSignUp)
+    const [formValid, dispatchFormValid] = useReducer(reducerFormValid, intialFormValid)
+    const [submit, setsubmit] = useState(false)
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
+            setsubmit(true)
             console.log(formSignUp);
-
+            console.log(formValid);
         } catch (error) {
-
         }
-
     }
     return (
         <MDBContainer fluid className='bg-dark' style={{ paddingTop: "100px" }}>
@@ -62,8 +107,7 @@ const SignUpPage = () => {
                         </div>
 
                         <div className='d-flex flex-column justify-content-center h-custom-2 w-75 pt-4'>
-
-                            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Name' id='formControlLg' type='text' size="lg" placeholder='Your name'
+                            <MDBInput wrapperClass='mx-5 w-100' label='Name' id='formControlLg' type='text' size="lg" placeholder='Your name'
                                 onChange={(e) => {
                                     dispatchFormSignUp(
                                         {
@@ -71,10 +115,17 @@ const SignUpPage = () => {
                                             payload: e.target.value
                                         }
                                     )
+                                    dispatchFormValid(
+                                        {
+                                            type: "VALIDATE_NAME",
+                                            payload: e.target.value
+                                        }
+                                    )
                                 }
                                 }
                             />
-                            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Email address' id='formControlLg' type='email' size="lg" placeholder='Email'
+                            <div className="text-danger mb-4 mx-5">{formValid.isValidname && submit ? "Name is required" : ""}</div>
+                            <MDBInput wrapperClass=' mx-5 w-100' label='Email address' id='formControlLg' type='email' size="lg" placeholder='Email'
                                 onChange={(e) => {
                                     dispatchFormSignUp(
                                         {
@@ -82,10 +133,18 @@ const SignUpPage = () => {
                                             payload: e.target.value
                                         }
                                     )
+                                    dispatchFormValid(
+                                        {
+                                            type: "VALIDATE_EMAIL",
+                                            payload: e.target.value
+                                        }
+                                    )
                                 }
                                 }
                             />
-                            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg" placeholder='******'
+                            <div className="text-danger mb-4 mx-5">{formValid.isValidemail && submit ? "Email is required" : ""}</div>
+
+                            <MDBInput wrapperClass=' mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg" placeholder='******'
                                 onChange={(e) => {
                                     dispatchFormSignUp(
                                         {
@@ -93,10 +152,28 @@ const SignUpPage = () => {
                                             payload: e.target.value
                                         }
                                     )
+                                    dispatchFormValid(
+                                        {
+                                            type: "VALIDATE_PASS",
+                                            payload: e.target.value
+                                        }
+                                    )
+                                    if (e.target.value == formSignUp.re_password) {
+                                        var err = "true"
+                                    } else {
+                                        var err = ""
+                                    }
+                                    dispatchFormValid(
+                                        {
+                                            type: "VALIDATE_RE_PASS",
+                                            payload: err
+                                        }
+                                    )
                                 }
                                 }
                             />
-                            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Re-Password' id='formControlLg' type='password' size="lg" placeholder='******'
+                            <div className="text-danger mb-4 mx-5">{formValid.isValidpassword && submit ? "password is required" : ""}</div>
+                            <MDBInput wrapperClass=' mx-5 w-100' label='Re-Password' id='formControlLg' type='password' size="lg" placeholder='******'
                                 onChange={(e) => {
                                     dispatchFormSignUp(
                                         {
@@ -104,14 +181,25 @@ const SignUpPage = () => {
                                             payload: e.target.value
                                         }
                                     )
+                                    if (formSignUp.password == e.target.value) {
+                                        var err = "true"
+                                    } else {
+                                        var err = ""
+                                    }
+                                    dispatchFormValid(
+                                        {
+                                            type: "VALIDATE_RE_PASS",
+                                            payload: err
+                                        }
+                                    )
                                 }
                                 }
                             />
+                            <div className="text-danger mb-4 mx-5">{formValid.isValidre_password && submit ? "Confirmation password does not match" : ""}</div>
 
-
-                            <MDBBtn className="mb-4 px-5 mx-5 w-100" color='info' size='lg'>Register</MDBBtn>
-
-                            <p className='ms-5'>Log in to your account? <a href="/signin" className="link-info">Log in here</a></p>
+                            <MDBBtn className="mb-4 px-5 mx-5 w-100" color='info' size='lg'> Register   </MDBBtn>
+                            <p className='ms-5'>Log in to your account?
+                                <Link to="/signin" className="link-info">Log in here</Link></p>
 
                         </div>
                     </form>

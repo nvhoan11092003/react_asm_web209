@@ -113,7 +113,6 @@ const UpdateProduct = (props: IProps) => {
       description: values.description,
     };
     console.log(newProduct);
-
     props.onUpdate(newProduct)
     alert("Cập nhật sản phẩm thành công");
     navigate("/admin/products");
