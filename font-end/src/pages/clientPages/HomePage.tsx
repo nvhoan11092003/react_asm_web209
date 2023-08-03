@@ -43,8 +43,8 @@ const HomePage = () => {
       <h1 className="container">Món ngon mỗi ngày</h1>
       <div className="container grid" style={{ display: "grid", gridTemplateColumns: "22% 22% 22% 22%", gap: "4%" }} >
         {isLoadingFecth && <LoadingSkeleton />}
-        {data?.map((item: any) =>
-          <div className="g-col-3" style={{}}>
+        {data?.map((item: any, index: number) =>
+          <div key={index} className="g-col-3" style={{}}>
             <img src={item.imgUrl[0]} className="card-img-top" style={{ height: "180px" }} alt="..." />
             <div className="card-body">
               <b className="text-danger">{item.price}đ</b>

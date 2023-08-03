@@ -8,6 +8,7 @@ import {
     MDBInput
 }
     from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom';
 type signInType = {
     email: string,
     password: string
@@ -127,9 +128,9 @@ const SignInPage = () => {
 
 
 
-                            <MDBBtn className="mb-4 px-5 mx-5 w-100" style={{}} color='info' size='lg' block>Login</MDBBtn>
-                            <p className="small mb-5 pb-lg-3 ms-5"><a className="text-muted" href="#!">Forgot password?</a></p>
-                            <p className='ms-5'>Don't have an account? <a href="/signup" className="link-info">Register here</a></p>
+                            <button className="mb-4 p-2 rounded-5 border-2 border border mx-5 w-100 text-white block  bg-info " > Log in   </button>
+                            <p className="small mb-5 pb-lg-3 ms-5"><Link className="text-muted" to="#!">Forgot password?</Link></p>
+                            <p className='ms-5'>Don't have an account? <Link to="/signup" className="link-info">Register here</Link></p>
 
                         </div>
                     </form>

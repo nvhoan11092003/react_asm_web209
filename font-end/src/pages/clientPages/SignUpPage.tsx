@@ -8,19 +8,21 @@ import {
     MDBInput
 }
     from 'mdb-react-ui-kit';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignUpMutation } from '../../service/user.service';
+import { message } from 'antd';
 type signInType = {
-    name: string,
+    username: string,
     email: string,
     password: string,
-    re_password: string
+    confirmPassword: string
 
 }
 const intialSignUp = {
-    name: "",
+    username: "",
     email: "",
     password: "",
-    re_password: "",
+    confirmPassword: "",
 }
 
 type FormValidType = {
@@ -39,13 +41,13 @@ const intialFormValid = {
 const reducerSignUp = (state: signInType, action: { type: string, payload: string }) => {
     switch (action.type) {
         case "UPDATE_NAME":
-            return { ...state, name: action.payload }
+            return { ...state, username: action.payload }
         case "UPDATE_EMAIL":
             return { ...state, email: action.payload }
         case "UPDATE_PASS":
             return { ...state, password: action.payload }
         case "UPDATE_RE_PASS":
-            return { ...state, re_password: action.payload }
+            return { ...state, confirmPassword: action.payload }
 
         default:
             return state
@@ -83,16 +85,35 @@ const reducerFormValid = (state: FormValidType, action: { type: string, payload:
     }
 }
 const SignUpPage = () => {
+    const navigate = useNavigate();
     const [formSignUp, dispatchFormSignUp] = useReducer(reducerSignUp, intialSignUp)
     const [formValid, dispatchFormValid] = useReducer(reducerFormValid, intialFormValid)
     const [submit, setsubmit] = useState(false)
+    const [messageApi, contextHolder] = message.useMessage();
+    const [signUp] = useSignUpMutation()
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
             setsubmit(true)
-            console.log(formSignUp);
-            console.log(formValid);
+            if (!formValid.isValidemail && !formValid.isValidname && !formValid.isValidpassword && !formValid.isValidre_password) {
+                signUp(formSignUp).then((data) => {
+                    console.log(data);
+                    if (data.data) {
+                        messageApi.info(data.data.message);
+                        alert("Tạo Thành Công Tài khoản");
+                        navigate("/signin");
+                    } else {
+                        messageApi.warning(data.errer.data.message);
+                    }
+
+
+                })
+
+
+            }
+
         } catch (error) {
+
         }
     }
     return (
@@ -105,7 +126,7 @@ const SignUpPage = () => {
                             <MDBIcon fas icon="crow fa-3x me-3" style={{ color: '#fea116' }} />
                             <span className="h1 fw-bold mb-0 text-light">Register</span>
                         </div>
-
+                        {contextHolder}
                         <div className='d-flex flex-column justify-content-center h-custom-2 w-75 pt-4'>
                             <MDBInput wrapperClass='mx-5 w-100' label='Name' id='formControlLg' type='text' size="lg" placeholder='Your name'
                                 onChange={(e) => {
@@ -158,7 +179,7 @@ const SignUpPage = () => {
                                             payload: e.target.value
                                         }
                                     )
-                                    if (e.target.value == formSignUp.re_password) {
+                                    if (e.target.value == formSignUp.confirmPassword) {
                                         var err = "true"
                                     } else {
                                         var err = ""
@@ -197,7 +218,7 @@ const SignUpPage = () => {
                             />
                             <div className="text-danger mb-4 mx-5">{formValid.isValidre_password && submit ? "Confirmation password does not match" : ""}</div>
 
-                            <MDBBtn className="mb-4 px-5 mx-5 w-100" color='info' size='lg'> Register   </MDBBtn>
+                            <button className="mb-4 p-2 rounded-5 border-2 border border mx-5 w-100 text-white block  bg-info " > Register   </button>
                             <p className='ms-5'>Log in to your account?
                                 <Link to="/signin" className="link-info">Log in here</Link></p>
 
