@@ -1,5 +1,5 @@
 import { Children, useEffect, useState } from "react";
-import { ICategory, IProduct } from "./models/type";
+import { ICart, ICategory, IProduct } from "./models/type";
 import {
   addProduct,
   deleteProduct,
@@ -30,6 +30,8 @@ import UpdateProduct from "./pages/admin/products/update-product";
 import ListCategory from "./pages/admin/categories/list-category";
 import AddCategory from "./pages/admin/categories/add-category";
 import UpdateCategory from "./pages/admin/categories/update-category";
+import CartPage from "./pages/clientPages/Cart";
+import { addToCart } from "./api/cart";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -78,6 +80,11 @@ function App() {
     );
   };
 
+  // ADD TO CART
+  const createCart = (cart:ICart) => {
+    addToCart(cart)
+  }
+
   const router = createBrowserRouter([
     {
       path: "/", element: <WebsiteLayouts />, children: [
@@ -92,6 +99,7 @@ function App() {
         { path: "contact", element: <ContactPage /> },
         { path: "booking", element: <BookingPage /> },
         { path: "team", element: <TeamPage /> },
+        {path: "cart",element: <CartPage />}
       ]
     },
     {

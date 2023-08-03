@@ -31,3 +31,20 @@ export type IUser = {
   password: string;
   confirmPassword: string;
 };
+
+export type ICart = {
+  _id?: string,
+  userId: string,
+  carts: [
+    {
+      items: {
+        productId: {
+          type: string
+        },
+        quantity: {
+          type: Number,
+        },
+      },
+    }
+  ]
+}

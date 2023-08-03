@@ -132,12 +132,12 @@
 
 @media (min-width: 992px) {
   .navbar-dark {
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     top: 0;
     left: 0;
     z-index: 999;
-    background: transparent !important;
+    /* background: transparent !important; */
   }
 
   .sticky-top.navbar-dark {
