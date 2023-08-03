@@ -75,7 +75,7 @@ const reducerFormValid = (state: FormValidType, action: { type: string, payload:
             return { ...state, isValidpassword: false }
 
         case "VALIDATE_RE_PASS":
-            console.log(action)
+
             if (!action.payload) {
                 return { ...state, isValidre_password: true }
             }
@@ -96,17 +96,17 @@ const SignUpPage = () => {
         try {
             setsubmit(true)
             if (!formValid.isValidemail && !formValid.isValidname && !formValid.isValidpassword && !formValid.isValidre_password) {
-                signUp(formSignUp).then((data) => {
-                    console.log(data);
-                    if (data.data) {
-                        messageApi.info(data.data.message);
-                        alert("Tạo Thành Công Tài khoản");
-                        navigate("/signin");
-                    } else {
-                        messageApi.warning(data.errer.data.message);
+                signUp(formSignUp).then((response) => {
+                    if ("error" in response) {
+                        console.log(response.error.data.message);
+                        messageApi.error(response.error.data.message);
                     }
-
-
+                    if ("data" in response) {
+                        console.log(response.data);
+                        messageApi.info(response.data.message);
+                        alert("Tạo Thành Công Tài khoản");
+                        navigate("/signin")
+                    }
                 })
 
 

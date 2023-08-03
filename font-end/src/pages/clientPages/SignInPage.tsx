@@ -8,7 +8,9 @@ import {
     MDBInput
 }
     from 'mdb-react-ui-kit';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignInMutation, useSignUpMutation } from '../../service/user.service';
+import { message } from 'antd';
 type signInType = {
     email: string,
     password: string
@@ -62,12 +64,44 @@ const SignInPage = () => {
     const [formSignIn, dispatchFormSignIn] = useReducer(reducerSignIn, intialSignIn)
     const [formValid, dispatchFormValid] = useReducer(reducerFormValid, intialFormValid)
     const [submit, setsubmit] = useState(false)
+    const [signIp, isError] = useSignInMutation()
+    const [messageApi, contextHolder] = message.useMessage();
+    const navigate = useNavigate()
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setsubmit(true)
+        console.log(formValid);
+        console.log(isError);
         try {
-            console.log(formSignIn);
+            if (!formValid.isValidemail && !formValid.isValidpassword) {
+                console.log(formSignIn);
+                signIp(formSignIn).then((response) => {
+                    const { data } = response
+                    console.log(data);
+                    if ("checkUser" in data) {
+                        const user = {
+                            accessToken: data.accessToken,
+                            _id: data.checkUser._id,
+                            email: data.checkUser.email,
+                            role: data.checkUser.role,
+                            username: data.checkUser.username
+                            ,
+                        }
+                        localStorage.setItem('user', JSON.stringify(user));
+                        alert("Đăng Nhập Thành Công")
+                        if (data.checkUser.role == "admin") {
+                            navigate("/admin")
+                        } else {
+                            navigate("/")
+                        }
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                    messageApi.error("Tài Khoản hoặc mật khẩu không Đúng")
 
+                })
+
+            }
         } catch (error) {
 
         }
@@ -76,7 +110,7 @@ const SignInPage = () => {
     return (
         <MDBContainer fluid className='bg-dark' style={{ paddingTop: "100px" }}>
             <MDBRow>
-
+                {contextHolder}
                 <MDBCol sm='6'>
                     <form action="" onSubmit={handleSubmit}>
 

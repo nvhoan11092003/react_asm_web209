@@ -30,3 +30,17 @@ export type IUser = {
   password: string;
   confirmPassword: string;
 };
+
+export interface IresponUser {
+  accessToken: string,
+  checkUser: {
+    createdAt: string;
+    email: string;
+    role: string;
+    updatedAt: string;
+    username: string;
+    _id: string;
+    message: string
+  }
+};
+
