@@ -16,12 +16,16 @@ export interface ISignin_User {
 export interface IFood {
     _id?: string;
     name: string;
-    Url_Img: string[];
+    imgUrl: string[];
     originPrice: number;
     processingInstructions: string;
     storageInstructions: string;
     price: number;
-    categoryId: string; // Updated property name to "category"
+    description: string,
+    categoryId: {
+        _id: string,
+        name: string,
+    }; // Updated property name to "category"
 }
 
 export interface ICategory {

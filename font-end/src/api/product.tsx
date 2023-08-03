@@ -25,6 +25,7 @@ const updateProduct = (product: IProduct) => {
   const storageInstructions = product.storageInstructions;
   const description = product.description;
   const categoryId = product.categoryId;
+  const imgUrl = product.imgUrl;
   return instance.put("/api/products/" + product._id, {
     name,
     price,
@@ -33,6 +34,7 @@ const updateProduct = (product: IProduct) => {
     storageInstructions,
     description,
     categoryId,
+    imgUrl
   });
 };
 
