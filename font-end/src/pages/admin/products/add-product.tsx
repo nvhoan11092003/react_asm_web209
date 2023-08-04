@@ -88,9 +88,6 @@ const AddProduct = (props: IProps) => {
         validateMessages={validateMessages}
         autoComplete="off"
       >
-
-
-
         <Form.Item
           label="Product Name"
           name="name"
@@ -117,7 +114,6 @@ const AddProduct = (props: IProps) => {
             })}
           </Select>
         </Form.Item>
-
         <Form.Item
           label="Product Price"
           name="Price"

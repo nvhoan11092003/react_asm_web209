@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import {
     MDBBtn,
     MDBContainer,
@@ -8,6 +8,9 @@ import {
     MDBInput
 }
     from 'mdb-react-ui-kit';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignInMutation, useSignUpMutation } from '../../service/user.service';
+import { message } from 'antd';
 type signInType = {
     email: string,
     password: string
@@ -16,6 +19,36 @@ const intialSignIn = {
     email: "",
     password: ""
 }
+type FormValidType = {
+    isValidemail: boolean,
+    isValidpassword: boolean,
+}
+
+const intialFormValid = {
+    isValidemail: true,
+    isValidpassword: true,
+}
+const reducerFormValid = (state: FormValidType, action: { type: string, payload: string }) => {
+
+    switch (action.type) {
+        case "VALIDATE_EMAIL":
+            if (action.payload.length == 0) {
+                return { ...state, isValidemail: true }
+            }
+            return { ...state, isValidemail: false }
+
+        case "VALIDATE_PASS":
+            if (action.payload.length == 0) {
+                return { ...state, isValidpassword: true }
+            }
+            return { ...state, isValidpassword: false }
+        default:
+            return state
+    }
+
+}
+
+
 const reducerSignIn = (state: signInType, action: { type: string, payload: string }) => {
     switch (action.type) {
         case "UPDATE_EMAIL":
@@ -25,14 +58,50 @@ const reducerSignIn = (state: signInType, action: { type: string, payload: strin
         default:
             return state
     }
+
 }
 const SignInPage = () => {
     const [formSignIn, dispatchFormSignIn] = useReducer(reducerSignIn, intialSignIn)
+    const [formValid, dispatchFormValid] = useReducer(reducerFormValid, intialFormValid)
+    const [submit, setsubmit] = useState(false)
+    const [signIp, isError] = useSignInMutation()
+    const [messageApi, contextHolder] = message.useMessage();
+    const navigate = useNavigate()
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        setsubmit(true)
+        console.log(formValid);
+        console.log(isError);
         try {
-            console.log(formSignIn);
+            if (!formValid.isValidemail && !formValid.isValidpassword) {
+                console.log(formSignIn);
+                signIp(formSignIn).then((response) => {
+                    const { data } = response
+                    console.log(data);
+                    if ("checkUser" in data) {
+                        const user = {
+                            accessToken: data.accessToken,
+                            _id: data.checkUser._id,
+                            email: data.checkUser.email,
+                            role: data.checkUser.role,
+                            username: data.checkUser.username
+                            ,
+                        }
+                        localStorage.setItem('user', JSON.stringify(user));
+                        alert("Đăng Nhập Thành Công")
+                        if (data.checkUser.role == "admin") {
+                            navigate("/admin")
+                        } else {
+                            navigate("/")
+                        }
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                    messageApi.error("Tài Khoản hoặc mật khẩu không Đúng")
 
+                })
+
+            }
         } catch (error) {
 
         }
@@ -41,7 +110,7 @@ const SignInPage = () => {
     return (
         <MDBContainer fluid className='bg-dark' style={{ paddingTop: "100px" }}>
             <MDBRow>
-
+                {contextHolder}
                 <MDBCol sm='6'>
                     <form action="" onSubmit={handleSubmit}>
 
@@ -53,7 +122,7 @@ const SignInPage = () => {
                         <div className='d-flex flex-column justify-content-center h-custom-2 w-75 pt-4'>
 
 
-                            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Email address' id='formControlLg' type='email' size="lg" placeholder='Email'
+                            <MDBInput wrapperClass=' mx-5 w-100' label='Email address' id='formControlLg' type='email' size="lg" placeholder='Email'
                                 onChange={(e) => {
                                     dispatchFormSignIn(
                                         {
@@ -61,10 +130,18 @@ const SignInPage = () => {
                                             payload: e.target.value
                                         }
                                     )
+                                    dispatchFormValid(
+                                        {
+                                            type: "VALIDATE_EMAIL",
+                                            payload: e.target.value
+                                        }
+                                    )
                                 }
                                 }
                             />
-                            <MDBInput wrapperClass='mb-4 mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg" placeholder='******'
+                            <div className="text-danger mb-4 mx-5">{formValid.isValidemail && submit ? "Email is required" : ""}</div>
+
+                            <MDBInput wrapperClass=' mx-5 w-100' label='Password' id='formControlLg' type='password' size="lg" placeholder='******'
                                 onChange={(e) => {
                                     dispatchFormSignIn(
                                         {
@@ -72,13 +149,22 @@ const SignInPage = () => {
                                             payload: e.target.value
                                         }
                                     )
+                                    dispatchFormValid(
+                                        {
+                                            type: "VALIDATE_PASS",
+                                            payload: e.target.value
+                                        }
+                                    )
                                 }
                                 }
                             />
+                            <div className="text-danger mb-4 mx-5">{formValid.isValidpassword && submit ? "Password is required" : ""}</div>
 
-                            <MDBBtn className="mb-4 px-5 mx-5 w-100" style={{}} color='info' size='lg' block>Login</MDBBtn>
-                            <p className="small mb-5 pb-lg-3 ms-5"><a className="text-muted" href="#!">Forgot password?</a></p>
-                            <p className='ms-5'>Don't have an account? <a href="/signup" className="link-info">Register here</a></p>
+
+
+                            <button className="mb-4 p-2 rounded-5 border-2 border border mx-5 w-100 text-white block  bg-info " > Log in   </button>
+                            <p className="small mb-5 pb-lg-3 ms-5"><Link className="text-muted" to="#!">Forgot password?</Link></p>
+                            <p className='ms-5'>Don't have an account? <Link to="/signup" className="link-info">Register here</Link></p>
 
                         </div>
                     </form>

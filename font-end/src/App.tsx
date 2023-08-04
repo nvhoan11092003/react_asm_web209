@@ -39,6 +39,8 @@ import ListCategory from "./pages/admin/categories/list-category";
 import AddCategory from "./pages/admin/categories/add-category";
 import UpdateCategory from "./pages/admin/categories/update-category";
 import { CartPage } from "./pages/clientPages/cart/CartPage";
+import SignUpPage from "./pages/clientPages/SignUpPage";
+import SignInPage from "./pages/clientPages/SignInPage";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -106,6 +108,8 @@ function App() {
         { path: "booking", element: <BookingPage /> },
         { path: "team", element: <TeamPage /> },
         { path: "cart", element: <CartPage /> },
+        { path: "signup", element: <SignUpPage /> },
+        { path: "signin", element: <SignInPage /> },
       ],
     },
     {
