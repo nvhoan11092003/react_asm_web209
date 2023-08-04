@@ -61,7 +61,7 @@ const cartSlice = createSlice({
         const confirm = window.confirm("Are you sure?");
         if (confirm)
           state.items = state.items.filter(
-            (item: any) => item.id !== action.payload
+            (item: any) => item._id !== action.payload
           );
         currentProduct.quantity = 1;
       }
