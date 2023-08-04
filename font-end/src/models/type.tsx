@@ -31,16 +31,11 @@ export type IUser = {
   confirmPassword: string;
 };
 
-export interface IresponUser {
+export interface IUSer {
   accessToken: string,
-  checkUser: {
-    createdAt: string;
-    email: string;
-    role: string;
-    updatedAt: string;
-    username: string;
-    _id: string;
-    message: string
-  }
+  email: string;
+  role: string;
+  username: string;
+  _id: string;
 };
 
