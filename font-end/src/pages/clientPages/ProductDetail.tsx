@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IProduct } from "../../models/type";
 import { useParams } from "react-router-dom";
+import { add } from "./cart/Cart.slice";
+import { useAppDispatch } from "../../store/hook";
 
 interface IProps {
-  products: IProduct[];
+  products: any;
 }
 const ProductDetail = (props: IProps) => {
+  const dispatch = useAppDispatch();
   let { id } = useParams();
   // console.log(props.products);
   const currentProduct = props.products.find(
-    (product) => product._id === String(id)
+    (product: IProduct) => product._id === String(id)
   );
+  const [quantity, setQuantity] = useState<number>(1); // Cung cấp kiểu dữ liệu
+
+  const handleAddToCart = () => {
+    dispatch(
+      add({ ...currentProduct, quantity: parseInt(quantity.toString()) })
+    );
+  };
 
   return (
     <div>
@@ -60,6 +70,21 @@ const ProductDetail = (props: IProps) => {
               </div>
               <div className="add-card">
                 <button className="btn-order">Đặt món</button>
+                <div className="purchase-info">
+                  <input
+                    type="number"
+                    value={quantity}
+                    min={1}
+                    onChange={(e) => setQuantity(parseInt(e.target.value))}
+                  />
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => handleAddToCart()}
+                  >
+                    Add to Cart <i className="fas fa-shopping-cart"></i>
+                  </button>
+                </div>
               </div>
               <div className="product-detail">
                 <div className="pro-desc">

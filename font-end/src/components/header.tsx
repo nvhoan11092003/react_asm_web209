@@ -1,5 +1,6 @@
 import { IUSer } from "../models/type";
 import SearchBar from "./SearchClient";
+import { useAppSelector } from "../store/hook";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -14,6 +15,7 @@ const Header = () => {
     localStorage.removeItem("user")
     return ""
   }
+  const { items } = useAppSelector((state: any) => state.cart);
 
   return (
     <div className="container-xxl position-relative p-0">
@@ -38,7 +40,8 @@ const Header = () => {
               Menu
             </Link>
             <div className="nav-item dropdown">
-              <Link to="#"
+              <Link
+                to="#"
                 className="nav-link dropdown-toggle"
                 data-bs-toggle="dropdown"
               >
@@ -53,9 +56,16 @@ const Header = () => {
                 </Link> */}
               </div>
             </div>
-            {/* <Link to="/contact" className="nav-item nav-link">
-              Contact
-            </Link> */}
+            <div className="nav-item cart-icon">
+              <a href="/cart" className="nav-link">
+                <i className="fa-solid fa-cart-shopping fa-xl"></i>
+                <span className="badge">
+                  {items.reduce(function (sum: any, item: any) {
+                    return sum + item.quantity;
+                  }, 0)}
+                </span>
+              </a>
+            </div>
           </div>
 
           <Link to="/signin" className=" btn btn-primary py-2 px-4">
