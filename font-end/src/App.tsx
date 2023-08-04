@@ -26,12 +26,14 @@ import AdminLayout from "./Layouts/adminLayout";
 import Dashboard from "./pages/adminPages/Dashboard";
 import ListProduct from "./pages/admin/products/list-product";
 import AddProduct from "./pages/admin/products/add-product";
-import UpdateProduct from "./pages/admin/products/update-product";
+// import UpdateProduct from "./pages/admin/products/update-product";
 import ListCategory from "./pages/admin/categories/list-category";
 import AddCategory from "./pages/admin/categories/add-category";
 import UpdateCategory from "./pages/admin/categories/update-category";
 import CartPage from "./pages/clientPages/Cart";
 import { addToCart } from "./api/cart";
+import SignUpPage from "./pages/clientPages/SignUpPage";
+import SignInPage from "./pages/clientPages/SignInPage";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -92,14 +94,17 @@ function App() {
         { path: "about", element: <AboutPage /> },
         { path: "service", element: <ServicePage /> },
         {
-          path: "menu", element: <MenuPage />, children: [
+          path: "menu", children: [
+            { path: "", element: <MenuPage /> },
             { path: ":id", element: <ProductDetail products={products} /> }
           ]
         },
         { path: "contact", element: <ContactPage /> },
         { path: "booking", element: <BookingPage /> },
         { path: "team", element: <TeamPage /> },
-        {path: "cart",element: <CartPage />}
+        {path: "cart",element: <CartPage />},
+        { path: "signup", element: <SignUpPage /> },
+        { path: "signin", element: <SignInPage /> },
       ]
     },
     {
@@ -116,12 +121,13 @@ function App() {
               />
             }, {
               path: "add", element: <AddProduct onAdd={onHandleAddProduct} />
-            }, {
-              path: ":id/update", element: <UpdateProduct
-                onUpdate={onHandleUpdateProduct}
-                products={products}
-              />
-            }
+            }, 
+            // {
+            //   path: ":id/update", element: <UpdateProduct
+            //     onUpdate={onHandleUpdateProduct}
+            //     products={products}
+            //   />
+            // }
           ]
         },
         {

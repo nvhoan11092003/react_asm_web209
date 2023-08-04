@@ -31,7 +31,7 @@ export const signup = async (req,res) => {
         }
         const userExists = await User.findOne({email})
         if(userExists){
-            return res.status(404).json({
+            return res.status(402).json({
                 message: "Email đã tồn tại"
             })
         }

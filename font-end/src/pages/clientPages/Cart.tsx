@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Table,Space,Button,message,Popconfirm ,InputNumber } from 'antd';
 import { ICart } from '../../models/type';
-import { getAllCart } from '../../api/cart';
-
-
+import { deleteCart, getAllCart } from '../../api/cart';
 
 
 
 const CartPage =  () => {
     const [data,setData] = useState<ICart[]>([])
     const [quantityMap, setQuantityMap] = useState<{ [key: string]: number }>({});
+    const [error, setError] = useState<string | null>(null);
 
     const handleQuantityChange = (key: string, value: number | undefined | null) => {
         setQuantityMap((prevQuantityMap) => ({
@@ -18,13 +17,47 @@ const CartPage =  () => {
         }));
     };
       
-    useEffect(()=>{
-        getAllCart().then(({data})=>setData(data?.carts))
-    },[])
-    // console.log(data);
+    useEffect(() => {
+      getAllCart()
+        .then(({ data }) => {
+          setData(data?.carts);
+        })
+        .catch((error) => {
+          setError(error.response.data.message);
+        });
+    }, []);
 
+    if (error) {
+      return <div>Error: {error}</div>;
+    }
+
+    const onHandleRemove = (id:string) => {
+      deleteCart(id).then(() => {
+        const remove = data.filter((item)=>item._id !== id)
+        console.log(remove);
+        setData(remove)
+      })
+      .catch((error)=>{
+        setError(error.response.data.message)
+      })
+    }
+    
+    const confirm = (record:any) => {
+      message.info('Xóa sản phẩm thành công');
+      onHandleRemove(record._id)
+  };
 
     const columns = [
+      {
+        dataIndex: "selected",
+        render: (selected: boolean, record: any) => (
+          <input
+            type="checkbox"
+            checked={selected}
+            // onChange={() => handleCheckboxChange(record.key)}
+          />
+        ),
+      },
         {
           title: 'Tên sản phẩm',
           render: (record: any) => <a>{record.items.productId.name}</a>,
@@ -59,12 +92,12 @@ const CartPage =  () => {
         {
           title: "Thao tác",
           key: "action",
-          render: () => (
+          render: (_:any, record:any) => (
             <Space size="middle">
               <Popconfirm
                 placement="top"
                 title={"Bạn có chắc chắn muốn xóa không?"}
-                onConfirm={() => confirm()}
+                onConfirm={() => confirm(record)}
                 okText="Yes"
                 cancelText="No"
               >
