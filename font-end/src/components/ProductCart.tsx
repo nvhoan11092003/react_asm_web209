@@ -53,7 +53,7 @@ const Cart = () => {
                 <div className="d-flex flex-row">
                   <button
                     className="btn btn-link px-2"
-                    onClick={() => dispatch(decrease(item.id))}
+                    onClick={() => dispatch(decrease(item._id))}
                   >
                     <i className="fas fa-minus"></i>
                   </button>
@@ -68,7 +68,7 @@ const Cart = () => {
                   />
 
                   <button
-                    onClick={() => dispatch(increase(item.id))}
+                    onClick={() => dispatch(increase(item._id))}
                     className="btn btn-link px-2"
                   >
                     <i className="fas fa-plus"></i>
