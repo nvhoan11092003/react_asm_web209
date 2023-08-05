@@ -7,7 +7,7 @@ const getCart = async (req, res) => {
   try {
     // Lấy giỏ hàng dựa trên userId
     const cart = await Cart.findOne({ userId: req.user._id }).populate({
-      path: "carts.items.productId",
+      path: "carts.productId",
       model: "Product",
     });
 
@@ -38,13 +38,13 @@ const addToCart = async (req, res) => {
     }
 
     for (const product of carts) {
-      const productExists = cart.carts.some(item => item.items.productId.equals(product.items.productId));
+      const productExists = cart.carts.some(item => item.productId && item.productId.equals(product.productId));
 
       if (productExists) {
         return res.status(400).json({ message: "Sản phẩm đã tồn tại trong giỏ hàng." });
       }
 
-      const productDocument = await Product.findById(product.items.productId);
+      const productDocument = await Product.findById(product.productId);
 
       if (!productDocument) {
         return res.status(404).json({ message: "Không tìm thấy sản phẩm." });
