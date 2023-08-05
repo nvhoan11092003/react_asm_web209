@@ -48,12 +48,12 @@ const cartSlice = createSlice({
       currentProduct.quantity = 0;
     },
     increase: (state, action: PayloadAction<number>) => {
-      state.items.find((item: any) => item.id === action.payload).quantity++;
+      state.items.find((item: any) => item._id === action.payload).quantity++;
       localStorage.setItem("cart", JSON.stringify(state.items));
     },
     decrease: (state, action: PayloadAction<number>) => {
       const currentProduct = state.items.find(
-        (item: any) => item.id === action.payload
+        (item: any) => item._id === action.payload
       );
       currentProduct.quantity--;
 
@@ -61,7 +61,7 @@ const cartSlice = createSlice({
         const confirm = window.confirm("Are you sure?");
         if (confirm)
           state.items = state.items.filter(
-            (item: any) => item.id !== action.payload
+            (item: any) => item._id !== action.payload
           );
         currentProduct.quantity = 1;
       }
