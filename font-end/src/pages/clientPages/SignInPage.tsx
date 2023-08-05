@@ -1,6 +1,6 @@
 import { useReducer, useState } from 'react';
 import {
-    MDBBtn,
+
     MDBContainer,
     MDBRow,
     MDBCol,
@@ -9,7 +9,7 @@ import {
 }
     from 'mdb-react-ui-kit';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSignInMutation, useSignUpMutation } from '../../service/user.service';
+import { useSignInMutation } from '../../service/user.service';
 import { message } from 'antd';
 type signInType = {
     email: string,
@@ -64,47 +64,46 @@ const SignInPage = () => {
     const [formSignIn, dispatchFormSignIn] = useReducer(reducerSignIn, intialSignIn)
     const [formValid, dispatchFormValid] = useReducer(reducerFormValid, intialFormValid)
     const [submit, setsubmit] = useState(false)
-    const [signIp, isError] = useSignInMutation()
+    const [signIp] = useSignInMutation()
     const [messageApi, contextHolder] = message.useMessage();
     const navigate = useNavigate()
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setsubmit(true)
-        console.log(formValid);
-        console.log(isError);
-        try {
-            if (!formValid.isValidemail && !formValid.isValidpassword) {
-                console.log(formSignIn);
-                signIp(formSignIn).then((response) => {
-                    const { data } = response
-                    console.log(data);
-                    if ("checkUser" in data) {
-                        const user = {
-                            accessToken: data.accessToken,
-                            _id: data.checkUser._id,
-                            email: data.checkUser.email,
-                            role: data.checkUser.role,
-                            username: data.checkUser.username
-                            ,
-                        }
-                        localStorage.setItem('user', JSON.stringify(user));
-                        alert("Đăng Nhập Thành Công")
-                        if (data.checkUser.role == "admin") {
-                            navigate("/admin")
-                        } else {
-                            navigate("/")
-                        }
+
+
+        if (!formValid.isValidemail && !formValid.isValidpassword) {
+            console.log(formSignIn);
+            signIp(formSignIn).then((response) => {
+                const { data } = response
+                console.log(data);
+                if ("checkUser" in data) {
+                    const user = {
+                        accessToken: data.accessToken,
+                        _id: data.checkUser._id,
+                        email: data.checkUser.email,
+                        role: data.checkUser.role,
+                        username: data.checkUser.username
+                        ,
                     }
-                }).catch((err) => {
-                    console.log(err);
-                    messageApi.error("Tài Khoản hoặc mật khẩu không Đúng")
+                    localStorage.setItem('user', JSON.stringify(user));
+                    alert("Đăng Nhập Thành Công")
+                    if (data.checkUser.role == "admin") {
+                        navigate("/admin")
 
-                })
+                    } else {
+                        navigate("/")
+                        window.location.reload();
+                    }
+                }
+            }).catch((err) => {
+                console.log(err);
+                messageApi.error("Tài Khoản hoặc mật khẩu không Đúng")
 
-            }
-        } catch (error) {
+            })
 
         }
+
 
     }
     return (

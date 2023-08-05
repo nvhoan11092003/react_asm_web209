@@ -41,6 +41,7 @@ import UpdateCategory from "./pages/admin/categories/update-category";
 import { CartPage } from "./pages/clientPages/cart/CartPage";
 import SignUpPage from "./pages/clientPages/SignUpPage";
 import SignInPage from "./pages/clientPages/SignInPage";
+import Profile from "./pages/clientPages/profile";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -97,6 +98,7 @@ function App() {
         { path: "", element: <HomePage /> },
         { path: "about", element: <AboutPage /> },
         { path: "service", element: <ServicePage /> },
+        { path: "profile", element: <Profile /> },
         {
           path: "menu",
           children: [
