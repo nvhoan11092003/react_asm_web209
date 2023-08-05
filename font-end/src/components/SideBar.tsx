@@ -57,6 +57,19 @@ const SideBar = () => {
           <span>Categories</span>
         </NavLink>
       </li>
+      <li className="nav-item">
+        <NavLink
+          to="users"
+          className="nav-link collapsed"
+          data-toggle="collapse"
+          data-target="#collapseUtilities"
+          aria-expanded="true"
+          aria-controls="collapseUtilities"
+        >
+          <i className="fas fa-fw fa-user"></i>
+          <span>Users</span>
+        </NavLink>
+      </li>
       <hr className="sidebar-divider" />
       <div className="text-center d-none d-md-inline">
         <button

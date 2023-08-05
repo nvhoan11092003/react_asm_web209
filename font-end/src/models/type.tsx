@@ -13,8 +13,8 @@ export type IProduct = {
   storageInstructions: string;
   description: string;
   categoryId: {
-    _id: string,
-    name: string,
+    _id: string;
+    name: string;
   };
 };
 
@@ -24,31 +24,32 @@ export type ICategory = {
 };
 
 export type IUser = {
-  id: string;
+  _id: string;
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
+  role: string;
 };
 
 export type ICart = {
-  _id?: string,
-  userId: string,
+  _id?: string;
+  userId: string;
   carts: [
     {
       items: {
         productId: {
-          type: string
-        },
+          type: string;
+        };
         quantity: {
-          type: Number,
-        },
-      },
+          type: Number;
+        };
+      };
     }
-  ]
-}
+  ];
+};
 export interface IresponUser {
-  accessToken: string,
+  accessToken: string;
   checkUser: {
     createdAt: string;
     email: string;
@@ -56,7 +57,6 @@ export interface IresponUser {
     updatedAt: string;
     username: string;
     _id: string;
-    message: string
-  }
-};
-
+    message: string;
+  };
+}
