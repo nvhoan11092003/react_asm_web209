@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 const Categories = () => {
   const [selectedType, setSelectedType] = useState("");
   const [selectedPrice, setSelectedPrice] = useState(0);
-
   const [data2, setData2] = useState<IFood[]>([]);
 
   useEffect(() => {
@@ -63,7 +62,7 @@ const Categories = () => {
         }}
       >
         {filteredProducts2.map((item: any) => (
-          <Link to={item._id}>
+          <Link to={item._id} key={item._id}>
             <div className="g-col-3" style={{}}>
               <img src={item.imgUrl[0]} className="card-img-top" alt="..." />
               <div className="card-body">

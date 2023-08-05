@@ -1,9 +1,26 @@
-import React from "react";
+import { IUSer } from "../models/type";
 import SearchBar from "./SearchClient";
 import { useAppSelector } from "../store/hook";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [user, setUser] = useState<any>({})
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const userstring = localStorage.getItem("user")
+      const user = JSON.parse(userstring ? userstring : "")
+      setUser(user)
+    }
+  }, [])
+  console.log("user", user);
+
+  const loguot = () => {
+    localStorage.removeItem("user")
+    setUser({})
+    return ""
+  }
   const { items } = useAppSelector((state: any) => state.cart);
 
   return (
@@ -52,13 +69,28 @@ const Header = () => {
                   {items.reduce(function (sum: any, item: any) {
                     return sum + item.quantity;
                   }, 0)}
+
                 </span>
               </a>
             </div>
           </div>
-          <Link to="/signin" className="btn btn-primary py-2 px-4">
-            Account
-          </Link>
+
+          {!user._id ?
+            <Link to="/signin" className=" btn btn-primary py-2 px-4">
+              Account
+            </Link>
+            :
+            <div className="btn-group">
+              <button className="btn btn-primary py-2 px-4 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cá Nhân
+              </button>
+              <ul className="dropdown-menu">
+                <li><Link className="dropdown-item" to="profile">Thông Tin</Link></li>
+                <li><Link className="dropdown-item" to="#">Lịch Sử mua hàng</Link></li>
+                <li><button onClick={loguot} className="dropdown-item">Đăng Xuất</button></li>
+              </ul>
+            </div>
+          }
         </div>
       </nav>
     </div>

@@ -121,7 +121,7 @@ const SignUpPage = () => {
             <MDBRow>
 
                 <MDBCol sm='6'>
-                    <form action="" onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <div className='d-flex flex-row ps-5 pt-5'>
                             <MDBIcon fas icon="crow fa-3x me-3" style={{ color: '#fea116' }} />
                             <span className="h1 fw-bold mb-0 text-light">Register</span>
