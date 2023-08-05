@@ -3,32 +3,25 @@ import type { ColumnsType } from "antd/es/table";
 import { IProduct } from "../../../models/type";
 import { Link } from "react-router-dom";
 
-interface DataType {
-  key: string | number;
-  _id: string;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-}
+
 interface IProps {
   products: IProduct[];
   onRemove: (id: string) => void;
 }
 
 const ListProduct = (props: IProps) => {
-  console.log(props.products);
+  
   const removeProduct = (id: string) => {
     props.onRemove(id);
   };
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<IProduct> = [
     {
 
       title: "Product Image",
       dataIndex: "imgUrl",
       key: "imgUrl",
-      render: (imgLink) => <img src={imgLink[0]} alt="" style={{ width: 100 }} />,
+      render: (imgUrls) => <img src={imgUrls[0]} alt="" style={{ width: 100 }} />,
     },
     {
       title: "Product Name",
@@ -94,10 +87,11 @@ const ListProduct = (props: IProps) => {
     },
   ];
 
-  const data: DataType[] = props.products.map((item: IProduct) => {
+  const data: IProduct[] = props.products.map((item: IProduct) => {
     return {
       key: item._id,
       ...item,
+      
     };
   });
 
