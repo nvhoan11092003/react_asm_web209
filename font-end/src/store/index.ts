@@ -1,4 +1,5 @@
 import { cartReducer } from "../pages/clientPages/cart/Cart.slice";
+import { foodAPI } from "../service/food.service";
 import {
   configureStore,
   ThunkAction,
@@ -23,6 +24,7 @@ const persistConfig = {
 };
 const rootReducer = combineReducers({
   cart: cartReducer,
+  [foodAPI.reducerPath]: foodAPI.reducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -33,7 +35,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(),
+    }).concat(foodAPI.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
