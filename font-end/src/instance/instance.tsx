@@ -1,7 +1,15 @@
 import axios from "axios";
+var user: any = {}
+if (localStorage.getItem("user")) {
+  const sonUser = localStorage.getItem("user")
+  user = JSON.parse(sonUser ? sonUser : "")
+} else {
+  user = {}
+}
+console.log(user);
 
-const userJSON =JSON.parse(localStorage.getItem("user")?? "")
-const accessToken = userJSON.accessToken 
+const accessToken = user.accessToken
+
 
 
 const instance = axios.create({
