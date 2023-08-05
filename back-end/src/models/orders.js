@@ -12,7 +12,7 @@ const orderSchema = new mongoose.Schema({
       ref: "Cart"
     }
   ],
-  totalAmount: {
+  intoMoney: {
     type: Number,
   },
   status: {
@@ -23,6 +23,17 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  numberphone:{
+    type : String
+  },
+  address: {
+      name: {
+        type: String
+      },
+      specificAddress: {
+        type: String
+      }
+  }
 }, { timestamps: true, versionKey: false });
 
 export default mongoose.model("Order", orderSchema);

@@ -574,7 +574,6 @@
   padding: 0.45rem 0.8rem;
   outline: 0;
   margin-right: 0.2rem;
-  margin-bottom: 1rem;
 }
 .purchase-info input {
   width: 60px;
@@ -637,4 +636,17 @@
 }
 .breadcrumb {
   background-color: transparent;
+}
+.cart-icon {
+  position: relative;
+}
+
+.cart-icon .badge {
+  position: relative;
+  top: -16px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  border-radius: 50%;
 }

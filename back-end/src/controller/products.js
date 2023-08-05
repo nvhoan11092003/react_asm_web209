@@ -2,7 +2,6 @@ import Product from "../models/products";
 import productSchema from "../schema/product";
 import Category from "../models/categories";
 import mongoose from "mongoose";
-import cloudinary from "../configs/cloudinaryConfig";
 
 //Tìm kiếm sản phẩm theo tên (cả chữ hoa và chữ thường)
 export const searchProduct = async (req, res) => {
