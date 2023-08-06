@@ -41,7 +41,7 @@ const addToCart = async (req, res) => {
       const existingProductIndex = cart.carts.findIndex(item => item.productId && item.productId.equals(product.productId));
 
       if (existingProductIndex !== -1) {
-        //Sản phẩm tồn tại trong giỏ hàng thì tăng số lượng lên 1
+        //Sản phẩm tồn tại trong giỏ hàng thì tăng số lượng lên
         cart.carts[existingProductIndex].quantity += 1;
       } else {
         const productDocument = await Product.findById(product.productId);

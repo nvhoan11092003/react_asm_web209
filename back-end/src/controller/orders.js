@@ -5,7 +5,13 @@ import Cart from "../models/cart";
 const getAllOrder = async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.user._id })
-      .populate();
+      .populate({
+        path: 'cartId',
+        populate: {
+          path: 'carts.productId',
+          model: 'Product',
+        },
+      });
 
     if (orders.length === 0) {
       return res.status(401).json({
