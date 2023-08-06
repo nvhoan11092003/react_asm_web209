@@ -1,15 +1,18 @@
+
 import SearchBar from "./SearchClient";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState,useContext } from "react";
 import { ICart } from "../models/type";
 import { save } from "../pages/clientPages/cart/Cart.slice";
 import { UserContext } from "../Layouts/websiteLayouts";
-("../App");
+"../App"
 const Header = () => {
+
   const { items } = useAppSelector((state: any) => state.cart);
   const dispatch = useAppDispatch();
-  const { user, setUser } = useContext(UserContext);
+
+  const { user, setUser } = useContext(UserContext)
   useEffect(() => {
     if (localStorage.getItem("user")) {
       const userstring = localStorage.getItem("user");

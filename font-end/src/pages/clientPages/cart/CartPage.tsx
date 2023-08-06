@@ -34,15 +34,22 @@ export const CartPage = () => {
       const userJSON = JSON.parse(localStorage.getItem("user") ?? "");
       const accessToken = userJSON.accessToken;
       const idUser: tokenUser = decode(accessToken);
-      const products = items.map((item: any) => {
-        const { _id, quantity } = item;
-        return { productId: _id, quantity };
-      });
-      const cart: ICart = {
-        userId: idUser._id,
-        carts: products,
-      };
-      dispatch(save(cart));
+      if (items) {
+        const products = items.map((item: any) => {
+          const { _id, quantity } = item;
+          return { productId: _id, quantity };
+        });
+        const cart: ICart = {
+          userId: idUser._id,
+          carts: products,
+        };
+        dispatch(save(cart));
+        navigate("/checkout");
+      } else {
+        console.log(!items);
+
+        alert("không có sản phẩm nào trong giỏ hàng");
+      }
     } else {
       alert("Bạn chưa đăng nhập");
       navigate("/signin");
