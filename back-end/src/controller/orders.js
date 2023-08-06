@@ -4,15 +4,48 @@ import Cart from "../models/cart";
 
 const getAllOrder = async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.user._id })
-      .populate();
+    const orders = await Order.find()
+    .populate("userId").populate({ path : "cartId" , populate : "carts.productId"}) 
+    if (orders.length === 0) {
+      return res.status(401).json({
+        message: 'không có đơn hàng nào',
+      });
+    }
+    return res.status(200).json(orders);
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+const getOrderbyid = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const orders = await Order.findById(_id)
+    .populate("userId").populate({ path : "cartId" , populate : "carts.productId"}) 
+    if (orders.length === 0) {
+      return res.status(401).json({
+        message: 'không có đơn hàng nào',
+      });
+    }
+    return res.status(200).json(orders);
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 
+const getOrderbyiduser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const orders = await Order.find({ userId })
+    .populate("userId").populate({ path : "cartId" , populate : "carts.productId"}) 
     if (orders.length === 0) {
       return res.status(401).json({
         message: 'Bạn không có đơn hàng nào',
       });
     }
-
     return res.status(200).json(orders);
   } catch (error) {
     return res.status(500).json({
@@ -121,5 +154,5 @@ const updateOrder = async (req, res) => {
 
 
 
-export { createOrder,getAllOrder,deleteOrder,updateOrder };
+export { createOrder,getAllOrder,deleteOrder,updateOrder ,getOrderbyiduser ,getOrderbyid };
 
