@@ -42,4 +42,4 @@ export const foodAPI = createApi({
 
 })
 
-export const { useGetFoodsQuery, useAddFoodMutation } = foodAPI
+export const { useGetFoodsQuery, useAddFoodMutation, useDeleteFoodMutation, useGetFoodByIdQuery, useUpdateFoodMutation } = foodAPI
