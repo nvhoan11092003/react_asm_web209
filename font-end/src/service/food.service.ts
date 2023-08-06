@@ -17,6 +17,10 @@ export const foodAPI = createApi({
         getFoodById: builder.query<any, string>({
             query: (id: string) => `/api/products/${id}`, // GET
         }),
+        searchFoodByKeyWord: builder.query({
+            query: (keyword: any) => `/api/products/search?keyword=${keyword}`
+        })
+        ,
         addFood: builder.mutation({
             query: (food: any) => ({
                 url: `/api/products`,
@@ -42,4 +46,11 @@ export const foodAPI = createApi({
 
 })
 
-export const { useGetFoodsQuery, useAddFoodMutation, useDeleteFoodMutation, useGetFoodByIdQuery, useUpdateFoodMutation } = foodAPI
+export const {
+    useGetFoodsQuery,
+    useAddFoodMutation,
+    useDeleteFoodMutation,
+    useGetFoodByIdQuery,
+    useUpdateFoodMutation,
+    useSearchFoodByKeyWordQuery
+} = foodAPI

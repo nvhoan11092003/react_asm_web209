@@ -1,40 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getAllProduct } from "../api/product";
-// import { getAllCategory } from "../api/category";
-import { IFood, ProductWithTypeName, ICategory } from "../models";
 import ReactDOM from 'react-dom'
 import { MDBInput, MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
+import { useGetFoodsQuery } from "../service/food.service";
 // import { Link } from "react-router-dom";
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [state, setState] = useState(false);
-
-  // const [category, setCategory] = useState<ICategory[]>([]);
-
-  const [data2, setData2] = useState<IFood[]>([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const product = await getAllProduct();
-      setData2(product.data);
-    };
-    getData();
-    // const getCate = async () => {
-    //   const cate = await getAllCategory()
-    //   setCategory(cate.data)
-
-    // }
-    // getCate()
-  }, []);
-
-  // const productsWithTypeNames: ProductWithTypeName[] = data2.map((product) => {
-  //   const productType = category.find((type) => type.id === product.categoryId);
-  //   return {
-  //     ...product,
-  //     typeName: productType?.name || "",
-  //   };
-  // });
-
+  const { data, error, isLoading } = useGetFoodsQuery()
   const handleSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -53,14 +25,14 @@ const Search = () => {
       dark.style.display = "block";
     } else dark.style.display = "none";
 
-    if (state && filteredProducts.length !== 0) {
+    if (state && filteredProducts?.length !== 0) {
       list.style.display = "block";
     } else list.style.display = "none";
   });
   const close = React.useRef(null);
 
   const myRef = React.useRef(null);
-  const filteredProducts = data2.filter((product: any) => {
+  const filteredProducts = data?.filter((product: any) => {
     if (product) {
       return (
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -99,7 +71,7 @@ const Search = () => {
         <MDBListGroup ref={myRef} style={{ display: "none", position: "absolute", backgroundColor: "white", width: "100%" }}>
           {
 
-            filteredProducts.map((product) => {
+            filteredProducts?.map((product: any) => {
               if (product == null) {
                 return ""
               }
