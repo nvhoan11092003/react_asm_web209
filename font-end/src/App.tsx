@@ -38,7 +38,7 @@ import AddProduct from "./pages/admin/products/add-product";
 import ListCategory from "./pages/admin/categories/list-category";
 import AddCategory from "./pages/admin/categories/add-category";
 import UpdateCategory from "./pages/admin/categories/update-category";
-import CartPage from "./pages/clientPages/Cart";
+import { CartPage } from "./pages/clientPages/cart/CartPage";
 import { addToCart } from "./api/cart";
 // import { CartPage } from "./pages/clientPages/cart/CartPage";
 import SignUpPage from "./pages/clientPages/SignUpPage";
@@ -93,9 +93,9 @@ function App() {
   };
 
   // ADD TO CART
-  const createCart = (cart:ICart) => {
-    addToCart(cart)
-  }
+  const createCart = (cart: ICart) => {
+    addToCart(cart);
+  };
 
   const router = createBrowserRouter([
     {
@@ -116,7 +116,7 @@ function App() {
         { path: "contact", element: <ContactPage /> },
         { path: "booking", element: <BookingPage /> },
         { path: "team", element: <TeamPage /> },
-        {path: "cart",element: <CartPage />},
+        { path: "cart", element: <CartPage /> },
         // { path: "cart", element: <CartPage /> },
         { path: "signup", element: <SignUpPage /> },
         { path: "signin", element: <SignInPage /> },

@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cart from "../../../components/ProductCart";
-import { useAppSelector } from "../../../store/hook";
+import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import decode from "jwt-decode";
-import { useAddCartMutation } from "../../../service/cart.service";
+import { save } from "./Cart.slice";
+import { ICart } from "../../../models/type";
 export const CartPage = () => {
+  type tokenUser = {
+    _id: string;
+    iat: number;
+    exp: number;
+  };
   const { items } = useAppSelector((state: any) => state.cart);
-  const [addCart, { isLoading: isAddCartLoading }] = useAddCartMutation();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const saveCart = () => {
     const userJSON = JSON.parse(localStorage.getItem("user") ?? "");
@@ -19,17 +25,16 @@ export const CartPage = () => {
       console.log("Không có sản phẩm nào trong giỏ hàng");
     }
     const accessToken = userJSON.accessToken;
-    const idUser = decode(accessToken);
+    const idUser: tokenUser = decode(accessToken);
     const products = items.map((item: any) => {
       const { _id, quantity } = item;
       return { _id, quantity };
     });
-    const cart = {
-      userId: idUser,
+    const cart: ICart = {
+      userId: idUser._id,
       carts: products,
     };
-    addCart(cart).unwrap();
-    console.log(products);
+    dispatch(save(cart));
   };
   return (
     <div>
