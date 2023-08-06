@@ -1,9 +1,22 @@
 import { useContext } from "react"
 import { UserContext } from "../../Layouts/websiteLayouts"
-
+import { Form, Input, Button, Upload, Select, } from "antd";
 const CheckoutPage = () => {
 
     const { user } = useContext(UserContext)
+    const onSubmit = async (data: any) => { }
+    const validateMessages = {
+        required: '${label} is required!',
+        types: {
+            email: '${label} is not a valid email!',
+            number: '${label} is not a valid number!',
+        },
+        number: {
+            range: '${label} must be between ${min} and ${max}',
+        }
+    }; const onFinishFailed = (errorInfo: any) => {
+        console.log("Failed:", errorInfo);
+    };
 
 
     return (
@@ -59,49 +72,73 @@ const CheckoutPage = () => {
                 </div>
                 <div className="col-md-6 mx-3 order-md-1">
                     <h4 className="mb-3">Billing address</h4>
-                    <form className="needs-validation" noValidate={false}>
+                    <Form
+                        name="basic"
+                        labelCol={{ span: 8 }}
+                        wrapperCol={{ span: 16 }}
+                        style={{ maxWidth: 800 }}
+                        initialValues={{ remember: true }}
+                        onFinish={onSubmit}
+                        onFinishFailed={onFinishFailed}
+                        validateMessages={validateMessages}
+                    >
+                        <Form.Item
+                            initialValue={user.username}
+                            label="Name"
+                            name="name"
+                            rules={[
+                                { required: true, },
+                                { whitespace: true },
+                                { min: 6, max: 255 },
+                            ]}
+                            hasFeedback
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[
+                                { required: true, },
+                                { whitespace: true },
+                                { min: 6, max: 255 },
+                            ]}
+                            hasFeedback
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="adress"
+                            name="adress"
+                            rules={[
+                                { required: true, },
+                                { whitespace: true },
+                                { min: 6, max: 255 },
+                            ]}
+                            hasFeedback
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="number"
+                            name="number"
+                            rules={[
+                                { required: true, },
+                                { whitespace: true },
+                                { min: 6, max: 255 },
+                            ]}
+                            hasFeedback
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                            <Button type="primary" htmlType="submit">
+                                Add Product
+                            </Button>
+                        </Form.Item>
 
-                        <div className="mb-3">
-                            <label htmlFor="username">Username</label>
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <span className="input-group-text">@</span>
-                                </div>
-                                <input type="text" className="form-control" id="username" placeholder="Username" />
-                                <div className="invalid-feedback" style={{ width: '100%' }}> Your username is required. </div>
-                            </div>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="email">Email <span className="text-muted">(Optional)</span></label>
-                            <input type="email" className="form-control" id="email" placeholder="you@example.com" />
-                            <div className="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="address">Address</label>
-                            <input type="text" className="form-control" id="address" placeholder="1234 Main St" />
-                            <div className="invalid-feedback"> Please enter your shipping address. </div>
-                        </div>
-                        <hr className="mb-4" />
-                        <h4 className="mb-3">Payment</h4>
-                        <div className="d-block my-3">
-                            <div className="custom-control custom-radio">
-                                <input id="credit" name="paymentMethod" type="radio" className="custom-control-input" defaultChecked />
-                                <label className="custom-control-label" htmlFor="credit">Credit card</label>
-                            </div>
-                            <div className="custom-control custom-radio">
-                                <input id="debit" name="paymentMethod" type="radio" className="custom-control-input" />
-                                <label className="custom-control-label" htmlFor="debit">Debit card</label>
-                            </div>
-                            <div className="custom-control custom-radio">
-                                <input id="paypal" name="paymentMethod" type="radio" className="custom-control-input" />
-                                <label className="custom-control-label" htmlFor="paypal">PayPal</label>
-                            </div>
-                        </div>
+                    </Form>
 
-
-                        <hr className="mb-4" />
-                        <button className="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-                    </form>
                 </div>
             </div>
         </div>
