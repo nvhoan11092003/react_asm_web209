@@ -1,11 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cart from "../../../components/ProductCart";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
 import decode from "jwt-decode";
 import { save } from "./Cart.slice";
 import { ICart } from "../../../models/type";
+import { getAllCart } from "../../../api/cart";
 export const CartPage = () => {
+  const [carts, setCart] = useState<ICart[]>([]);
+  useEffect(() => {
+    getAllCart()
+      .then(({ data }) => {
+        setCart(data?.carts);
+        localStorage.setItem("cart", JSON.stringify(data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   type tokenUser = {
     _id: string;
     iat: number;
@@ -15,26 +27,26 @@ export const CartPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const saveCart = () => {
-    const userJSON = JSON.parse(localStorage.getItem("user") ?? "");
+    const userLogin = localStorage.getItem("user");
+    console.log(userLogin);
 
-    if (!userJSON) {
-      console.log("Bạn chưa đăng nhập");
-      navigate("/login");
+    if (userLogin) {
+      const userJSON = JSON.parse(localStorage.getItem("user") ?? "");
+      const accessToken = userJSON.accessToken;
+      const idUser: tokenUser = decode(accessToken);
+      const products = items.map((item: any) => {
+        const { _id, quantity } = item;
+        return { productId: _id, quantity };
+      });
+      const cart: ICart = {
+        userId: idUser._id,
+        carts: products,
+      };
+      dispatch(save(cart));
+    } else {
+      alert("Bạn chưa đăng nhập");
+      navigate("/signin");
     }
-    if (!items) {
-      console.log("Không có sản phẩm nào trong giỏ hàng");
-    }
-    const accessToken = userJSON.accessToken;
-    const idUser: tokenUser = decode(accessToken);
-    const products = items.map((item: any) => {
-      const { _id, quantity } = item;
-      return { _id, quantity };
-    });
-    const cart: ICart = {
-      userId: idUser._id,
-      carts: products,
-    };
-    dispatch(save(cart));
   };
   return (
     <div>

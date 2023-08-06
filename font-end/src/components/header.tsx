@@ -1,27 +1,39 @@
-import { IUSer } from "../models/type";
 import SearchBar from "./SearchClient";
-import { useAppSelector } from "../store/hook";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { ICart } from "../models/type";
+import { save } from "../pages/clientPages/cart/Cart.slice";
 
 const Header = () => {
-  const [user, setUser] = useState<any>({})
+  const [user, setUser] = useState<any>({});
+  const { items } = useAppSelector((state: any) => state.cart);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      const userstring = localStorage.getItem("user")
-      const user = JSON.parse(userstring ? userstring : "")
-      setUser(user)
+      const userstring = localStorage.getItem("user");
+      const user = JSON.parse(userstring ? userstring : "");
+      setUser(user);
     }
-  }, [])
+  }, []);
   console.log("user", user);
 
   const loguot = () => {
-    localStorage.removeItem("user")
-    setUser({})
-    return ""
-  }
-  const { items } = useAppSelector((state: any) => state.cart);
+    const products = items.map((item: any) => {
+      const { _id, quantity } = item;
+      return { productId: _id, quantity };
+    });
+    const cart: ICart = {
+      userId: user._id,
+      carts: products,
+    };
+    dispatch(save(cart));
+    localStorage.removeItem("user");
+    localStorage.removeItem("cart");
+    setUser({});
+    return "";
+  };
 
   return (
     <div className="container-xxl position-relative p-0">
@@ -69,28 +81,44 @@ const Header = () => {
                   {items.reduce(function (sum: any, item: any) {
                     return sum + item.quantity;
                   }, 0)}
-
                 </span>
               </a>
             </div>
           </div>
 
-          {!user._id ?
+          {!user._id ? (
             <Link to="/signin" className=" btn btn-primary py-2 px-4">
               Account
             </Link>
-            :
+          ) : (
             <div className="btn-group">
-              <button className="btn btn-primary py-2 px-4 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button
+                className="btn btn-primary py-2 px-4 dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 Cá Nhân
               </button>
               <ul className="dropdown-menu">
-                <li><Link className="dropdown-item" to="profile">Thông Tin</Link></li>
-                <li><Link className="dropdown-item" to="#">Lịch Sử mua hàng</Link></li>
-                <li><button onClick={loguot} className="dropdown-item">Đăng Xuất</button></li>
+                <li>
+                  <Link className="dropdown-item" to="profile">
+                    Thông Tin
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="#">
+                    Lịch Sử mua hàng
+                  </Link>
+                </li>
+                <li>
+                  <button onClick={loguot} className="dropdown-item">
+                    Đăng Xuất
+                  </button>
+                </li>
               </ul>
             </div>
-          }
+          )}
         </div>
       </nav>
     </div>

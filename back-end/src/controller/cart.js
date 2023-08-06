@@ -57,7 +57,9 @@ const addToCart = async (req, res) => {
       }
     }
 
-    await cart.save();
+    await Cart.findByIdAndUpdate(cart._id, req.body, {
+      new: true,
+    });
 
     res.status(200).json({
       message: "Thêm sản phẩm vào giỏ hàng thành công",
