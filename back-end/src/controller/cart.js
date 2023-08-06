@@ -38,24 +38,23 @@ const addToCart = async (req, res) => {
     }
 
     for (const product of carts) {
-      const productExists = cart.carts.some(
+      const existingProductIndex = cart.carts.findIndex(
         (item) => item.productId && item.productId.equals(product.productId)
       );
 
-      if (productExists) {
-        return res
-          .status(400)
-          .json({ message: "Sản phẩm đã tồn tại trong giỏ hàng." });
+      if (existingProductIndex !== -1) {
+        //Sản phẩm tồn tại trong giỏ hàng thì tăng số lượng lên 1
+        cart.carts[existingProductIndex].quantity += 1;
+      } else {
+        const productDocument = await Product.findById(product.productId);
+
+        if (!productDocument) {
+          return res.status(404).json({ message: "Không tìm thấy sản phẩm." });
+        }
+
+        // Thêm sản phẩm vào giỏ hàng với số lượng mặc định là 1
+        cart.carts.push(product);
       }
-
-      // const productDocument = await Product.findById(product.productId);
-
-      // if (!productDocument) {
-      //   return res.status(404).json({ message: "Không tìm thấy sản phẩm." });
-      // }
-
-      // Thêm sản phẩm vào giỏ hàng
-      cart.carts.push(product);
     }
 
     await cart.save();
