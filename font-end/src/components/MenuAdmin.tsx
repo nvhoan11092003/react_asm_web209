@@ -39,6 +39,14 @@ const MenuAdmin = () => {
         </NavLink>
       </li>
       <li className="nav-item menu-items">
+        <NavLink className="nav-link" to="users">
+          <span className="menu-icon">
+            <i className="mdi mdi-table-large"></i>
+          </span>
+          <span className="menu-title">Users</span>
+        </NavLink>
+      </li>
+      <li className="nav-item menu-items">
         <NavLink className="nav-link" to="chart">
           <span className="menu-icon">
             <i className="mdi mdi-chart-bar"></i>
