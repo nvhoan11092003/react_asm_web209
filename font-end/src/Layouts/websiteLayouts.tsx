@@ -9,11 +9,12 @@ const WebsiteLayouts = () => {
     width: "3rem",
     height: "3rem",
   };
+
   return (
-   <>
-     <LinkClient/>
-    <div className="container-xxl bg-white p-0">
-      {/* <div
+    <>
+      <LinkClient />
+      <div className="container-xxl bg-white p-0">
+        {/* <div
         id="spinner"
         className="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
       >
@@ -25,11 +26,11 @@ const WebsiteLayouts = () => {
           <span className="sr-only">Loading...</span>
         </div>
       </div> */}
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
-   </>
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
+    </>
   );
 };
 

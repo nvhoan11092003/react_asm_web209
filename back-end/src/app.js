@@ -28,8 +28,5 @@ mongoose.connect(
   "mongodb+srv://hoannvph28518:Hoan1109@database.jszf9cb.mongodb.net/foods"
 );
 
-// app.listen(8080, () => {
-//   console.log("connected db port 8080");
-// });
 
 export const viteNodeApp = app;

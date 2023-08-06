@@ -3,6 +3,22 @@ import {signupSchema, signinSchema, forgotPasswordSchema, changePasswordSchema} 
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
+
+export const getAllUser = async (req,res) => {
+    try {
+        const user = await User.find()
+        if(user.length===0){
+            return res.status(400).json({
+                message: "Không có dữ liệu người dùng"
+            })
+        }
+        return res.status(200).json(user)
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        })        
+    }
+}
 export const signup = async (req,res) => {
     try {
         const { username, email, password } = req.body

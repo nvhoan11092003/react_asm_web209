@@ -31,6 +31,22 @@ export type IUser = {
   confirmPassword: string;
 };
 
+export type ICart = {
+  _id?: string,
+  userId: string,
+  carts: [
+    {
+      items: {
+        productId: {
+          type: string
+        },
+        quantity: {
+          type: Number,
+        },
+      },
+    }
+  ]
+}
 export interface IresponUser {
   accessToken: string,
   checkUser: {
