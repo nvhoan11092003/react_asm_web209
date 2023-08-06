@@ -1,4 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { addToCart } from "../../../api/cart";
+import { ICart } from "../../../models/type";
 
 interface IProduct {
   _id?: string;
@@ -33,8 +35,10 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    save: (state, action: PayloadAction<IProduct>) => {
+    save: (state, action: PayloadAction<ICart>) => {
       const cart = action.payload;
+      console.log(cart);
+      addToCart(cart);
     },
     add: (state, action: PayloadAction<IProduct>) => {
       const newProduct = action.payload;
@@ -82,5 +86,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { add, increase, decrease, remove } = cartSlice.actions;
+export const { add, increase, decrease, remove, save } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

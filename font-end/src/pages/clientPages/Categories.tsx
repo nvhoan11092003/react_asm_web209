@@ -14,6 +14,7 @@ const Categories = () => {
   useEffect(() => {
     const getData = async () => {
       const product = await getAllProduct();
+
       setData2(product.data);
     };
     getData();

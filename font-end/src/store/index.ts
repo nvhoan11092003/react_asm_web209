@@ -1,6 +1,7 @@
 import { cartReducer } from "../pages/clientPages/cart/Cart.slice";
+import { userAPI } from "../service/user.service";
 import { foodAPI } from "../service/food.service";
-import { cartAPI } from "../service/cart.service";
+
 import {
   configureStore,
   ThunkAction,
@@ -26,7 +27,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   cart: cartReducer,
   [foodAPI.reducerPath]: foodAPI.reducer,
-  //   [cartAPI.reducerPath]: cartAPI.reducer,
+  [userAPI.reducerPath]: userAPI.reducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -37,7 +38,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(foodAPI.middleware),
+    }).concat(foodAPI.middleware, userAPI.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
