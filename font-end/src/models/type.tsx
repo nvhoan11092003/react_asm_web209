@@ -60,3 +60,11 @@ export interface IresponUser {
   }
 };
 
+export interface userlogin {
+  accessToken: string,
+  email: string,
+  role: string,
+  username: string,
+  _id: string,
+}
+

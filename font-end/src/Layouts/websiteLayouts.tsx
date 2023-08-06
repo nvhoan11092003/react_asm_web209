@@ -3,6 +3,9 @@ import Header from "../components/header";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import LinkClient from "../components/LinkClient";
+import { createContext, useState } from 'react'
+import { IUser } from '../models/type';
+export const UserContext = createContext({} as any);
 
 const WebsiteLayouts = () => {
   const inlineStyle = {
@@ -10,8 +13,9 @@ const WebsiteLayouts = () => {
     height: "3rem",
   };
 
+  const [user, setUser] = useState<IUser>({} as any);
   return (
-    <>
+    <UserContext.Provider value={{ setUser, user }}>
       <LinkClient />
       <div className="container-xxl bg-white p-0">
         {/* <div
@@ -30,7 +34,7 @@ const WebsiteLayouts = () => {
         <Outlet />
         <Footer />
       </div>
-    </>
+    </UserContext.Provider>
   );
 };
 
