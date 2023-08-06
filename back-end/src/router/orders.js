@@ -3,6 +3,6 @@ import { createOrder, getAllOrder } from "../controller/orders"
 import {checkPermissionOrder} from "../middlewares/checkPermissionOrder"
 
 const router = express.Router()
-router.post("/order",checkPermissionOrder,createOrder)
-router.get("/order",checkPermissionOrder,getAllOrder)
+router.post("/order",createOrder)
+router.get("/order",getAllOrder)
 export default router
