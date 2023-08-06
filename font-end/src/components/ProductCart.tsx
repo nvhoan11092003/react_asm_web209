@@ -9,7 +9,7 @@ const Cart = () => {
   const dispatch = useAppDispatch();
 
   const { items } = useAppSelector((state: any) => state.cart);
-  console.log(useAppSelector((state: any) => state.cart));
+
   if (!items[0]) {
     return <h1 className="mx-auto">Không có sản phẩm nào trong giỏ hàng !</h1>;
   }

@@ -1,5 +1,6 @@
 import { cartReducer } from "../pages/clientPages/cart/Cart.slice";
 import { foodAPI } from "../service/food.service";
+import { cartAPI } from "../service/cart.service";
 import {
   configureStore,
   ThunkAction,
@@ -25,6 +26,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   cart: cartReducer,
   [foodAPI.reducerPath]: foodAPI.reducer,
+  //   [cartAPI.reducerPath]: cartAPI.reducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

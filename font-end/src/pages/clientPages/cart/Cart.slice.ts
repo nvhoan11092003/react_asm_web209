@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface IProduct {
   _id?: string;
@@ -18,11 +18,24 @@ interface IProduct {
 const initialState = {
   items: [],
 } as { items: any[] };
-
+// export const createCart = createAsyncThunk(
+//   "cart/create",
+//   async (film: IProduct, thunkAPI) => {
+//     try {
+//       const data = await postFilm(film);
+//       return data;
+//     } catch (err: any) {
+//       return thunkAPI.rejectWithValue(err.response.data);
+//     }
+//   }
+// );
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    save: (state, action: PayloadAction<IProduct>) => {
+      const cart = action.payload;
+    },
     add: (state, action: PayloadAction<IProduct>) => {
       const newProduct = action.payload;
 

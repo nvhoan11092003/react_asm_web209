@@ -1,9 +1,36 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cart from "../../../components/ProductCart";
 import { useAppSelector } from "../../../store/hook";
+import decode from "jwt-decode";
+import { useAddCartMutation } from "../../../service/cart.service";
 export const CartPage = () => {
   const { items } = useAppSelector((state: any) => state.cart);
+  const [addCart, { isLoading: isAddCartLoading }] = useAddCartMutation();
+  const navigate = useNavigate();
+  const saveCart = () => {
+    const userJSON = JSON.parse(localStorage.getItem("user") ?? "");
+
+    if (!userJSON) {
+      console.log("Bạn chưa đăng nhập");
+      navigate("/login");
+    }
+    if (!items) {
+      console.log("Không có sản phẩm nào trong giỏ hàng");
+    }
+    const accessToken = userJSON.accessToken;
+    const idUser = decode(accessToken);
+    const products = items.map((item: any) => {
+      const { _id, quantity } = item;
+      return { _id, quantity };
+    });
+    const cart = {
+      userId: idUser,
+      carts: products,
+    };
+    addCart(cart).unwrap();
+    console.log(products);
+  };
   return (
     <div>
       <div className="container-xxl py-5 bg-dark hero-header mb-5">
@@ -203,6 +230,7 @@ export const CartPage = () => {
 
                       <button
                         type="button"
+                        onClick={() => saveCart()}
                         className="btn btn-primary btn-block btn-lg"
                       >
                         <div className="d-flex justify-content-between">
