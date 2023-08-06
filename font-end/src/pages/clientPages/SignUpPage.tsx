@@ -96,7 +96,7 @@ const SignUpPage = () => {
         try {
             setsubmit(true)
             if (!formValid.isValidemail && !formValid.isValidname && !formValid.isValidpassword && !formValid.isValidre_password) {
-                signUp(formSignUp).then((response) => {
+                signUp(formSignUp).then((response: any) => {
                     if ("error" in response) {
                         console.log(response.error.data.message);
                         messageApi.error(response.error.data.message);

@@ -62,7 +62,7 @@ const Header = () => {
               </div>
             </div>
             <div className="nav-item cart-icon">
-              <a href="/cart" className="nav-link">
+              <Link to="/cart" className="nav-link">
                 <i className="fa-solid fa-cart-shopping fa-xl"></i>
                 <span className="badge">
                   {items.reduce(function (sum: any, item: any) {
@@ -70,7 +70,7 @@ const Header = () => {
                   }, 0)}
 
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
 

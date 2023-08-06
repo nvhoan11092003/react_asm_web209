@@ -44,6 +44,7 @@ import { addToCart } from "./api/cart";
 import SignUpPage from "./pages/clientPages/SignUpPage";
 import SignInPage from "./pages/clientPages/SignInPage";
 import Profile from "./pages/clientPages/profile";
+import CheckoutPage from "./pages/clientPages/Checkout";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -117,6 +118,7 @@ function App() {
         { path: "booking", element: <BookingPage /> },
         { path: "team", element: <TeamPage /> },
         { path: "cart", element: <CartPage /> },
+        { path: "Checkout", element: <CheckoutPage /> },
         // { path: "cart", element: <CartPage /> },
         { path: "signup", element: <SignUpPage /> },
         { path: "signin", element: <SignInPage /> },

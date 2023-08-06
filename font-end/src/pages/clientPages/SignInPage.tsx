@@ -12,6 +12,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSignInMutation } from '../../service/user.service';
 import { message } from 'antd';
 import { UserContext } from '../../Layouts/websiteLayouts';
+import { IresponUser } from '../../models/type';
 type signInType = {
     email: string,
     password: string
@@ -75,7 +76,7 @@ const SignInPage = () => {
         if (!formValid.isValidemail && !formValid.isValidpassword) {
             console.log(formSignIn);
             signIp(formSignIn).then((response) => {
-                const { data } = response
+                const { data }: any = response
                 console.log(data);
                 if ("checkUser" in data) {
                     const user = {
