@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
 import Team from "../../components/Team";
 import Menu from "../../components/Menu";
 import { Link } from "react-router-dom";
-import { getAllProduct } from "../../api/product";
 import { useGetFoodsQuery } from "../../service/food.service";
 import LoadingSkeleton from "../../components/Skeleton";
 
 const HomePage = () => {
+  const VND = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+  })
   const { data, error, isLoading: isLoadingFecth } = useGetFoodsQuery();
   console.log(error);
 
@@ -59,7 +61,7 @@ const HomePage = () => {
               alt="..."
             />
             <div className="card-body">
-              <b className="text-danger">{item.price}đ</b>
+              <b className="text-danger">{VND.format(item.price)}</b>
               <p className="card-text">
                 <Link to={`menu/${item._id}`}>{item.name}</Link>
               </p>

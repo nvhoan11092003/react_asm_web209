@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer, useState, useContext } from "react";
 import {
   MDBContainer,
   MDBRow,
@@ -9,6 +9,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useSignInMutation } from "../../service/user.service";
 import { message } from "antd";
+import { UserContext } from "../../Layouts/websiteLayouts";
+import { IresponUser } from "../../models/type";
 
 type signInType = {
   email: string;
@@ -66,12 +68,14 @@ const SignInPage = () => {
     reducerSignIn,
     intialSignIn
   );
+
   const [formValid, dispatchFormValid] = useReducer(
     reducerFormValid,
     intialFormValid
   );
-  const [submit, setsubmit] = useState(false);
+  const { setUser } = useContext(UserContext);
 
+  const [submit, setsubmit] = useState(false);
   const [signIp] = useSignInMutation();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();

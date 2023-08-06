@@ -44,6 +44,10 @@ import { addToCart } from "./api/cart";
 import SignUpPage from "./pages/clientPages/SignUpPage";
 import SignInPage from "./pages/clientPages/SignInPage";
 import Profile from "./pages/clientPages/profile";
+import CheckoutPage from "./pages/clientPages/Checkout";
+import { getAllUser, deleteUser } from "./api/user";
+import { IUser } from "./models/type";
+import ListUser from "./pages/admin/users/list-user";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -92,6 +96,18 @@ function App() {
     );
   };
 
+  const [users, setUsers] = useState<IUser[]>([]);
+  useEffect(() => {
+    getAllUser().then(({ data }) => setUsers(data));
+  }, []);
+
+  const onHandleRemoveUser = (id: string) => {
+    deleteUser(id).then(() =>
+      setUsers(users.filter((item: IUser) => item._id !== id))
+    );
+    alert("Xoá người dùng thành công");
+  };
+
   // ADD TO CART
   const createCart = (cart: ICart) => {
     addToCart(cart);
@@ -117,6 +133,7 @@ function App() {
         { path: "booking", element: <BookingPage /> },
         { path: "team", element: <TeamPage /> },
         { path: "cart", element: <CartPage /> },
+        { path: "Checkout", element: <CheckoutPage /> },
         // { path: "cart", element: <CartPage /> },
         { path: "signup", element: <SignUpPage /> },
         { path: "signin", element: <SignInPage /> },
@@ -180,6 +197,15 @@ function App() {
                   onUpdate={onHandleUpdateCategory}
                 />
               ),
+            },
+          ],
+        },
+        {
+          path: "users",
+          children: [
+            {
+              path: "",
+              element: <ListUser users={users} onRemove={onHandleRemoveUser} />,
             },
           ],
         },

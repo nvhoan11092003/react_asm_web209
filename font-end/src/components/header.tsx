@@ -1,15 +1,15 @@
 import SearchBar from "./SearchClient";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { ICart } from "../models/type";
 import { save } from "../pages/clientPages/cart/Cart.slice";
-
+import { UserContext } from "../Layouts/websiteLayouts";
+("../App");
 const Header = () => {
-  const [user, setUser] = useState<any>({});
   const { items } = useAppSelector((state: any) => state.cart);
   const dispatch = useAppDispatch();
-
+  const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     if (localStorage.getItem("user")) {
       const userstring = localStorage.getItem("user");
@@ -18,7 +18,6 @@ const Header = () => {
     }
   }, []);
   console.log("user", user);
-
   const loguot = () => {
     const products = items.map((item: any) => {
       const { _id, quantity } = item;
@@ -75,14 +74,14 @@ const Header = () => {
               </div>
             </div>
             <div className="nav-item cart-icon">
-              <a href="/cart" className="nav-link">
+              <Link to="/cart" className="nav-link">
                 <i className="fa-solid fa-cart-shopping fa-xl"></i>
                 <span className="badge">
                   {items.reduce(function (sum: any, item: any) {
                     return sum + item.quantity;
                   }, 0)}
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
 
