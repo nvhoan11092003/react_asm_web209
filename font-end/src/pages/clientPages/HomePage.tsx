@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+
 import Team from "../../components/Team";
 import Menu from "../../components/Menu";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import { useGetFoodsQuery } from "../../service/food.service";
 import LoadingSkeleton from "../../components/Skeleton";
 
 const HomePage = () => {
+
   const { data, error, isLoading: isLoadingFecth } = useGetFoodsQuery();
   console.log(error);
 

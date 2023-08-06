@@ -1,12 +1,12 @@
-import { IUSer } from "../models/type";
+
 import SearchBar from "./SearchClient";
 import { useAppSelector } from "../store/hook";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-
+import { useEffect, useContext, } from "react";
+import { UserContext } from "../Layouts/websiteLayouts";
+"../App"
 const Header = () => {
-  const [user, setUser] = useState<any>({})
-
+  const { user, setUser } = useContext(UserContext)
   useEffect(() => {
     if (localStorage.getItem("user")) {
       const userstring = localStorage.getItem("user")
@@ -15,7 +15,6 @@ const Header = () => {
     }
   }, [])
   console.log("user", user);
-
   const loguot = () => {
     localStorage.removeItem("user")
     setUser({})

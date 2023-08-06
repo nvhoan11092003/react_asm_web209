@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useReducer, useState, useContext } from 'react';
 import {
 
     MDBContainer,
@@ -11,6 +11,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useSignInMutation } from '../../service/user.service';
 import { message } from 'antd';
+import { UserContext } from '../../Layouts/websiteLayouts';
 type signInType = {
     email: string,
     password: string
@@ -63,6 +64,7 @@ const reducerSignIn = (state: signInType, action: { type: string, payload: strin
 const SignInPage = () => {
     const [formSignIn, dispatchFormSignIn] = useReducer(reducerSignIn, intialSignIn)
     const [formValid, dispatchFormValid] = useReducer(reducerFormValid, intialFormValid)
+    const { setUser } = useContext(UserContext)
     const [submit, setsubmit] = useState(false)
     const [signIp] = useSignInMutation()
     const [messageApi, contextHolder] = message.useMessage();
@@ -85,13 +87,12 @@ const SignInPage = () => {
                         ,
                     }
                     localStorage.setItem('user', JSON.stringify(user));
+                    setUser(user)
                     alert("Đăng Nhập Thành Công")
                     if (data.checkUser.role == "admin") {
                         navigate("/admin")
-
                     } else {
                         navigate("/")
-                        window.location.reload();
                     }
                 }
             }).catch((err) => {
