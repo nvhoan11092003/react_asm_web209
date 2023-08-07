@@ -23,7 +23,7 @@ const CheckoutPage = () => {
     console.log("Failed:", errorInfo);
   };
 
-  if (!items[0]) {
+  if (!items?.[0]) {
     return <h1 className="mx-auto">Không có sản phẩm nào !</h1>;
   }
 

@@ -10,7 +10,7 @@ const Cart = () => {
 
   const { items } = useAppSelector((state: any) => state.cart);
 
-  if (!items[0]) {
+  if (!items?.[0]) {
     return <h1 className="mx-auto">Không có sản phẩm nào trong giỏ hàng !</h1>;
   }
 

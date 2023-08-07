@@ -35,7 +35,7 @@ export const CartPage = () => {
       const accessToken = userJSON.accessToken;
       const idUser: tokenUser = decode(accessToken);
       if (items) {
-        const products = items.map((item: any) => {
+        const products = items?.map((item: any) => {
           const { _id, quantity } = item;
           return { productId: _id, quantity };
         });
@@ -98,7 +98,7 @@ export const CartPage = () => {
                       >
                         <p className="mb-2">Subtotal</p>
                         <p className="mb-2">
-                          {items.reduce(function (sum: any, item: any) {
+                          {items?.reduce(function (sum: any, item: any) {
                             return sum + item.price * item.quantity;
                           }, 0)}{" "}
                           đ
@@ -122,7 +122,7 @@ export const CartPage = () => {
                         <p className="mb-2">Total (tax included)</p>
                         <p className="mb-2">
                           {" "}
-                          {items.reduce(function (sum: any, item: any) {
+                          {items?.reduce(function (sum: any, item: any) {
                             return sum + item.price * item.quantity + 20000;
                           }, 0)}{" "}
                           đ
@@ -138,7 +138,7 @@ export const CartPage = () => {
                           <span>Checkout</span>
                           <span>
                             {" "}
-                            {items.reduce(function (sum: any, item: any) {
+                            {items?.reduce(function (sum: any, item: any) {
                               return sum + item.price * item.quantity + 20000;
                             }, 0)}{" "}
                             đ

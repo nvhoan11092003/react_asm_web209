@@ -2,7 +2,7 @@
 import SearchBar from "./SearchClient";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { Link } from "react-router-dom";
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { ICart } from "../models/type";
 import { save } from "../pages/clientPages/cart/Cart.slice";
 import { UserContext } from "../Layouts/websiteLayouts";
@@ -22,7 +22,7 @@ const Header = () => {
   }, []);
   console.log("user", user);
   const loguot = () => {
-    const products = items.map((item: any) => {
+    const products = items?.map((item: any) => {
       const { _id, quantity } = item;
       return { productId: _id, quantity };
     });
@@ -80,7 +80,7 @@ const Header = () => {
               <Link to="/cart" className="nav-link">
                 <i className="fa-solid fa-cart-shopping fa-xl"></i>
                 <span className="badge">
-                  {items.reduce(function (sum: any, item: any) {
+                  {items?.reduce(function (sum: any, item: any) {
                     return sum + item.quantity;
                   }, 0)}
                 </span>
