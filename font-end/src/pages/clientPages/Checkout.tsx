@@ -141,7 +141,7 @@ const CheckoutPage = () => {
             </Form.Item>
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
               <Button type="primary" htmlType="submit">
-                Add Product
+                Check Out
               </Button>
             </Form.Item>
           </Form>
