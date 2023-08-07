@@ -1,25 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Layouts/websiteLayouts";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { Form, Input, Button, Upload, Select, } from "antd";
+import { Form, Input, Button, Upload, Select } from "antd";
 const CheckoutPage = () => {
-
   const { items } = useAppSelector((state: any) => state.cart);
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
+
   const onSubmit = async (data: any) => {
     console.log(data);
-
-  }
+  };
   const validateMessages = {
-    required: '${label} is required!',
+    required: "${label} is required!",
     types: {
-      email: '${label} is not a valid email!',
-      number: '${label} is not a valid number!',
+      email: "${label} is not a valid email!",
+      number: "${label} is not a valid number!",
     },
     number: {
-      range: '${label} must be between ${min} and ${max}',
-    }
-  }; const onFinishFailed = (errorInfo: any) => {
+      range: "${label} must be between ${min} and ${max}",
+    },
+  };
+  const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
 
@@ -76,81 +76,77 @@ const CheckoutPage = () => {
               </strong>
             </li>
           </ul>
-          <div className="col-md-6 mx-3 order-md-1">
-            <h4 className="mb-3">Billing address</h4>
-            <Form
-              name="basic"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 16 }}
-              style={{ maxWidth: 800 }}
-              initialValues={{ remember: true }}
-              onFinish={onSubmit}
-              onFinishFailed={onFinishFailed}
-              validateMessages={validateMessages}
+        </div>
+        <div className="col-md-6 mx-3 order-md-1">
+          <h4 className="mb-3">Billing address</h4>
+          <Form
+            name="basic"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            style={{ maxWidth: 800 }}
+            initialValues={{ remember: true }}
+            onFinish={onSubmit}
+            onFinishFailed={onFinishFailed}
+            validateMessages={validateMessages}
+          >
+            <Form.Item
+              initialValue={user.username}
+              label="Name"
+              name="name"
+              rules={[
+                { required: true },
+                { whitespace: true },
+                { min: 6, max: 255 },
+              ]}
+              hasFeedback
             >
-              <Form.Item
-                initialValue={user.username}
-                label="Name"
-                name="name"
-                rules={[
-                  { required: true, },
-                  { whitespace: true },
-                  { min: 6, max: 255 },
-                ]}
-                hasFeedback
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  { required: true, },
-                  { whitespace: true },
-                  { min: 6, max: 255 },
-                ]}
-                hasFeedback
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="adress"
-                name="adress"
-                rules={[
-                  { required: true, },
-                  { whitespace: true },
-                  { min: 6, max: 255 },
-                ]}
-                hasFeedback
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="number"
-                name="number"
-                rules={[
-                  { required: true, },
-                  { whitespace: true },
-                  { min: 6, max: 255 },
-                ]}
-                hasFeedback
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
-                  Add Product
-                </Button>
-              </Form.Item>
-
-            </Form>
-
-          </div>
+              <Input />
+            </Form.Item>
+            <Form.Item
+              initialValue={user.email}
+              label="Email"
+              name="email"
+              rules={[
+                { required: true },
+                { whitespace: true },
+                { min: 6, max: 255 },
+              ]}
+              hasFeedback
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="adress"
+              name="adress"
+              rules={[
+                { required: true },
+                { whitespace: true },
+                { min: 6, max: 255 },
+              ]}
+              hasFeedback
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="number"
+              name="number"
+              rules={[
+                { required: true },
+                { whitespace: true },
+                { min: 6, max: 255 },
+              ]}
+              hasFeedback
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button type="primary" htmlType="submit">
+                Add Product
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
       </div>
-
-
-
     </div>
   );
 };
