@@ -38,11 +38,16 @@ import AddProduct from "./pages/admin/products/add-product";
 import ListCategory from "./pages/admin/categories/list-category";
 import AddCategory from "./pages/admin/categories/add-category";
 import UpdateCategory from "./pages/admin/categories/update-category";
-import CartPage from "./pages/clientPages/Cart";
+import { CartPage } from "./pages/clientPages/cart/CartPage";
 import { addToCart } from "./api/cart";
 // import { CartPage } from "./pages/clientPages/cart/CartPage";
 import SignUpPage from "./pages/clientPages/SignUpPage";
 import SignInPage from "./pages/clientPages/SignInPage";
+import Profile from "./pages/clientPages/profile";
+import CheckoutPage from "./pages/clientPages/Checkout";
+import { getAllUser, deleteUser } from "./api/user";
+import { IUser } from "./models/type";
+import ListUser from "./pages/admin/users/list-user";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -91,10 +96,22 @@ function App() {
     );
   };
 
+  const [users, setUsers] = useState<IUser[]>([]);
+  useEffect(() => {
+    getAllUser().then(({ data }) => setUsers(data));
+  }, []);
+
+  const onHandleRemoveUser = (id: string) => {
+    deleteUser(id).then(() =>
+      setUsers(users.filter((item: IUser) => item._id !== id))
+    );
+    alert("Xoá người dùng thành công");
+  };
+
   // ADD TO CART
-  const createCart = (cart:ICart) => {
-    addToCart(cart)
-  }
+  const createCart = (cart: ICart) => {
+    addToCart(cart);
+  };
 
   const router = createBrowserRouter([
     {
@@ -104,6 +121,7 @@ function App() {
         { path: "", element: <HomePage /> },
         { path: "about", element: <AboutPage /> },
         { path: "service", element: <ServicePage /> },
+        { path: "profile", element: <Profile /> },
         {
           path: "menu",
           children: [
@@ -114,7 +132,8 @@ function App() {
         { path: "contact", element: <ContactPage /> },
         { path: "booking", element: <BookingPage /> },
         { path: "team", element: <TeamPage /> },
-        {path: "cart",element: <CartPage />},
+        { path: "cart", element: <CartPage /> },
+        { path: "Checkout", element: <CheckoutPage /> },
         // { path: "cart", element: <CartPage /> },
         { path: "signup", element: <SignUpPage /> },
         { path: "signin", element: <SignInPage /> },
@@ -178,6 +197,15 @@ function App() {
                   onUpdate={onHandleUpdateCategory}
                 />
               ),
+            },
+          ],
+        },
+        {
+          path: "users",
+          children: [
+            {
+              path: "",
+              element: <ListUser users={users} onRemove={onHandleRemoveUser} />,
             },
           ],
         },

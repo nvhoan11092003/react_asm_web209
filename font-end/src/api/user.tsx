@@ -17,4 +17,19 @@ const changePassword = (password: IUser) => {
   return instance.post("/api/change-password", password);
 };
 
-export { signin, signup, forgotPassword, changePassword };
+const getAllUser = () => {
+  return instance.get("/api/users");
+};
+
+const deleteUser = (id: string) => {
+  return instance.delete("/api/users/" + id);
+};
+
+export {
+  signin,
+  signup,
+  forgotPassword,
+  changePassword,
+  getAllUser,
+  deleteUser,
+};

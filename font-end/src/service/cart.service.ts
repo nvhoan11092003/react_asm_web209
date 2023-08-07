@@ -1,30 +1,29 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-
+const userJSON = JSON.parse(localStorage.getItem("user") ?? "");
+const accessToken = userJSON.accessToken;
 export const cartAPI = createApi({
-    reducerPath: "cart",
-    baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080",
-        headers: {
-            Authentication: "Bearer "
-        }
+  reducerPath: "cart",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:8080",
+    headers: {
+      Authentication: `Bearer  ${accessToken}`,
+    },
+  }),
+  endpoints: (builder) => ({
+    // action
+    getCart: builder.query<any, string>({
+      query: () => `/api/cart`, // GET
     }),
-    endpoints: builder => ({
-        // action
-        getCart: builder.query<any, string>({
-            query: () => `/api/cart`  // GET
-        }),
 
-        addCart: builder.mutation({
-            query: (product: any) => ({
-                url: `/api/cart`,
-                method: "POST",
-                body: product
-            })
-        }),
+    addCart: builder.mutation({
+      query: (product: any) => ({
+        url: `/api/cart`,
+        method: "POST",
+        body: product,
+      }),
+    }),
+  }),
+});
 
-    })
-
-})
-
-export const { useAddCartMutation, useGetCartQuery } = cartAPI
+export const { useAddCartMutation, useGetCartQuery } = cartAPI;

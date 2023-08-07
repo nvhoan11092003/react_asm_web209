@@ -1,4 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { addToCart } from "../../../api/cart";
+import { ICart } from "../../../models/type";
 
 interface IProduct {
   _id?: string;
@@ -18,11 +20,26 @@ interface IProduct {
 const initialState = {
   items: [],
 } as { items: any[] };
-
+// export const createCart = createAsyncThunk(
+//   "cart/create",
+//   async (film: IProduct, thunkAPI) => {
+//     try {
+//       const data = await postFilm(film);
+//       return data;
+//     } catch (err: any) {
+//       return thunkAPI.rejectWithValue(err.response.data);
+//     }
+//   }
+// );
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    save: (state, action: PayloadAction<ICart>) => {
+      const cart = action.payload;
+      console.log(cart);
+      addToCart(cart);
+    },
     add: (state, action: PayloadAction<IProduct>) => {
       const newProduct = action.payload;
 
@@ -69,5 +86,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { add, increase, decrease, remove } = cartSlice.actions;
+export const { add, increase, decrease, remove, save } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
