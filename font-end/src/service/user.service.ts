@@ -1,38 +1,52 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const userAPI = createApi({
-  reducerPath: "users",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080",
-    headers: {
-      Authentication: "Bearer ",
-    },
-  }),
-  endpoints: (builder) => ({
-    signIn: builder.mutation({
-      query: (user: any) => ({
-        url: `/api/signin`,
-        method: "POST",
-        body: user,
-      }),
+    reducerPath: 'users',
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'http://localhost:8080',
+        headers: {
+            Authentication: 'Bearer ',
+        },
     }),
-    signUp: builder.mutation({
-      query: (user: any) => ({
-        url: `/api/signup`,
-        method: "POST",
-        body: user,
-      }),
+    endpoints: (builder) => ({
+        signIn: builder.mutation<
+            {
+                message: string;
+                accessToken: string;
+                newUser: any;
+            },
+            any
+        >({
+            query: (user: any) => ({
+                url: `/api/signin`,
+                method: 'POST',
+                body: user,
+            }),
+        }),
+        signUp: builder.mutation<
+            {
+                message: string;
+                accessToken: string;
+                newUser: any;
+            },
+            any
+        >({
+            query: (user: any) => ({
+                url: `/api/signup`,
+                method: 'POST',
+                body: user,
+            }),
+        }),
+        getUsers: builder.query<any[], void>({
+            query: () => '/api/user', // GET
+        }),
+        deleteUser: builder.mutation({
+            query: (id: string) => ({
+                url: `/api/user/${id}`,
+                method: 'DELETE',
+            }),
+        }),
     }),
-    getUsers: builder.query<any[], void>({
-      query: () => "/api/user", // GET
-    }),
-    deleteUser: builder.mutation({
-      query: (id: string) => ({
-        url: `/api/user/${id}`,
-        method: "DELETE",
-      }),
-    }),
-  }),
 });
 
 export const { useSignInMutation, useSignUpMutation } = userAPI;
