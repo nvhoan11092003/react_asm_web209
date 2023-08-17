@@ -9,7 +9,7 @@ import {
 }
     from 'mdb-react-ui-kit';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSignUpMutation } from '../../service/user.service';
+import { useSignUpMutation } from '../service/user.service';
 import { message } from 'antd';
 type signInType = {
     username: string,

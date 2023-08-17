@@ -34,7 +34,7 @@ import AdminLayout from "./Layouts/adminLayout";
 import Dashboard from "./pages/adminPages/Dashboard";
 import ListProduct from "./pages/admin/products/list-product";
 import AddProduct from "./pages/admin/products/add-product";
-// import UpdateProduct from "./pages/admin/products/update-product";
+import UpdateProduct from "./pages/admin/products/update-product";
 import ListCategory from "./pages/admin/categories/list-category";
 import AddCategory from "./pages/admin/categories/add-category";
 import UpdateCategory from "./pages/admin/categories/update-category";
@@ -162,15 +162,15 @@ function App() {
               path: "add",
               element: <AddProduct onAdd={onHandleAddProduct} />,
             },
-            // {
-            //   path: ":id/update",
-            //   element: (
-            //     <UpdateProduct
-            //       onUpdate={onHandleUpdateProduct}
-            //       products={products}
-            //     />
-            //   ),
-            // },
+            {
+              path: ":id/update",
+              element: (
+                <UpdateProduct
+                  onUpdate={onHandleUpdateProduct}
+                  products={products}
+                />
+              ),
+            },
           ],
         },
         {

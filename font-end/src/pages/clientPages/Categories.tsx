@@ -1,7 +1,7 @@
 import { MDBInput, MDBListGroup, MDBListGroupItem } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useGetFoodsQuery } from "../../service/food.service";
+import { useGetFoodsQuery } from "../service/food.service";
 import LoadingSkeleton from "../../components/Skeleton";
 
 const Categories = () => {
