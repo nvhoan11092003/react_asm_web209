@@ -24,6 +24,7 @@ const UpdateProduct = (props: IProps) => {
     const categories = data
     const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
         setFileList(newFileList);
+
     const setFields = () => {
         const imgdefaul = product?.imgUrl.map((item, index) => {
             return {
@@ -54,33 +55,34 @@ const UpdateProduct = (props: IProps) => {
     }, [product])
 
     const onFinish = async (values: any) => {
-        console.log("img :", values.images);
-        var newurl = []
+        let newurls = []
         if (values.images.fileList) {
-            newurl = values.images.fileList.map(async (item: any) => {
+            newurls = await Promise.all(values.images.fileList.map(async (item: any) => {
                 if (!item.status) {
-                    console.log("them anh");
-
                     const formData = new FormData();
-                    const API_key = "b53a475c0c6a8d96e048708ab79d29d8"
-                    formData.append("image", item);
+                    formData.append("image", item.originFileObj);
+                    const API_key = "42d2b4a414af48bbc306d6456dd1f943"
                     const apiResponse: any = await axios.post(
                         `https://api.imgbb.com/1/upload?key=${API_key}`,
                         formData
-                    )
-                    return apiResponse.url
+                    );
+                    return apiResponse.data.data.url
                 }
 
                 return item.url
-            })
+            }))
+
         } else {
-            newurl = values.images
+            newurls = values.images
         }
+
+        console.log(newurls);
+
         const newProduct: IProduct = {
             _id: values._id,
             name: values.name,
             categoryId: values.categoryId,
-            imgUrl: newurl,
+            imgUrl: newurls,
             price: values.price,
             originPrice: values.originPrice,
             processingInstructions: values.processingInstructions,
@@ -88,9 +90,9 @@ const UpdateProduct = (props: IProps) => {
             description: values.description,
         };
         console.log(newProduct);
-        // props.onUpdate(newProduct)
+        props.onUpdate(newProduct)
         alert("Cập nhật sản phẩm thành công");
-        // navigate("/admin/products");
+        navigate("/admin/products");
     };
 
     const onFinishFailed = (values: any) => {

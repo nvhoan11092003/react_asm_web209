@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const ListProduct = (props: IProps) => {
-  
+
   const removeProduct = (id: string) => {
     props.onRemove(id);
   };
@@ -66,7 +66,7 @@ const ListProduct = (props: IProps) => {
       title: "Action",
       key: "action",
       render: (record) => (
-        <Space size="middle">
+        <Space size="middle" className="w-12">
           <Button
             type="primary"
             style={{ backgroundColor: "red" }}
@@ -91,18 +91,16 @@ const ListProduct = (props: IProps) => {
     return {
       key: item._id,
       ...item,
-      
+
     };
   });
 
   return (
-    <div style={{ marginTop: 100 }}>
+    <div style={{ marginTop: 100, paddingRight: 50 }}>
       <Button type="primary" style={{ marginBottom: 30 }}>
         <Link to={"/admin/products/add"}>Add New Product</Link>
       </Button>
       <Table
-
-        className=""
         style={{ backgroundColor: "white", marginTop: 100, }}
         columns={columns}
         dataSource={data}
