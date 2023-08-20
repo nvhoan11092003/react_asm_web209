@@ -10,8 +10,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSignInMutation } from "../service/user.service";
 import { message } from "antd";
 import { UserContext } from "../../Layouts/websiteLayouts";
-import { IresponUser } from "../../models/type";
-
 type signInType = {
   email: string;
   password: string;
@@ -98,7 +96,7 @@ const SignInPage = () => {
               username: data.checkUser.username,
             };
             localStorage.setItem("user", JSON.stringify(user));
-
+            setUser(user)
             alert("Đăng Nhập Thành Công");
             if (data.checkUser.role == "admin") {
               navigate("/admin");

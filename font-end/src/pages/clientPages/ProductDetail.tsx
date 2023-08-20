@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IProduct } from "../../models/type";
 import { useParams } from "react-router-dom";

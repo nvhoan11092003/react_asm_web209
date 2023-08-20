@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ICategory, IProduct } from "../../../models/type";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Form, Input, Select, Upload, UploadFile, UploadProps } from "antd";
+import { Button, Form, Input, Select, Upload, UploadProps } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
 import { UploadOutlined } from '@ant-design/icons';

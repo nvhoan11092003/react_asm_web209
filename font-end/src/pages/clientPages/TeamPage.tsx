@@ -1,4 +1,4 @@
-import React from "react";
+
 import Team from "../../components/Team";
 import { Link } from "react-router-dom";
 

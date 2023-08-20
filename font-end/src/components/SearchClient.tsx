@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getAllProduct } from "../api/product";
 // import { getAllCategory } from "../api/category";
-import { IFood, ProductWithTypeName, ICategory } from "../models";
 import ReactDOM from 'react-dom'
 import { MDBInput, MDBListGroup, MDBListGroupItem } from 'mdb-react-ui-kit';
+import { IProduct } from "../models/type";
 // import { Link } from "react-router-dom";
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,7 +11,7 @@ const Search = () => {
 
   // const [category, setCategory] = useState<ICategory[]>([]);
 
-  const [data2, setData2] = useState<IFood[]>([]);
+  const [data2, setData2] = useState<IProduct[]>([]);
 
   useEffect(() => {
     const getData = async () => {

@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../Layouts/websiteLayouts";
-import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { Form, Input, Button, Upload, Select } from "antd";
+import { useAppSelector } from "../../store/hook";
+import { Form, Input, Button } from "antd";
 const CheckoutPage = () => {
   const { items } = useAppSelector((state: any) => state.cart);
   const { user } = useContext(UserContext);

@@ -1,5 +1,5 @@
-import { MDBInput, MDBListGroup, MDBListGroupItem } from "mdb-react-ui-kit";
-import React, { useEffect, useState } from "react";
+import { MDBInput } from "mdb-react-ui-kit";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetFoodsQuery } from "../service/food.service";
 import LoadingSkeleton from "../../components/Skeleton";
@@ -10,6 +10,9 @@ const Categories = () => {
 
   const { data, error, isLoading: isLoadingFecth } = useGetFoodsQuery();
 
+  if (error) {
+    console.error(error);
+  }
   const VND = new Intl.NumberFormat('vi-VN', {
     style: 'currency',
     currency: 'VND',

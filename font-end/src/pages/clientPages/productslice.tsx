@@ -10,6 +10,7 @@ const intialState = {
 export const fetchFilms = createAsyncThunk(
     'film/fetch',
     async (arg, thunkAPI) => {
+        console.log(arg);
         try {
             const data = await getAllProduct()
             return data

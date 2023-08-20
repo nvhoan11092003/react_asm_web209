@@ -1,12 +1,11 @@
 import TextArea from "antd/es/input/TextArea";
 import { ICategory, IProduct } from "../../../models/type";
-import { Form, Input, Button, Upload, Select, message, InputNumber } from "antd";
+import { Form, Input, Button, Upload, Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { UploadOutlined } from '@ant-design/icons';
 import axios from "axios";
 import { getAllCategory } from "../../../api/category";
-import { RcFile, UploadFile, UploadProps } from "antd/es/upload";
 interface IProps {
   onAdd: (product: IProduct) => void;
 }

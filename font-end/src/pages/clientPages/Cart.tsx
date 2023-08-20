@@ -50,7 +50,7 @@ const CartPage = () => {
   const columns = [
     {
       dataIndex: "selected",
-      render: (selected: boolean, record: any) => (
+      render: (selected: boolean) => (
         <input
           type="checkbox"
           checked={selected}

@@ -8,10 +8,7 @@ import { IUser } from '../models/type';
 export const UserContext = createContext({} as any);
 
 const WebsiteLayouts = () => {
-  const inlineStyle = {
-    width: "3rem",
-    height: "3rem",
-  };
+
 
   const [user, setUser] = useState<IUser>({} as any);
   return (

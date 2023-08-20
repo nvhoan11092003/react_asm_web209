@@ -1,5 +1,5 @@
-import React from "react";
-import Menu from "../../components/Menu";
+
+
 import Categories from "./Categories";
 import { Link } from "react-router-dom";
 

@@ -1,6 +1,5 @@
 import React, { useReducer, useState } from 'react';
 import {
-    MDBBtn,
     MDBContainer,
     MDBRow,
     MDBCol,

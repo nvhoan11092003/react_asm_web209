@@ -4,10 +4,10 @@ import { ICategory } from "../../../models/type";
 import { Link } from "react-router-dom";
 
 interface DataType {
-  key: string | number;
-  _id: string;
+  key?: string | number;
+  _id?: string;
   name: string;
-  image: string;
+  image?: string;
 }
 interface IProps {
   categories: ICategory[];

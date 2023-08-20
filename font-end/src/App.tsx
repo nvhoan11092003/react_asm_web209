@@ -1,5 +1,5 @@
-import { Children, useEffect, useState } from "react";
-import { ICart, ICategory, IProduct } from "./models/type";
+import { useEffect, useState } from "react";
+import { ICategory, IProduct } from "./models/type";
 import {
   addProduct,
   deleteProduct,
@@ -13,12 +13,9 @@ import {
   updateCategory,
 } from "./api/category";
 import {
-  BrowserRouter,
   Form,
   Navigate,
-  Route,
   RouterProvider,
-  Routes,
   createBrowserRouter,
 } from "react-router-dom";
 import WebsiteLayouts from "./Layouts/websiteLayouts";
@@ -39,7 +36,6 @@ import ListCategory from "./pages/admin/categories/list-category";
 import AddCategory from "./pages/admin/categories/add-category";
 import UpdateCategory from "./pages/admin/categories/update-category";
 import { CartPage } from "./pages/clientPages/cart/CartPage";
-import { addToCart } from "./api/cart";
 // import { CartPage } from "./pages/clientPages/cart/CartPage";
 import SignUpPage from "./pages/clientPages/SignUpPage";
 import SignInPage from "./pages/clientPages/SignInPage";
@@ -109,9 +105,9 @@ function App() {
   };
 
   // ADD TO CART
-  const createCart = (cart: ICart) => {
-    addToCart(cart);
-  };
+  // const createCart = (cart: ICart) => {
+  //   addToCart(cart);
+  // };
 
   const router = createBrowserRouter([
     {

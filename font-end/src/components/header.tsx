@@ -2,7 +2,7 @@
 import SearchBar from "./SearchClient";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { Link } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { ICart } from "../models/type";
 import { save } from "../pages/clientPages/cart/Cart.slice";
 import { UserContext } from "../Layouts/websiteLayouts";

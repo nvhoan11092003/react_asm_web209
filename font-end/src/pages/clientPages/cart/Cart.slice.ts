@@ -1,4 +1,4 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { addToCart } from "../../../api/cart";
 import { ICart } from "../../../models/type";
 
@@ -26,6 +26,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     save: (state, action: PayloadAction<ICart>) => {
+      console.log(state);
       const cart = action.payload;
       addToCart(cart);
     },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cart from "../../../components/ProductCart";
 import { useAppDispatch, useAppSelector } from "../../../store/hook";
@@ -6,16 +6,14 @@ import decode from "jwt-decode";
 import { save } from "./Cart.slice";
 import { ICart } from "../../../models/type";
 import { getAllCart } from "../../../api/cart";
-import { persistStore } from "redux-persist";
-import store from "../../../store";
+
 // import storage from "redux-persist/lib/storage";
 export const CartPage = () => {
   // const persistor = persistStore(store);
-  const [carts, setCart] = useState<ICart[]>([]);
   useEffect(() => {
     getAllCart()
       .then(({ data }) => {
-        setCart(data?.carts);
+
         localStorage.setItem("cart", JSON.stringify(data));
       })
       .catch((error) => {
