@@ -15,7 +15,7 @@ const Team = () => {
             <div className="rounded-circle overflow-hidden m-4">
               <img
                 className="img-fluid w-[252px]"
-                src="img/team-1.jpg"
+                src="/assets/img/team-1.jpg"
                 alt=""
               />
             </div>
@@ -39,7 +39,7 @@ const Team = () => {
             <div className="rounded-circle overflow-hidden m-4">
               <img
                 className="img-fluid w-[252px]"
-                src="img/team-1.jpg"
+                src="/assets/img/team-1.jpg"
                 alt=""
               />
             </div>
@@ -61,7 +61,7 @@ const Team = () => {
         <div className="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
           <div className="team-item text-center rounded overflow-hidden">
             <div className="rounded-circle overflow-hidden m-4">
-              <img className="img-fluid" src="img/team-2.jpg" alt="" />
+              <img className="img-fluid" src="/assets/img/team-2.jpg" alt="" />
             </div>
             <h5 className="mb-0">Nguyễn Văn Mạnh</h5>
             <small>Designation</small>
@@ -81,7 +81,7 @@ const Team = () => {
         <div className="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
           <div className="team-item text-center rounded overflow-hidden">
             <div className="rounded-circle overflow-hidden m-4">
-              <img className="img-fluid" src="img/team-3.jpg" alt="" />
+              <img className="img-fluid" src="/assets/img/team-3.jpg" alt="" />
             </div>
             <h5 className="mb-0">Nguyễn Văn Hoàn</h5>
             <small>Designation</small>
@@ -101,7 +101,7 @@ const Team = () => {
         <div className="col-lg-2 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
           <div className="team-item text-center rounded overflow-hidden">
             <div className="rounded-circle overflow-hidden m-4">
-              <img className="img-fluid" src="img/team-4.jpg" alt="" />
+              <img className="img-fluid" src="/assets/img/team-4.jpg" alt="" />
             </div>
             <h5 className="mb-0">Nguyễn Văn Quý</h5>
             <small>Designation</small>

@@ -20,8 +20,8 @@ const LinkClient = () => {
         href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
         rel="stylesheet"
       />
-      <link href="/css/bootstrap.min.css" rel="stylesheet" />
-      <link href="/css/style.css" rel="stylesheet" />
+      <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+      <link href="/assets/css/style.css" rel="stylesheet" />
     </Helmet>
   );
 };
