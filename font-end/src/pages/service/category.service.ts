@@ -5,7 +5,7 @@ import { ICategory } from '../../models/type'
 export const categoryAPI = createApi({
     reducerPath: "categories",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080",
+        baseUrl: "https://database-bay.vercel.app/",
         headers: {
             Authentication: "Bearer "
         }

@@ -50,7 +50,7 @@ const ListCategory = (props: IProps) => {
             Remove
           </Button>
 
-          <Button type="primary">
+          <Button type="primary" className="bg-blue-500">
             <Link to={`/admin/categories/${record._id}/update`}>Update</Link>
           </Button>
         </Space>
@@ -67,7 +67,7 @@ const ListCategory = (props: IProps) => {
 
   return (
     <div style={{ marginTop: 100, width: 1200 }}>
-      <Button type="primary" style={{ marginBottom: 30 }}>
+      <Button type="primary" className="bg-blue-500" style={{ marginBottom: 30 }}>
         <Link to={"/admin/categories/add"}>Add New Category</Link>
       </Button>
       <Table

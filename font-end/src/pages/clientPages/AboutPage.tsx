@@ -37,28 +37,28 @@ const AboutPage = () => {
                   <img
                     className="img-fluid rounded w-100 wow zoomIn"
                     data-wow-delay="0.1s"
-                    src="img/about-1.jpg"
+                    src="/assets/img/about-1.jpg"
                   />
                 </div>
                 <div className="col-6 text-start">
                   <img
                     className="img-fluid rounded w-75 wow zoomIn"
                     data-wow-delay="0.3s"
-                    src="img/about-2.jpg"
+                    src="/assets/img/about-2.jpg"
                   />
                 </div>
                 <div className="col-6 text-end">
                   <img
                     className="img-fluid rounded w-75 wow zoomIn"
                     data-wow-delay="0.5s"
-                    src="img/about-3.jpg"
+                    src="/assets/img/about-3.jpg"
                   />
                 </div>
                 <div className="col-6 text-end">
                   <img
                     className="img-fluid rounded w-100 wow zoomIn"
                     data-wow-delay="0.7s"
-                    src="img/about-4.jpg"
+                    src="/assets/img/about-4.jpg"
                   />
                 </div>
               </div>
@@ -68,7 +68,7 @@ const AboutPage = () => {
                 About Us
               </h5>
               <h1 className="mb-4">
-                Welcome to <img src="./img/logo.png" alt="" />
+                Welcome to <img src="/assets/img/logo.png" alt="" />
               </h1>
               <p className="mb-4">
                 Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.

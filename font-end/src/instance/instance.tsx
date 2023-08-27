@@ -11,7 +11,7 @@ console.log(user);
 const accessToken = user.accessToken;
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://database-bay.vercel.app/",
   headers: {
     Authorization: `Bearer ${accessToken}`,
   },

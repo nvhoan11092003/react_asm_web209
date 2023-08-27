@@ -46,7 +46,9 @@ const Header = () => {
 
         <SearchBar />
         <div className=" show navbar-collapse z-2" id="navbarCollapse">
+          <Link className=" bg-blue-500 text-white p-1 rounded-lg xl:ml-24" to="/admin/dashboard">admin Page</Link>
           <div className="navbar-nav ms-auto py-0 pe-4">
+
             <Link to="/" className="nav-item nav-link active">
               Home
             </Link>

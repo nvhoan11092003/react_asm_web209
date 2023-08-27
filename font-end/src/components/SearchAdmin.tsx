@@ -6,11 +6,13 @@ const SearchAdmin = () => {
                 <input type="text" className="form-control bg-light border-0 small" placeholder="Search for..."
                     aria-label="Search" aria-describedby="basic-addon2" />
                 <div className="input-group-append">
-                    <button className="btn btn-primary" type="button">
+                    <button className="btn btn-primary bg-blue-500" type="button">
                         <i className="fas fa-search fa-sm"></i>
                     </button>
                 </div>
+
             </div>
+
         </form></>
     )
 }

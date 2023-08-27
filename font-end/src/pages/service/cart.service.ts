@@ -5,7 +5,7 @@ const accessToken = userJSON.accessToken;
 export const cartAPI = createApi({
   reducerPath: "cart",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080",
+    baseUrl: "https://database-bay.vercel.app/",
     headers: {
       Authentication: `Bearer  ${accessToken}`,
     },

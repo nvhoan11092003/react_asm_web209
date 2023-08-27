@@ -178,7 +178,7 @@ const AddProduct = (props: IProps) => {
           </Upload>
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" className="bg-blue-500" htmlType="submit">
             Add Product
           </Button>
         </Form.Item>

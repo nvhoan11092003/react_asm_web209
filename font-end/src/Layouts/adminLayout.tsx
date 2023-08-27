@@ -10,6 +10,7 @@ const AdminLayout = () => {
     <>
       <div id="wrapper">
         <SideBar />
+
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
             <NavBar />
@@ -17,7 +18,9 @@ const AdminLayout = () => {
               <Outlet />
             </div>
           </div>
+
           <BtnToTop />
+
           <ModalLogout />
 
           <FooterAdmin />

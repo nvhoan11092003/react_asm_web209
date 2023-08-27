@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 export const orderAPI = createApi({
     reducerPath: "orders",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080",
+        baseUrl: "https://database-bay.vercel.app/",
         headers: {
             Authentication: "Bearer "
         }

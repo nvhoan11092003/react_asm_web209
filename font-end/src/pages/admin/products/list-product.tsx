@@ -17,7 +17,6 @@ const ListProduct = (props: IProps) => {
 
   const columns: ColumnsType<IProduct> = [
     {
-
       title: "Product Image",
       dataIndex: "imgUrl",
       key: "imgUrl",
@@ -79,7 +78,10 @@ const ListProduct = (props: IProps) => {
           >
             Remove
           </Button>
-          <Button type="primary">
+          <Button type="primary"
+            className="bg-blue-500"
+          >
+
             <Link to={`/admin/products/${record._id}/update`}>Update</Link>
           </Button>
         </Space>
@@ -97,7 +99,7 @@ const ListProduct = (props: IProps) => {
 
   return (
     <div style={{ marginTop: 100, paddingRight: 50 }}>
-      <Button type="primary" style={{ marginBottom: 30 }}>
+      <Button type="primary" className="bg-blue-500" style={{ marginBottom: 30 }}>
         <Link to={"/admin/products/add"}>Add New Product</Link>
       </Button>
       <Table

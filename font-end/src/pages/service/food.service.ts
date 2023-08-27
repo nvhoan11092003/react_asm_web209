@@ -5,7 +5,7 @@ import { IProduct } from '../../models/type'
 export const foodAPI = createApi({
     reducerPath: "foods",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080",
+        baseUrl: "https://database-bay.vercel.app/",
         headers: {
             Authentication: "Bearer "
         }

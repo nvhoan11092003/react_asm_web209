@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import NavbarDrop from "./NavbarDrop"
 import SearchAdmin from "./SearchAdmin"
 
@@ -10,6 +11,7 @@ const NavBar = () => {
                 <i className="fa fa-bars"></i>
             </button>
             <SearchAdmin />
+            <Link className="ml-24 p-2 bg-blue-500 text-white rounded-xl " to="/">go client Page</Link>
             <NavbarDrop />
         </nav>
     )
