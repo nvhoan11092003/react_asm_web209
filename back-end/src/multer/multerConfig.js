@@ -1,6 +1,6 @@
 import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
-import cloudinary from "../configs/cloudinaryConfig";
+import cloudinary from "../configs/cloudinaryConfig.js";
 
 // Cấu hình Multer storage cho Cloudinary
 const storage = new CloudinaryStorage({
@@ -8,12 +8,12 @@ const storage = new CloudinaryStorage({
   params: {
     folder: "images_food",
   },
-  allowedFormats: ['jpg','png','jpeg'],
-  transformation: [{width: 500,height: 500, crop: 'limit'}]
+  allowedFormats: ["jpg", "png", "jpeg"],
+  transformation: [{ width: 500, height: 500, crop: "limit" }],
 });
 
-const upload = multer({ 
-  storage : storage,
+const upload = multer({
+  storage: storage,
 });
 
 export default upload;

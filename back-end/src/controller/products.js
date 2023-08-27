@@ -1,6 +1,6 @@
-import Product from "../models/products";
-import productSchema from "../schema/product";
-import Category from "../models/categories";
+import Product from "../models/products.js";
+import productSchema from "../schema/product.js";
+import Category from "../models/categories.js";
 import mongoose from "mongoose";
 
 //Tìm kiếm sản phẩm theo tên (cả chữ hoa và chữ thường)
@@ -69,9 +69,7 @@ export const getAll = async (req, res) => {
   };
 
   try {
-    const products = await Product.find().populate(
-      "categoryId"
-    )
+    const products = await Product.find().populate("categoryId");
     if (products.length === 0) {
       return res.status(401).json({
         message: "Không có dữ liệu sản phẩm",
@@ -114,7 +112,7 @@ export const createProduct = async (req, res) => {
       });
     }
 
-    const product = await Product.create(req.body)
+    const product = await Product.create(req.body);
 
     await Category.findByIdAndUpdate(product.categoryId, {
       $addToSet: {

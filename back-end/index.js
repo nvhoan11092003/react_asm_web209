@@ -1,11 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-import productRouter from "./router/product";
-import categoryRouter from "./router/category";
-import userRouter from "./router/user";
-import cartRouter from "./router/cart";
-import orderRouter from "./router/orders";
-import uploadRouter from "./router/upload_image";
+import productRouter from "./src/router/product.js";
+import categoryRouter from "./src/router/category.js";
+import userRouter from "./src/router/user.js";
+import cartRouter from "./src/router/cart.js";
+import orderRouter from "./src/router/orders.js";
+import uploadRouter from "./src/router/upload_image.js";
 import mongoose from "mongoose";
 import cors from "cors";
 
@@ -28,5 +28,10 @@ mongoose.connect(
   "mongodb+srv://hoannvph28518:Hoan1109@database.jszf9cb.mongodb.net/foods"
 );
 
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log("on port : " + PORT);
+});
 
 export const viteNodeApp = app;

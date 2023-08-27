@@ -1,14 +1,15 @@
 // controllers/order.js
-import Order from "../models/orders";
-import Cart from "../models/cart";
+import Order from "../models/orders.js";
+import Cart from "../models/cart.js";
 
 const getAllOrder = async (req, res) => {
   try {
     const orders = await Order.find()
-    .populate("userId").populate({ path : "cartId" , populate : "carts.productId"}) 
+      .populate("userId")
+      .populate({ path: "cartId", populate: "carts.productId" });
     if (orders.length === 0) {
       return res.status(401).json({
-        message: 'không có đơn hàng nào',
+        message: "không có đơn hàng nào",
       });
     }
     return res.status(200).json(orders);
@@ -22,10 +23,11 @@ const getOrderbyid = async (req, res) => {
   try {
     const _id = req.params.id;
     const orders = await Order.findById(_id)
-    .populate("userId").populate({ path : "cartId" , populate : "carts.productId"}) 
+      .populate("userId")
+      .populate({ path: "cartId", populate: "carts.productId" });
     if (orders.length === 0) {
       return res.status(401).json({
-        message: 'không có đơn hàng nào',
+        message: "không có đơn hàng nào",
       });
     }
     return res.status(200).json(orders);
@@ -40,10 +42,11 @@ const getOrderbyiduser = async (req, res) => {
   try {
     const userId = req.params.id;
     const orders = await Order.find({ userId })
-    .populate("userId").populate({ path : "cartId" , populate : "carts.productId"}) 
+      .populate("userId")
+      .populate({ path: "cartId", populate: "carts.productId" });
     if (orders.length === 0) {
       return res.status(401).json({
-        message: 'Bạn không có đơn hàng nào',
+        message: "Bạn không có đơn hàng nào",
       });
     }
     return res.status(200).json(orders);
@@ -54,14 +57,15 @@ const getOrderbyiduser = async (req, res) => {
   }
 };
 
-
 const createOrder = async (req, res) => {
   const userId = req.user._id;
-  const { cartId, numberphone, address} = req.body;
+  const { cartId, numberphone, address } = req.body;
 
   try {
     // Tìm giỏ hàng của người dùng dựa vào userId
-    const carts = await Cart.find({ _id: { $in: cartId } }).populate("carts.productId");
+    const carts = await Cart.find({ _id: { $in: cartId } }).populate(
+      "carts.productId"
+    );
 
     // Tìm các giỏ hàng trong mảng carts có ID nằm trong cartId
     // const selectedCarts = cart.carts.filter(cartItem => cartId.includes(cartItem._id.toString()));
@@ -72,12 +76,11 @@ const createOrder = async (req, res) => {
     // Tạo đơn hàng mới
     const newOrder = new Order({
       userId,
-      cartId,// Liên kết đơn hàng với giỏ hàng
+      cartId, // Liên kết đơn hàng với giỏ hàng
       numberphone,
-      address
+      address,
     });
-    
-  
+
     // // Lưu đơn hàng vào cơ sở dữ liệu
     await newOrder.save();
     res.status(200).json({
@@ -92,7 +95,6 @@ const createOrder = async (req, res) => {
   }
 };
 
-
 const deleteOrder = async (req, res) => {
   const orderId = req.params.id; // Assuming orderId is extracted from the URL
 
@@ -101,17 +103,17 @@ const deleteOrder = async (req, res) => {
 
     if (!deletedOrder) {
       return res.status(404).json({
-        message: "Không tìm thấy đơn hàng cần xóa"
+        message: "Không tìm thấy đơn hàng cần xóa",
       });
     }
 
     return res.status(200).json({
       message: "Xóa đơn hàng thành công",
-      deletedOrder
+      deletedOrder,
     });
   } catch (error) {
     return res.status(500).json({
-      message: error.message
+      message: error.message,
     });
   }
 };
@@ -127,32 +129,34 @@ const updateOrder = async (req, res) => {
         $set: {
           status,
           numberphone,
-          address
-        }
+          address,
+        },
       },
       { new: true } // To get the updated order as the response
     );
 
     if (!updatedOrder) {
       return res.status(404).json({
-        message: "Không tìm thấy đơn hàng cần cập nhật"
+        message: "Không tìm thấy đơn hàng cần cập nhật",
       });
     }
 
     return res.status(200).json({
       message: "Cập nhật đơn hàng thành công",
-      updatedOrder
+      updatedOrder,
     });
   } catch (error) {
     return res.status(500).json({
-      message: error.message
+      message: error.message,
     });
   }
 };
 
-
-
-
-
-export { createOrder,getAllOrder,deleteOrder,updateOrder ,getOrderbyiduser ,getOrderbyid };
-
+export {
+  createOrder,
+  getAllOrder,
+  deleteOrder,
+  updateOrder,
+  getOrderbyiduser,
+  getOrderbyid,
+};

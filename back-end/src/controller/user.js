@@ -1,10 +1,10 @@
-import User from "../models/user";
+import User from "../models/user.js";
 import {
   signupSchema,
   signinSchema,
   forgotPasswordSchema,
   changePasswordSchema,
-} from "../schema/user";
+} from "../schema/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 

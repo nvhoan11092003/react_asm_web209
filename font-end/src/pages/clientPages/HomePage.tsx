@@ -54,18 +54,20 @@ const HomePage = () => {
         {isLoadingFecth && <LoadingSkeleton />}
         {data?.map((item: any, index: number) => (
           <div key={index} className="g-col-3" style={{}}>
-            <img
-              src={item.imgUrl[0]}
-              className="card-img-top"
-              style={{ height: "180px" }}
-              alt="..."
-            />
-            <div className="card-body">
-              <b className="text-danger">{VND.format(item.price)}</b>
-              <p className="card-text">
-                <Link to={`menu/${item._id}`}>{item.name}</Link>
-              </p>
-            </div>
+            <Link to={`menu/${item._id}`} >
+              <img
+                src={item.imgUrl[0]}
+                className="card-img-top"
+                style={{ height: "180px" }}
+                alt="..."
+              />
+              <div className="card-body">
+                <b className="text-danger">{VND.format(item.price)}</b>
+                <p className="card-text">
+                  {item.name}
+                </p>
+              </div>
+            </Link>
           </div>
         ))}
       </div>

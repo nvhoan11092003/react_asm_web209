@@ -1,6 +1,6 @@
-import Category from "../models/categories";
-import Product from "../models/products";
-import categorySchma from "../schema/category";
+import Category from "../models/categories.js";
+import Product from "../models/products.js";
+import categorySchma from "../schema/category.js";
 import mongoose from "mongoose";
 
 // Thêm danh mục

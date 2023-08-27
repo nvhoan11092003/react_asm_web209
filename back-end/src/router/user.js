@@ -6,7 +6,7 @@ import {
   signin,
   signup,
   deleteUser,
-} from "../controller/user";
+} from "../controller/user.js";
 
 const router = express.Router();
 router.post("/signup", signup);

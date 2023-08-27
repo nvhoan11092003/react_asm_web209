@@ -1,10 +1,12 @@
 import jwt from "jsonwebtoken";
-import User from "../models/user";
+import User from "../models/user.js";
 export const checkPermissionCart = async (req, res, next) => {
   try {
     // kiểm tra xem user có đăng nhập không
     if (!req.headers.authorization) {
-      throw new Error("Bạn phải đăng nhập để có thể xem được sản phẩm trong giỏ hàng");
+      throw new Error(
+        "Bạn phải đăng nhập để có thể xem được sản phẩm trong giỏ hàng"
+      );
     }
 
     // lấy jwt token từ header

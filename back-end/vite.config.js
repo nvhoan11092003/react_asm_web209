@@ -10,6 +10,9 @@ export default defineConfig({
     // vite server configs, for details see [vite doc](https://vitejs.dev/config/#server-host)
     port: PORT,
   },
+  preview: {
+    port: 7575,
+  },
   plugins: [
     ...VitePluginNode({
       // Nodejs native Request adapter
@@ -18,7 +21,7 @@ export default defineConfig({
       adapter: "express",
 
       // tell the plugin where is your project entry
-      appPath: "./src/app.js",
+      appPath: "index.js",
 
       // Optional, default: 'viteNodeApp'
       // the name of named export of you app from the appPath file
@@ -62,4 +65,5 @@ export default defineConfig({
     //   'fastify-swagger',
     // ],
   },
+  base: "/",
 });
