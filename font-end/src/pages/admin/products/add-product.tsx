@@ -13,6 +13,7 @@ interface IProps {
 const AddProduct = (props: IProps) => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const [loadings, setLoadings] = useState<boolean>();
   const validateMessages = {
     required: '${label} is required!',
     types: {
@@ -33,42 +34,39 @@ const AddProduct = (props: IProps) => {
     return false;
   };
 
-  const onSubmit = async (data: any) => {
-    try {
-      // Xử lý data tải lên hình ảnh 
-      const formData = new FormData();
-      for (const item of data.images.fileList) {
-        formData.append("img", item.originFileObj);
-      }
-      const response = await axios.post(
-        "http://localhost:8080/api/upload",
-        formData
-      );
-      const urlImages = response.data.imgUrl;
-      console.log(urlImages);
 
-      if (response.status === 200) {
-        const newProduct: IProduct = {
-          name: data.name,
-          categoryId: data.CategoryID,
-          imgUrl: urlImages,
-          price: data.Price,
-          originPrice: data.originPrice,
-          processingInstructions: data.processingInstructions,
-          storageInstructions: data.storageInstructions,
-          description: data.description,
-        };
-        console.log(newProduct);
-        props.onAdd(newProduct)
-        alert("Thêm sản phẩm thành công");
-        navigate("/admin/products");
-      } else {
-        console.error("Image upload failed!");
-      }
-    } catch (error) {
-      console.error("Error uploading image:", error);
+
+  const onSubmit = async (data: any) => {
+    setLoadings(true)
+    let newurls = []
+    if (data.images.fileList) {
+      newurls = await Promise.all(data.images.fileList.map(async (item: any) => {
+        const formData = new FormData();
+        formData.append("image", item.originFileObj);
+        const API_key = "42d2b4a414af48bbc306d6456dd1f943"
+        const apiResponse: any = await axios.post(
+          `https://api.imgbb.com/1/upload?key=${API_key}`,
+          formData
+        );
+        return apiResponse.data.data.url
+      }))
     }
-  };
+    console.log(newurls);
+    const newProduct: IProduct = {
+      name: data.name,
+      categoryId: data.CategoryID,
+      imgUrl: newurls,
+      price: data.Price,
+      originPrice: data.originPrice,
+      processingInstructions: data.processingInstructions,
+      storageInstructions: data.storageInstructions,
+      description: data.description,
+    };
+    console.log(newProduct);
+    props.onAdd(newProduct)
+    alert("Thêm sản phẩm thành công");
+    navigate("/admin/products");
+  }
 
 
   return (
@@ -172,13 +170,13 @@ const AddProduct = (props: IProps) => {
           rules={[{ required: true, message: "Vui lòng chọn ảnh sản phẩm" }]}
         >
           <Upload accept="image/*" listType="picture-circle" multiple beforeUpload={beforeUpload} maxCount={5}>
-            <Button icon={<UploadOutlined />} block>
+            <Button icon={<UploadOutlined />} block >
               Chọn ảnh
             </Button>
           </Upload>
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" className="bg-blue-500" htmlType="submit">
+          <Button type="primary" loading={loadings} className="bg-blue-500" htmlType="submit">
             Add Product
           </Button>
         </Form.Item>

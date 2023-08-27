@@ -48,7 +48,10 @@ import ListUser from "./pages/admin/users/list-user";
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
   useEffect(() => {
-    getAllProduct().then(({ data }) => setProducts(data));
+    getAllProduct().then(({ data }) => {
+      const newdata = data.sort()
+      setProducts(newdata)
+    });
   }, []);
 
   const onHandleRemoveProduct = (id: string) => {

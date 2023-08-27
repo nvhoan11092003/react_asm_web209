@@ -116,7 +116,7 @@ const AddCategory = (props: IProps) => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="bg-blue-500">
             Add Category
           </Button>
         </Form.Item>
